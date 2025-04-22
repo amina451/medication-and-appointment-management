@@ -20,7 +20,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   Widget build(BuildContext context) {
     return CustomLogo(
-      imageLogo: AppImages.logoSplashScreen,
+      imageLogo: AppImages.assetsImagesLogoSplashScreen,
       colorTitle: Colors.white,
       colorSupTitle: Colors.white,
     );

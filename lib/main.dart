@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/helper_functions/material_route.dart';
-import 'package:pharmacy_app/features/spalsh/views/splash_view.dart';
+import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         builder: (context,child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: SplashView.routName,
+            initialRoute: HomeView.routeName,
             onGenerateRoute: onGenerateRoute,
           );
         }

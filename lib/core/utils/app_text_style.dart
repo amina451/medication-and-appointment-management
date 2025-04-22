@@ -21,6 +21,6 @@ abstract class AppTextStyle {
   static const TextStyle semiBold20 = TextStyle(
     fontFamily: "LeagueSpartan",
     fontSize: 20,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.bold,
   );
 }

@@ -18,7 +18,7 @@ class HomeViewBody extends StatelessWidget {
         children: [
           Text("What are you looking for?", style: AppTextStyle.semiBold24),
           CustomCardItem(
-             onTap: () {
+            onTap: () {
               Navigator.pushReplacementNamed(context, '/medication');
             },
             colorIcon: Colors.pinkAccent.withOpacity(0.65),
@@ -27,8 +27,6 @@ class HomeViewBody extends StatelessWidget {
             imagePath: AppImages.assetsImagesDoctorhand,
             colorTitle: Colors.pinkAccent.withOpacity(0.65),
           ),
-
-
           CustomCardItem(
             onTap: () {
               Navigator.pushReplacementNamed(context, '/medication');
@@ -39,13 +37,12 @@ class HomeViewBody extends StatelessWidget {
             colorTitle: Colors.blueAccent.withOpacity(0.65),
             colorIcon: Colors.blueAccent.withOpacity(0.65),
           ),
-
           CustomCardItem(
-             onTap: () {
+            onTap: () {
               Navigator.pushReplacementNamed(context, '/medication');
             },
-            title: 'Medication Schedule',
-            subTitle: "View and manage your \nmedication schedule",
+            title: 'Doctor Schedule',
+            subTitle: "View and manage your \ndoctor schedule",
             imagePath: AppImages.assetsImagesCalendar,
             colorTitle: Colors.greenAccent.withOpacity(0.65),
             colorIcon: Colors.greenAccent.withOpacity(0.65),
@@ -55,3 +52,5 @@ class HomeViewBody extends StatelessWidget {
     );
   }
 }
+
+

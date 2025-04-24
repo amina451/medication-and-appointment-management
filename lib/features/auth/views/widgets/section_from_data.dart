@@ -48,8 +48,6 @@ class SectionFormData extends StatelessWidget {
           hint: "+20*********",
         ),
 
-        SizedBox(height: 12),
-        FormTitle(title: "Date of Birth"),
         SizedBox(height: 16),
         Align(alignment: Alignment.center, child: TermsUsePrivacy()),
         Align(

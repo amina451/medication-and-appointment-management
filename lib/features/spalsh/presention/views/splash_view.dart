@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
-import 'package:pharmacy_app/features/spalsh/views/widgets/splash_view_body.dart';
+import 'package:pharmacy_app/features/spalsh/presention/views/widgets/splash_view_body.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});

@@ -10,6 +10,30 @@ class AppImages {
   /// assets/images/Doctorhand.svg
   static const String assetsImagesDoctorhand = "assets/images/Doctorhand.svg";
 
+  /// Assets for assetsImagesDrBalestra
+  /// assets/images/dr_balestra.png
+  static const String assetsImagesDrBalestra = "assets/images/dr_balestra.png";
+
+  /// Assets for assetsImagesDrCrown
+  /// assets/images/dr_crown.png
+  static const String assetsImagesDrCrown = "assets/images/dr_crown.png";
+
+  /// Assets for assetsImagesDrSh
+  /// assets/images/dr_sh.png
+  static const String assetsImagesDrSh = "assets/images/dr_sh.png";
+
+  /// Assets for assetsImagesDrWata
+  /// assets/images/dr_wata.png
+  static const String assetsImagesDrWata = "assets/images/dr_wata.png";
+
+  /// Assets for assetsImagesFavorite
+  /// assets/images/favorite.svg
+  static const String assetsImagesFavorite = "assets/images/favorite.svg";
+
+  /// Assets for assetsImagesFavoriteRed
+  /// assets/images/favoriteRed.svg
+  static const String assetsImagesFavoriteRed = "assets/images/favoriteRed.svg";
+
   /// Assets for assetsImagesHomeIcon
   /// assets/images/homeIcon.svg
   static const String assetsImagesHomeIcon = "assets/images/homeIcon.svg";

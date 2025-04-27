@@ -3,6 +3,8 @@ import 'package:pharmacy_app/features/auth/views/screens/login_view.dart';
 import 'package:pharmacy_app/features/auth/views/screens/sing_up_view.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
+import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
+import 'package:pharmacy_app/features/medications/presention/views/medications_views.dart';
 import 'package:pharmacy_app/features/spalsh/presention/views/splash_view.dart';
 
 
@@ -24,6 +26,14 @@ MaterialPageRoute onGenerateRoute(RouteSettings settings) {
     case DoctorsView.routeName:
       return MaterialPageRoute(builder: (_) => DoctorsView());
    
+
+     case MedicationsView.routeName:
+      return MaterialPageRoute(builder: (_) => MedicationsView());
+    
+      case CustomBottomNavBar.routeName:
+      return MaterialPageRoute(builder: (_) => CustomBottomNavBar());
+
+
     default:
       return MaterialPageRoute(builder: (_) => Scaffold());
   }

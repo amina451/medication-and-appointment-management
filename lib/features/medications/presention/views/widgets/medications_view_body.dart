@@ -4,8 +4,8 @@ import 'package:pharmacy_app/core/utils/app_images.dart';
 import 'package:pharmacy_app/core/widgets/card_item.dart';
 import 'package:pharmacy_app/core/widgets/search_form.dart';
 
-class DoctorsViewBody extends StatelessWidget {
-  const DoctorsViewBody({super.key});
+class MedicationsViewBody extends StatelessWidget {
+  const MedicationsViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +17,15 @@ class DoctorsViewBody extends StatelessWidget {
           const SizedBox(height: 20),
           Expanded(
             child: ListView.separated(
-              itemBuilder: (context, index) => CardItem(
-                name: 'Dr. John',
-                specialty: 'Cardiologist',
-                experience: '5 years',
-                image: AppImages.assetsImagesDrWata, 
-                date: '12',
-              ),
+              itemBuilder:
+                  (context, index) => CardItem(
+                    name: 'Pain Reliever',
+                    specialty: index % 2 == 0 ? 
+                    'Pain Reliever' : 'Antibiotic',
+                    experience: "number : 1",
+                    image: AppImages.assetsImagesMedication, 
+                    date: '5.30',
+                  ),
               separatorBuilder: (context, index) => SizedBox(height: 10.h),
               itemCount: 10,
             ),

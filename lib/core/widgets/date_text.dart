@@ -4,8 +4,8 @@ import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
 
 class DateVisitDoctor extends StatelessWidget {
-  const DateVisitDoctor({super.key});
-
+  const DateVisitDoctor({super.key, required this.date});
+  final String date;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,7 +24,7 @@ class DateVisitDoctor extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(
-                  text: "12:00",
+                  text: date,
                   style: AppTextStyle.semiBold12.copyWith(color: Colors.black),
                 ),
                 TextSpan(

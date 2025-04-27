@@ -46,6 +46,10 @@ class AppImages {
   /// assets/images/logoWelcomeScreen.svg
   static const String assetsImagesLogoWelcomeScreen = "assets/images/logoWelcomeScreen.svg";
 
+  /// Assets for assetsImagesMedication
+  /// assets/images/medication.png
+  static const String assetsImagesMedication = "assets/images/medication.png";
+
   /// Assets for assetsImagesProfileIcon
   /// assets/images/profileIcon.svg
   static const String assetsImagesProfileIcon = "assets/images/profileIcon.svg";

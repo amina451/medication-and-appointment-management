@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/helper_functions/material_route.dart';
+import 'package:pharmacy_app/features/date/presentaion/views/Perescarptions_view.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
 import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
@@ -28,7 +29,6 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               scrolledUnderElevation: 0.0,
               foregroundColor: Colors.white,
-              
 
               backgroundColor: Colors.white,
               elevation: 0,
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.white,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: CustomBottomNavBar.routeName,
+          initialRoute: PerescarptionsView.routeName,
           onGenerateRoute: onGenerateRoute,
         );
       },

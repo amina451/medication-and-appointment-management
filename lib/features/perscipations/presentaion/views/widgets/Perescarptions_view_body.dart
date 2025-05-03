@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:pharmacy_app/features/date/presentaion/views/widgets/card_prescription_item.dart';
-import 'package:pharmacy_app/features/date/presentaion/views/widgets/header_prescrription.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/card_prescription_item.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/header_prescrription.dart';
 
 class PerescarptionsViewBody extends StatelessWidget {
   const PerescarptionsViewBody({super.key});

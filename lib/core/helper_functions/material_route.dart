@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/features/auth/views/screens/login_view.dart';
 import 'package:pharmacy_app/features/auth/views/screens/sing_up_view.dart';
-import 'package:pharmacy_app/features/date/presentaion/views/Perescarptions_view.dart';
+import 'package:pharmacy_app/features/date/presentaions/views/date_view.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/views/Perescarptions_view.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
 import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
@@ -30,7 +31,8 @@ MaterialPageRoute onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => CustomBottomNavBar());
     case PerescarptionsView.routeName:
       return MaterialPageRoute(builder: (_) => PerescarptionsView());
-
+case DateView.routeName:
+      return MaterialPageRoute(builder: (_) => DateView());
     default:
       return MaterialPageRoute(builder: (_) => Scaffold());
   }

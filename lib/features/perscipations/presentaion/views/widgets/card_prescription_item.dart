@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
-import 'package:pharmacy_app/features/date/presentaion/views/widgets/custom_show_more.dart';
-import 'package:pharmacy_app/features/date/presentaion/views/widgets/info_doctor.dart';
-import 'package:pharmacy_app/features/date/presentaion/views/widgets/medication_item.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/custom_show_more.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/info_doctor.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/medication_item.dart';
 
 class CardPrescriptionsItem extends StatefulWidget {
   const CardPrescriptionsItem({super.key, required this.index});

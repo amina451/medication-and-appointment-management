@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/helper_functions/material_route.dart';
-import 'package:pharmacy_app/features/date/presentaion/views/Perescarptions_view.dart';
-import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
-import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
-import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
-import 'package:pharmacy_app/features/spalsh/presention/views/splash_view.dart';
+import 'package:pharmacy_app/features/date/presentaions/views/date_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +32,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.white,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: PerescarptionsView.routeName,
+          initialRoute: DateView.routeName,
           onGenerateRoute: onGenerateRoute,
         );
       },

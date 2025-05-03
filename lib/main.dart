@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/helper_functions/material_route.dart';
-import 'package:pharmacy_app/features/date/presentaions/views/date_view.dart';
+import 'package:pharmacy_app/features/doctor_details/presention/view/doctor_detailes_view.dart';
+import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
+import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.white,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: DateView.routeName,
+          initialRoute: DoctorDetailsView.routeName,
           onGenerateRoute: onGenerateRoute,
         );
       },

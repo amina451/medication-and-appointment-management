@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_images.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
 import 'package:pharmacy_app/features/medications/presention/views/medications_views.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/views/Perescarptions_view.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   const CustomBottomNavBar({super.key});
-
 
   static const String routeName = 'CustomBottomNavBar';
   @override
@@ -22,22 +23,21 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     Colors.pinkAccent.withOpacity(0.65),
     Colors.greenAccent.withOpacity(0.65),
     Colors.purple,
+    AppColor.primaryColor,
   ];
 
   final List<Widget> _selectedPage = [
-     HomeView(),
+    HomeView(),
     const DoctorsView(),
     const MedicationsView(),
-     HomeView(),
+    HomeView(),
+    PerescarptionsView(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _selectedPage,
-      ),
+      body: IndexedStack(index: _currentIndex, children: _selectedPage),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
@@ -62,7 +62,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             selectedItemColor: _selectedColors[_currentIndex],
             unselectedItemColor: Colors.grey,
             selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-            unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+            unselectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.normal,
+            ),
             onTap: (index) {
               setState(() {
                 _currentIndex = index;
@@ -97,6 +99,15 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   color: _currentIndex == 3 ? _selectedColors[3] : Colors.grey,
                 ),
                 label: 'M.schedule',
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  height: 35.h,
+                  AppImages.assetsImagesMedicalPrescriptionSvgrepoCom,
+                  color: _currentIndex == 4 ? _selectedColors[4] : 
+                  Colors.grey,
+                ),
+                label: 'Pref',
               ),
             ],
           ),

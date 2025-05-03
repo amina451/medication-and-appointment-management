@@ -6,6 +6,10 @@ class AppImages {
   /// assets/images/calendar.svg
   static const String assetsImagesCalendar = "assets/images/calendar.svg";
 
+  /// Assets for assetsImagesDoctorJhon
+  /// assets/images/DoctorJhon.png
+  static const String assetsImagesDoctorJhon = "assets/images/DoctorJhon.png";
+
   /// Assets for assetsImagesDoctorhand
   /// assets/images/Doctorhand.svg
   static const String assetsImagesDoctorhand = "assets/images/Doctorhand.svg";
@@ -45,6 +49,10 @@ class AppImages {
   /// Assets for assetsImagesLogoWelcomeScreen
   /// assets/images/logoWelcomeScreen.svg
   static const String assetsImagesLogoWelcomeScreen = "assets/images/logoWelcomeScreen.svg";
+
+  /// Assets for assetsImagesMedicalPrescriptionSvgrepoCom
+  /// assets/images/medical-prescription-svgrepo-com.svg
+  static const String assetsImagesMedicalPrescriptionSvgrepoCom = "assets/images/medical-prescription-svgrepo-com.svg";
 
   /// Assets for assetsImagesMedication
   /// assets/images/medication.png

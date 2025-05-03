@@ -34,21 +34,23 @@ class CustomCardItemHome extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: AppTextStyle.semiBold20.copyWith(color: colorTitle),
-                ),
+            FittedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: AppTextStyle.semiBold20.copyWith(color: colorTitle),
+                  ),
 
-                Text(
-                  subTitle,
-                  style: AppTextStyle.semiBold12.copyWith(fontSize: 14.sp),
-                  overflow: TextOverflow.visible,
-                  softWrap: true,
-                ),
-              ],
+                  Text(
+                    subTitle,
+                    style: AppTextStyle.semiBold12.copyWith(fontSize: 14.sp),
+                    overflow: TextOverflow.visible,
+                    softWrap: true,
+                  ),
+                ],
+              ),
             ),
             SvgPicture.asset(imagePath, color: colorIcon, height: 40.h),
           ],

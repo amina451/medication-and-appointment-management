@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_images.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
+import 'package:pharmacy_app/features/date/presentaions/views/date_view.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
 import 'package:pharmacy_app/features/home/presention/widgets/custom_card_item.dart';
 import 'package:pharmacy_app/features/medications/presention/views/medications_views.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/views/Perescarptions_view.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -47,13 +50,29 @@ class HomeViewBody extends StatelessWidget {
           Expanded(
             child: CustomCardItemHome(
               onTap: () {
-                Navigator.pushReplacementNamed(context, '/medication');
+                Navigator.pushReplacementNamed(context, DateView.routeName);
               },
               title: 'Doctor Schedule',
               subTitle: "View and manage your \ndoctor schedule",
               imagePath: AppImages.assetsImagesCalendar,
               colorTitle: Colors.greenAccent.withOpacity(0.65),
               colorIcon: Colors.greenAccent.withOpacity(0.65),
+            ),
+          ),
+
+          Expanded(
+            child: CustomCardItemHome(
+              onTap: () {
+                Navigator.pushReplacementNamed(
+                  context,
+                  PerescarptionsView.routeName,
+                );
+              },
+              title: 'Prescriptions',
+              subTitle: "View and manage your \nPrescriptions",
+              imagePath: AppImages.assetsImagesMedicalPrescriptionSvgrepoCom,
+              colorTitle: AppColor.primaryColor,
+              colorIcon: AppColor.primaryColor,
             ),
           ),
         ],

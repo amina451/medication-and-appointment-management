@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/features/auth/views/screens/login_view.dart';
-import 'package:pharmacy_app/features/auth/views/screens/sing_up_view.dart';
+import 'package:pharmacy_app/features/auth/views/screens/sign_up_view.dart';
 import 'package:pharmacy_app/features/date/presentaions/views/date_view.dart';
 import 'package:pharmacy_app/features/doctor_details/presention/view/doctor_detailes_view.dart';
 import 'package:pharmacy_app/features/perscipations/presentaion/views/Perescarptions_view.dart';

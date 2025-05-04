@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/custom_button.dart';
+import 'package:pharmacy_app/features/auth/views/screens/login_view.dart';
 import 'package:pharmacy_app/features/auth/views/widgets/cusom_text_form_field.dart';
 import 'package:pharmacy_app/features/auth/views/widgets/form_title.dart';
 import 'package:pharmacy_app/features/auth/views/widgets/term_use_privacy.dart';
@@ -50,13 +51,18 @@ class SectionFormData extends StatelessWidget {
 
         SizedBox(height: 16),
         Align(alignment: Alignment.center, child: TermsUsePrivacy()),
+
+        SizedBox(height: 16),
+
         Align(
           alignment: Alignment.center,
           child: CustomButton(
             title: "Sign Up",
             buttonTitleColor: Colors.white,
             buttonColor: AppColor.primaryColor,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, LoginView.routeName);
+            },
           ),
         ),
         SizedBox(height: 4),

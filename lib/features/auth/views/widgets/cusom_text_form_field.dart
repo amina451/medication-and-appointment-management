@@ -7,12 +7,12 @@ import 'package:pharmacy_app/core/utils/app_text_style.dart';
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
-    required this.keyboardType,
+     this.keyboardType,
     required this.hint,
     this.icon,
     this.colorHint,
   });
-  final TextInputType keyboardType;
+  final TextInputType ?keyboardType;
   final String hint;
   final IconData? icon;
   final Color? colorHint;
@@ -25,12 +25,13 @@ class CustomTextFormField extends StatelessWidget {
         fillColor: AppColor.lightSecondryColor,
         filled: true,
         hintText: hint,
-        hintStyle: AppTextStyle.semiBold20.copyWith(
+        hintStyle: AppTextStyle.semiBold12.copyWith(
+          fontSize: 16,
           color: colorHint ?? AppColor.hintColor,
         ),
-        enabledBorder: biuldBorder(),
-        focusedBorder: biuldBorder(),
-        disabledBorder: biuldBorder(),
+        enabledBorder: buildBorder(),
+        focusedBorder: buildBorder(),
+        disabledBorder: buildBorder(),
       ),
     );
   }

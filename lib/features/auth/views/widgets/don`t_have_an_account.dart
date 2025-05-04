@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
-import 'package:pharmacy_app/features/auth/views/screens/sing_up_view.dart';
+import 'package:pharmacy_app/features/auth/views/screens/sign_up_view.dart';
 
 class HaveOrDontHAveAnAcount extends StatelessWidget {
   const HaveOrDontHAveAnAcount({
     super.key,
     required this.firstTitle,
-    required this.secondTitle,
+    required this.secondTitle, this.onTap,
   });
 
   final String firstTitle, secondTitle;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,9 +28,7 @@ class HaveOrDontHAveAnAcount extends StatelessWidget {
             ),
 
             GestureDetector(
-              onTap: () {
-                Navigator.pushReplacementNamed(context, SignUpView.routeName);
-              },
+              onTap: onTap,
               child: Text(
                 secondTitle,
                 style: AppTextStyle.semiBold12.copyWith(

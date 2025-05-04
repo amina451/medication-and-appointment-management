@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/widgets/custom_app_bar.dart';
+import 'package:pharmacy_app/features/auth/views/screens/sign_up_view.dart';
 import 'package:pharmacy_app/features/auth/views/widgets/don%60t_have_an_account.dart';
-import 'package:pharmacy_app/features/auth/views/widgets/or_signup_section.dart';
 
 import 'package:pharmacy_app/features/auth/views/widgets/section_text_frm_field.dart';
 import 'package:pharmacy_app/features/auth/views/widgets/welcome_section.dart';
@@ -19,9 +19,11 @@ class LoginViewBody extends StatelessWidget {
             SliverToBoxAdapter(child: CustomAppBar(title: "Log In")),
             SliverToBoxAdapter(child: WelcomeSection()),
             SliverToBoxAdapter(child: SectionTextFormField()),
-            SliverToBoxAdapter(child: OrSignUp()),
             SliverToBoxAdapter(
               child: HaveOrDontHAveAnAcount(
+                onTap: () {
+                Navigator.pushReplacementNamed(context, SignUpView.routeName);
+              },
                 firstTitle: 'Don\'t have an account?',
                 secondTitle: "Sign Up",
               ),

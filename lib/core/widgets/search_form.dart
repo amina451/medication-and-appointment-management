@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 
 class SearchForm extends StatelessWidget {
-   SearchForm({super.key, });
+  SearchForm({super.key});
 
-    final List<String> items = ['Doctor A', 'Doctor B', 'Doctor C'];
+  final List<String> items = ['Doctor A', 'Doctor B', 'Doctor C'];
 
   @override
   Widget build(BuildContext context) {
@@ -16,31 +16,27 @@ class SearchForm extends StatelessWidget {
             AppColor.lightSecondryColor,
           ),
           shadowColor: WidgetStateProperty.all<Color>(
-            // ignore: deprecated_member_use
             Colors.grey.shade500.withOpacity(0.1),
           ),
           padding: const WidgetStatePropertyAll<EdgeInsets>(
             EdgeInsets.symmetric(horizontal: 16.0),
           ),
-          onTap: () {
-            controller.openView();
-          },
-          onChanged: (_) {
-            controller.openView();
-          },
           leading: const Icon(Icons.search),
           hintText: 'Dentist...',
           elevation: const WidgetStatePropertyAll(4.0),
         );
       },
       suggestionsBuilder: (BuildContext context, SearchController controller) {
-        String query = controller.text.toLowerCase();
-        List<String> suggestions =
-            items.where((item) => item.toLowerCase().contains(query)).toList();
+        final query = controller.text;
+        final filteredItems =
+            items
+                .where(
+                  (item) => item.toLowerCase().contains(query.toLowerCase()),
+                )
+                .toList();
 
-        return suggestions.isNotEmpty
-            ? List<Widget>.generate(suggestions.length, (index) {
-              String suggestion = suggestions[index];
+        return filteredItems.isNotEmpty
+            ? filteredItems.map((suggestion) {
               return ListTile(
                 title: Text(suggestion),
                 onTap: () {

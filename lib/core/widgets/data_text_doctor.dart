@@ -21,8 +21,7 @@ class DataTextAndButtonRemove extends StatelessWidget {
       spacing: 5.h,
       children: [
         Row(
-          spacing: 10 * 15,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          spacing: 90.w,
           children: [
             Text(name, style: AppTextStyle.semiBold20),
             RemoveButton(),

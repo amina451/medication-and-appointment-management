@@ -7,9 +7,10 @@ class CustomSectionTitleHeaderWithAddCard extends StatelessWidget {
   const CustomSectionTitleHeaderWithAddCard({
     super.key,
     required this.title,
-    required this.subTitle,
+    required this.subTitle,required this.onTap,
   });
   final String title, subTitle;
+  final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,14 +34,17 @@ class CustomSectionTitleHeaderWithAddCard extends StatelessWidget {
                 fontSize: 12.sp,
               ),
             ),
-            Container(
-              height: 40,
-              width: 28,
-              decoration: BoxDecoration(
-                color: Colors.white.withAlpha((0.25 * 255).toInt()),
-                borderRadius: BorderRadius.circular(25.sp),
+            GestureDetector(
+              onTap: onTap,
+              child: Container(
+                height: 40,
+                width: 28,
+                decoration: BoxDecoration(
+                  color: Colors.white.withAlpha((0.25 * 255).toInt()),
+                  borderRadius: BorderRadius.circular(25.sp),
+                ),
+                child: Icon(Icons.add, size: 20.sp, color: Colors.white),
               ),
-              child: Icon(Icons.add, size: 20.sp, color: Colors.white),
             ),
           ],
         ),

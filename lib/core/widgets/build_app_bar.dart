@@ -1,10 +1,9 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
 
-AppBar buildAppBar(BuildContext context) {
+AppBar buildAppBar(BuildContext context,String title) {
   return AppBar(
     leading: Padding(
       padding: const EdgeInsets.only(left: 24.0),
@@ -24,7 +23,7 @@ AppBar buildAppBar(BuildContext context) {
       ),
     ),
     title: Text(
-      'Doctors',
+      title,
       style: AppTextStyle.semiBold20.copyWith(color: AppColor.primaryColor),
     ),
   );

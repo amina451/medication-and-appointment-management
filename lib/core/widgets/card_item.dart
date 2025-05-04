@@ -20,35 +20,36 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(16.0),
-        height: 170.h,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColor.lightSecondryColor,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset(image, height: 87.h, width: 92.w),
-                DataTextAndButtonRemove(
-                  name: name,
-                  specialty: specialty,
-                  experience: experience!,
-                ),
-              ],
-            ),
-            SizedBox(height: 5.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [DateVisitDoctor(date: date), EditButton()],
-            ),
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      height: 175.h,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: AppColor.lightSecondryColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(image, height: 87.h, width: 92.w),
+              ),
+              DataTextAndButtonRemove(
+                name: name,
+                specialty: specialty,
+                experience: experience!,
+              ),
+            ],
+          ),
+          SizedBox(height: 5.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [DateVisitDoctor(date: date), EditButton()],
+          ),
+        ],
       ),
     );
   }

@@ -29,7 +29,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
 
   void excuteNavgation() {
     Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, HomeView.routeName);
+      Navigator.pushReplacementNamed(context, LoginView.routeName);
     });
   }
 }

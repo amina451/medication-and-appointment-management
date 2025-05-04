@@ -6,6 +6,9 @@ class FormTitle extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: AppTextStyle.semiBold24.copyWith(fontSize: 20));
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(title, style: AppTextStyle.semiBold20.copyWith(fontSize: 20)),
+    );
   }
 }

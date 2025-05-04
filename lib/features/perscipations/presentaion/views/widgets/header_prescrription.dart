@@ -76,9 +76,7 @@ void buildShowModalSheetPrescriptions(BuildContext context) {
                 CustomFormAddData(hint: "Specialty"),
                 FormTitle(title: "Day"),
                 CustomFormAddData(hint: "Day"),
-
                 Center(child: FormTitle(title: "Medications")),
-
                 FormTitle(title: "Medication"),
                 CustomFormAddData(hint: "Name Medication"),
                 FormTitle(title: "Specialty"),

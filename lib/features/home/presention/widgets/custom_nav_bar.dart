@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_images.dart';
+import 'package:pharmacy_app/features/date/presentaions/views/date_view.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
 import 'package:pharmacy_app/features/medications/presention/views/medications_views.dart';
@@ -30,7 +31,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     HomeView(),
     const DoctorsView(),
     const MedicationsView(),
-    HomeView(),
+    DateView(),
     PerescarptionsView(),
   ];
 

@@ -22,7 +22,7 @@ class MedicationsViewBody extends StatelessWidget {
                     name: 'Pain Reliever',
                     specialty: index % 2 == 0 ? 
                     'Pain Reliever' : 'Antibiotic',
-                    experience: "number : 1",
+                    address: "number : 1",
                     image: AppImages.assetsImagesMedication, 
                     date: '5.30',
                   ),

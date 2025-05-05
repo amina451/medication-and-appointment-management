@@ -9,11 +9,16 @@ import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_fo
 void customBuildShowModalSheet(
   BuildContext context,
   void Function() onPressed,
-  String nameDoctor,
-  date,
-  hintName,
-  exp,
-  hintExp,
+  String nameFirsmDoctor,
+  nameLastDoctor,
+  
+  hintFirstName,
+  hintLasrName,
+  specialty,
+  address,
+  hintAddress,
+  phone,
+  hintPhone,
 ) {
   showModalBottomSheet(
     context: context,
@@ -39,17 +44,19 @@ void customBuildShowModalSheet(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ImageUpload(),
-                FormTitle(title: hintName),
-                CustomFormAddData(hint: nameDoctor),
+                FormTitle(title: hintFirstName),
+                CustomFormAddData(hint: nameFirsmDoctor),
+                FormTitle(title: hintLasrName),
+                CustomFormAddData(hint: nameFirsmDoctor),
 
-                FormTitle(title: "Specialty"),
+                FormTitle(title: specialty),
                 CustomFormAddData(hint: "Specialty"),
 
-                FormTitle(title: hintExp),
-                CustomFormAddData(hint: exp),
+                FormTitle(title: hintAddress),
+                CustomFormAddData(hint: address),
 
-                FormTitle(title: "Date"),
-                CustomFormAddData(hint: date),
+                FormTitle(title: hintPhone),
+                CustomFormAddData(hint: phone),
 
                 CustomButton(
                   title: "Save",

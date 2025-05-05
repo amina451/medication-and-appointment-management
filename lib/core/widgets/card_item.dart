@@ -5,18 +5,20 @@ import 'package:pharmacy_app/core/widgets/data_text_doctor.dart';
 import 'package:pharmacy_app/core/widgets/date_text.dart';
 import 'package:pharmacy_app/core/widgets/edit_button.dart';
 
+
+
 class CardItem extends StatelessWidget {
   const CardItem({
     super.key,
     required this.name,
     required this.specialty,
-    this.experience,
+    this.address,
     required this.image,
     required this.date,
   });
 
   final String name, specialty, date, image;
-  final String? experience;
+  final String? address;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class CardItem extends StatelessWidget {
               DataTextAndButtonRemove(
                 name: name,
                 specialty: specialty,
-                experience: experience!,
+                experience: address!,
               ),
             ],
           ),

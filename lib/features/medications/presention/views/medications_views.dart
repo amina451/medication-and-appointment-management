@@ -22,6 +22,10 @@ class MedicationsView extends StatelessWidget {
             "N.Medication",
             "1",
             "Number",
+            "2",
+            "Date", 
+            "Date",
+            "Date",
           );
         },
       ),
@@ -30,3 +34,5 @@ class MedicationsView extends StatelessWidget {
     );
   }
 }
+
+

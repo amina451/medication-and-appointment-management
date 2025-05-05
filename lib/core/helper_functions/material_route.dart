@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy_app/features/auth/views/screens/login_view.dart';
 import 'package:pharmacy_app/features/auth/views/screens/sign_up_view.dart';
 import 'package:pharmacy_app/features/date/presentaions/views/date_view.dart';
-import 'package:pharmacy_app/features/doctor_details/presention/view/doctor_detailes_view.dart';
 import 'package:pharmacy_app/features/perscipations/presentaion/views/Perescarptions_view.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
@@ -35,8 +34,7 @@ MaterialPageRoute onGenerateRoute(RouteSettings settings) {
 case DateView.routeName:
       return MaterialPageRoute(builder: (_) => DateView());
 
-      case DoctorDetailsView.routeName:
-      return MaterialPageRoute(builder: (_) => DoctorDetailsView());
+
     default:
       return MaterialPageRoute(builder: (_) => Scaffold());
   }

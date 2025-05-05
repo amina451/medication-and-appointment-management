@@ -22,7 +22,7 @@ class SearchForm extends StatelessWidget {
             EdgeInsets.symmetric(horizontal: 16.0),
           ),
           leading: const Icon(Icons.search),
-          hintText: 'Dentist...',
+          hintText: 'Search...',
           elevation: const WidgetStatePropertyAll(4.0),
         );
       },

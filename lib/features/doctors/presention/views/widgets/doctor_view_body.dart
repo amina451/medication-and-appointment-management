@@ -17,13 +17,14 @@ class DoctorsViewBody extends StatelessWidget {
           const SizedBox(height: 20),
           Expanded(
             child: ListView.separated(
-              itemBuilder: (context, index) => CardItem(
-                name: 'Dr. John',
-                specialty: 'Cardiologist',
-                experience: '5 years',
-                image: AppImages.assetsImagesDrWata, 
-                date: '12',
-              ),
+              itemBuilder:
+                  (context, index) => CardItem(
+                    name: 'Dr. John',
+                    specialty: 'Cardiologist',
+                    address: 'Address : mascara',
+                    image: AppImages.assetsImagesDrWata,
+                    date: '12',
+                  ),
               separatorBuilder: (context, index) => SizedBox(height: 10.h),
               itemCount: 10,
             ),

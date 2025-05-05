@@ -14,27 +14,16 @@ class DateVisitDoctor extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Next Available ",
+            "Phone call",
             style: AppTextStyle.semiBold12.copyWith(
               color: AppColor.primaryColor,
             ),
           ),
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: date,
-                  style: AppTextStyle.semiBold12.copyWith(color: Colors.black),
-                ),
-                TextSpan(
-                  text: " AM tomorrow",
-                  style: AppTextStyle.semiBold12.copyWith(
-                    color: Colors.grey.shade500,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          Text("+213 123 456 789",
+              style: AppTextStyle.semiBold12.copyWith(
+                color: AppColor.primaryColor,
+              )),
+          
         ],
       ),
     );

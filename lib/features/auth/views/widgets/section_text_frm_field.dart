@@ -5,6 +5,7 @@ import 'package:pharmacy_app/core/widgets/custom_button.dart';
 import 'package:pharmacy_app/features/auth/views/widgets/cusom_text_form_field.dart';
 import 'package:pharmacy_app/features/auth/views/widgets/form_title.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
+import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
 
 class SectionTextFormField extends StatelessWidget {
   const SectionTextFormField({super.key});
@@ -15,7 +16,7 @@ class SectionTextFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        FormTitle(title: "Mobile Number"),
+        FormTitle(title: "Email"),
         SizedBox(height: 12.h),
         CustomTextFormField(
           keyboardType: TextInputType.emailAddress,
@@ -37,7 +38,7 @@ class SectionTextFormField extends StatelessWidget {
             buttonTitleColor: Colors.white,
             buttonColor: AppColor.primaryColor,
             onPressed: () {
-              Navigator.pushReplacementNamed(context, HomeView.routeName);
+              Navigator.pushReplacementNamed(context, CustomBottomNavBar.routeName);
             },
           ),
         ),

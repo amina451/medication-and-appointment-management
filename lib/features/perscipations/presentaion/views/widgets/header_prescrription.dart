@@ -4,7 +4,7 @@ import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
 import 'package:pharmacy_app/core/widgets/cstom_section_title_header_with_add_card.dart';
 import 'package:pharmacy_app/core/widgets/custom_button.dart';
-import 'package:pharmacy_app/features/auth/views/widgets/form_title.dart';
+import 'package:pharmacy_app/features/auth/presnetion/views/widgets/form_title.dart';
 import 'package:pharmacy_app/features/date/presentaions/views/widgets/biuld_show_modal_sheet.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_form_data.dart';
 import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/custom_search_anochr.dart';
@@ -76,9 +76,7 @@ void buildShowModalSheetPrescriptions(BuildContext context) {
                 CustomFormAddData(hint: "Specialty"),
                 FormTitle(title: "Day"),
                 CustomFormAddData(hint: "Day"),
-
                 Center(child: FormTitle(title: "Medications")),
-
                 FormTitle(title: "Medication"),
                 CustomFormAddData(hint: "Name Medication"),
                 FormTitle(title: "Specialty"),

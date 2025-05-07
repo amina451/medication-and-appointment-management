@@ -1,0 +1,2 @@
+const urlSubaBase = "https://qkzduafmbkzfzyuqmnqd.supabase.co";
+const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFremR1YWZtYmt6Znp5dXFtbnFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY1MjU1NTQsImV4cCI6MjA2MjEwMTU1NH0.oWhzkBEMnT4ORijcK5ABs_SfdMfKjpyGp7lGPDiPlWg";

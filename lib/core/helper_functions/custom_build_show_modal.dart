@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/custom_button.dart';
 import 'package:pharmacy_app/core/widgets/upload_image.dart';
-import 'package:pharmacy_app/features/auth/views/widgets/form_title.dart';
+import 'package:pharmacy_app/features/auth/presnetion/views/widgets/form_title.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_form_data.dart';
 
 void customBuildShowModalSheet(

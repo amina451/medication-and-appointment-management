@@ -7,6 +7,7 @@ import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/features/auth/presnetion/manger/sign_in/signin_cubit.dart';
 import 'package:pharmacy_app/features/auth/presnetion/views/widgets/login_view_body.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
+import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -21,12 +22,12 @@ class LoginView extends StatelessWidget {
           listener: (context, state) {
             if (state is SignInSuccess) {
               buildShowToast(state.toString(),AppColor.primaryColor);
-              Navigator.pushReplacementNamed(context, HomeView.routeName);
+              Navigator.pushReplacementNamed(context, CustomBottomNavBar.routeName);
             } else if (state is SignInFailure) {
              buildShowToast(state.toString(),Colors.red.shade500);
             }
           },
-          
+
           builder: (context, state) {
             return ModalProgressHUD(
               progressIndicator: Center(

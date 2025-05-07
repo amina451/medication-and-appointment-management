@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/helper_functions/material_route.dart';
-import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
-import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
+import 'package:pharmacy_app/core/services/get_it.dart';
+import 'package:pharmacy_app/core/utils/constants.dart';
 import 'package:pharmacy_app/features/spalsh/presention/views/splash_view.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(url: urlSubaBase, anonKey: apiKey);
+  setup();
   runApp(const MyApp());
 }
 
@@ -27,7 +30,6 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               scrolledUnderElevation: 0.0,
               foregroundColor: Colors.white,
-
               backgroundColor: Colors.white,
               elevation: 0,
             ),

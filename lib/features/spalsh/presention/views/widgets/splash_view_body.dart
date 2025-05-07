@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_images.dart';
 import 'package:pharmacy_app/core/widgets/custom_logo_screen.dart';
-import 'package:pharmacy_app/features/auth/views/screens/login_view.dart';
+import 'package:pharmacy_app/features/auth/presnetion/views/screens/login_view.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
 
 class SplashViewBody extends StatefulWidget {

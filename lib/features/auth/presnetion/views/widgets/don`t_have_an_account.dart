@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
-import 'package:pharmacy_app/features/auth/views/screens/sign_up_view.dart';
+import 'package:pharmacy_app/features/auth/presnetion/views/screens/sign_up_view.dart';
 
 class HaveOrDontHAveAnAcount extends StatelessWidget {
   const HaveOrDontHAveAnAcount({

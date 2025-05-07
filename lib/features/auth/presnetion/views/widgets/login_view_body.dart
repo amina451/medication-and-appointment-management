@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/widgets/custom_app_bar.dart';
-import 'package:pharmacy_app/features/auth/views/screens/sign_up_view.dart';
-import 'package:pharmacy_app/features/auth/views/widgets/don%60t_have_an_account.dart';
+import 'package:pharmacy_app/features/auth/presnetion/views/screens/sign_up_view.dart';
+import 'package:pharmacy_app/features/auth/presnetion/views/widgets/don%60t_have_an_account.dart';
 
-import 'package:pharmacy_app/features/auth/views/widgets/section_text_frm_field.dart';
-import 'package:pharmacy_app/features/auth/views/widgets/welcome_section.dart';
+import 'package:pharmacy_app/features/auth/presnetion/views/widgets/section_text_frm_field.dart';
+import 'package:pharmacy_app/features/auth/presnetion/views/widgets/welcome_section.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});

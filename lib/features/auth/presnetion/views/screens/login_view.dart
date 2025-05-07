@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:pharmacy_app/core/helper_functions/build_show_toast.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/features/auth/presnetion/manger/sign_in/signin_cubit.dart';
 import 'package:pharmacy_app/features/auth/presnetion/views/widgets/login_view_body.dart';
@@ -18,16 +20,13 @@ class LoginView extends StatelessWidget {
         body: BlocConsumer<SignInCubit, SignInState>(
           listener: (context, state) {
             if (state is SignInSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.toString())),
-          );
+              buildShowToast(state.toString(),AppColor.primaryColor);
               Navigator.pushReplacementNamed(context, HomeView.routeName);
             } else if (state is SignInFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
-          );
+             buildShowToast(state.toString(),Colors.red.shade500);
             }
           },
+          
           builder: (context, state) {
             return ModalProgressHUD(
               progressIndicator: Center(
@@ -42,4 +41,6 @@ class LoginView extends StatelessWidget {
       ),
     );
   }
+
+ 
 }

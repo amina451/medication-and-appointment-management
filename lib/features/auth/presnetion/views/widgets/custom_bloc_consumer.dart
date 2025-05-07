@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:pharmacy_app/core/helper_functions/build_show_toast.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/features/auth/presnetion/manger/sign_up/sign_up_state.dart';
 import 'package:pharmacy_app/features/auth/presnetion/manger/sign_up/sing_up_cubit.dart';
@@ -18,14 +19,11 @@ class CustomBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignUpState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Confirm Email')),
-          );
+         buildShowToast("Confirm Email",AppColor.primaryColor);
           Navigator.pushReplacementNamed(context, LoginView.routeName);
         } else if (state is SignUpFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
-          );
+          buildShowToast(state.message,AppColor.primaryColor);
+
         }
       },
       builder: (context, state) {

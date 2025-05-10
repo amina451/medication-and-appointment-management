@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pharmacy_app/core/helper_functions/custom_build_show_modal.dart';
 import 'package:pharmacy_app/core/widgets/build_app_bar.dart';
 import 'package:pharmacy_app/core/widgets/custom_floating_button.dart';
 import 'package:pharmacy_app/features/medications/presention/views/widgets/custom_floting_button_med.dart';
@@ -13,8 +12,8 @@ class MedicationsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      floatingActionButton: CustomFloatingActionButtonMed(
-      ),
+    //  floatingActionButton: CustomFloatingActionButtonMed(),
+    
       appBar: buildAppBar(context, "Medications"),
       body: MedicationsViewBody(),
     );

@@ -5,7 +5,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignupCubit extends Cubit<SignUpState> {
   SignupCubit() : super(SignUpInitial());
-
   final SupabaseClient client = Supabase.instance.client;
 
   Future<void> signUp({
@@ -19,7 +18,12 @@ class SignupCubit extends Cubit<SignUpState> {
       final response = await client.auth.signUp(
         email: email.trim(),
         password: password.trim(),
-        data: {'name': name.trim(), 'phone': phone.trim()},
+        data: {
+          'name': name.trim(),
+          'phone': phone.trim(),
+          "medicationList":[],
+          "doctorList":[],
+          },
       );
       if (response.user == null) {
         emit(SignUpFailure(message: 'Sign-up failed, user not found'));

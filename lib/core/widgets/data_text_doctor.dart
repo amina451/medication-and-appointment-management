@@ -10,9 +10,11 @@ class DataTextAndButtonRemove extends StatelessWidget {
     required this.name,
     required this.specialty,
     required this.experience,
+       this.onDelete,
   });
   final String name, specialty;
   final String? experience;
+  final void Function()? onDelete;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +26,9 @@ class DataTextAndButtonRemove extends StatelessWidget {
           spacing: 90.w,
           children: [
             Text(name, style: AppTextStyle.semiBold20),
-            RemoveButton(),
+            GestureDetector(
+              onTap: onDelete,
+              child: RemoveButton()),
           ],
         ),
         Text(

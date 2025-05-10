@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pharmacy_app/core/helper_functions/custom_build_show_modal.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 
 class CustomFloatingActionButtonMed extends StatelessWidget {
@@ -8,7 +7,7 @@ class CustomFloatingActionButtonMed extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-          customBuildShowModalSheet(
+         /* customBuildShowModalSheet(
             context,
             () {},
             'Name Medication',
@@ -20,7 +19,7 @@ class CustomFloatingActionButtonMed extends StatelessWidget {
             "Date", 
             "Date",
             "Date",
-          );
+          );*/
         },
       backgroundColor: AppColor.primaryColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),

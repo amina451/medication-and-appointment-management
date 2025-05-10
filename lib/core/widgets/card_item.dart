@@ -14,11 +14,12 @@ class CardItem extends StatelessWidget {
     required this.specialty,
     this.address,
     required this.image,
-    required this.date,
+    required this.date, this.onDelete,
   });
 
   final String name, specialty, date, image;
   final String? address;
+  final void Function()? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,7 @@ class CardItem extends StatelessWidget {
                 child: Image.asset(image, height: 87.h, width: 92.w),
               ),
               DataTextAndButtonRemove(
+                onDelete: onDelete,
                 name: name,
                 specialty: specialty,
                 experience: address!,

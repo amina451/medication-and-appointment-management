@@ -11,6 +11,7 @@ class DataTextAndButtonRemove extends StatelessWidget {
     required this.specialty,
     required this.experience,
     this.onDelete,
+    this.onDelete,
   });
   final String name, specialty;
   final String? experience;

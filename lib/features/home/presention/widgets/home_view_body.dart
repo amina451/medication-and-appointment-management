@@ -23,57 +23,49 @@ class HomeViewBody extends StatelessWidget {
         children: [
           SizedBox(height: 20.h),
           Text("What are you looking for?", style: AppTextStyle.semiBold24),
-          Expanded(
-            child: CustomCardItemHome(
-              onTap: () {
-                Navigator.pushNamed(context, DoctorsView.routeName);
-              },
-              colorIcon: Colors.pinkAccent.withOpacity(0.65),
-              title: 'Doctors',
-              subTitle: "Here are the doctors you've visited",
-              imagePath: AppImages.assetsImagesDoctorhand,
-              colorTitle: Colors.pinkAccent.withOpacity(0.65),
-            ),
+          CustomCardItemHome(
+            onTap: () {
+              Navigator.pushNamed(context, DoctorsView.routeName);
+            },
+            colorIcon: Colors.pinkAccent.withOpacity(0.65),
+            title: 'Doctors',
+            subTitle: "Here are the doctors you've visited",
+            imagePath: AppImages.assetsImagesDoctorhand,
+            colorTitle: Colors.pinkAccent.withOpacity(0.65),
           ),
-          Expanded(
-            child: CustomCardItemHome(
-              onTap: () {
-                Navigator.pushNamed(context, MedicationsView.routeName);
-              },
-              title: 'My Medications',
-              subTitle: "Track and manage your \npersonal medications",
-              imagePath: AppImages.assetsImagesSyringe,
-              colorTitle: Colors.blueAccent.withOpacity(0.65),
-              colorIcon: Colors.blueAccent.withOpacity(0.65),
-            ),
+          CustomCardItemHome(
+            onTap: () {
+              Navigator.pushNamed(context, MedicationsView.routeName);
+            },
+            title: 'My Medications',
+            subTitle: "Track and manage your \npersonal medications",
+            imagePath: AppImages.assetsImagesSyringe,
+            colorTitle: Colors.blueAccent.withOpacity(0.65),
+            colorIcon: Colors.blueAccent.withOpacity(0.65),
           ),
-          Expanded(
-            child: CustomCardItemHome(
-              onTap: () {
-                Navigator.pushReplacementNamed(context, DateView.routeName);
-              },
-              title: 'Doctor Schedule',
-              subTitle: "View and manage your \ndoctor schedule",
-              imagePath: AppImages.assetsImagesCalendar,
-              colorTitle: Colors.greenAccent.withOpacity(0.65),
-              colorIcon: Colors.greenAccent.withOpacity(0.65),
-            ),
+          CustomCardItemHome(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, DateView.routeName);
+            },
+            title: 'Doctor Schedule',
+            subTitle: "View and manage your \ndoctor schedule",
+            imagePath: AppImages.assetsImagesCalendar,
+            colorTitle: Colors.greenAccent.withOpacity(0.65),
+            colorIcon: Colors.greenAccent.withOpacity(0.65),
           ),
 
-          Expanded(
-            child: CustomCardItemHome(
-              onTap: () {
-                Navigator.pushReplacementNamed(
-                  context,
-                  PerescarptionsView.routeName,
-                );
-              },
-              title: 'Prescriptions',
-              subTitle: "View and manage your \nPrescriptions",
-              imagePath: AppImages.assetsImagesMedicalPrescriptionSvgrepoCom,
-              colorTitle: AppColor.primaryColor,
-              colorIcon: AppColor.primaryColor,
-            ),
+          CustomCardItemHome(
+            onTap: () {
+              Navigator.pushReplacementNamed(
+                context,
+                PerescarptionsView.routeName,
+              );
+            },
+            title: 'Prescriptions',
+            subTitle: "View and manage your \nPrescriptions",
+            imagePath: AppImages.assetsImagesMedicalPrescriptionSvgrepoCom,
+            colorTitle: AppColor.primaryColor,
+            colorIcon: AppColor.primaryColor,
           ),
         ],
       ),

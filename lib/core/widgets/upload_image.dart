@@ -12,14 +12,14 @@ class ImageUpload extends StatefulWidget {
 
 class ImageUploadState extends State<ImageUpload> {
   final ImagePicker _picker = ImagePicker();
-  File? _selectedImage;
+  File? selectedImage;
 
   Future<void> _pickImage(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
 
     if (pickedFile != null) {
       setState(() {
-        _selectedImage = File(pickedFile.path);
+        selectedImage = File(pickedFile.path);
       });
     }
   }
@@ -31,7 +31,7 @@ class ImageUploadState extends State<ImageUpload> {
         _pickImage(ImageSource.gallery);
       },
       child:
-          _selectedImage == null
+          selectedImage == null
               ? Container(
                 width: 125.w,
                 height: 125.h,
@@ -45,7 +45,7 @@ class ImageUploadState extends State<ImageUpload> {
               : ClipRRect(
                 borderRadius: BorderRadius.circular(16.sp),
                 child: Image.file(
-                  _selectedImage!,
+                  selectedImage!,
                   width: 125.w,
                   height: 125.h,
                   fit: BoxFit.cover,

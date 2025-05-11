@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
@@ -31,49 +32,48 @@ class CardItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            spacing: 10.w,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ClipRRect(
+                ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  image,
+                child: CachedNetworkImage(
+                  imageUrl: image,
                   height: 87.h,
                   width: 92.w,
                   fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value:
-                            loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                    (loadingProgress.expectedTotalBytes ?? 1)
-                                : null,
-                      ),
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return Icon(Icons.error, size: 50.w, color: Colors.red);
-                  },
+                  placeholder: (context, url) => Center(
+                  child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => Icon(
+                  Icons.error,
+                  size: 40,
+                  color: Colors.red,
+                  ),
                 ),
-              ),
+                ),
+              
               DataTextAndButtonRemove(
                 onDelete: onDelete,
                 name: name,
                 specialty: specialty,
-                experience: address!,
+                experience: address ?? 'No address available',
               ),
             ],
           ),
           SizedBox(height: 5.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [DateVisitDoctor(date: date), EditButton()],
+            children: [
+              DateVisitDoctor(date: date),
+              EditButton(),
+            ],
           ),
         ],
       ),
     );
   }
 }
+  

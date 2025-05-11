@@ -30,7 +30,10 @@ class MyApp extends StatelessWidget {
 
       builder: (context, child) {
         return MultiBlocProvider(
-          providers: [BlocProvider(create: (context) => getIt<DoctorsCubit>())],
+          providers: [BlocProvider(create: (context) => 
+          getIt<DoctorsCubit>()..fetchDoctors()
+          
+          )],
           child: MaterialApp(
             theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,

@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart' as oldDoctor;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pharmacy_app/core/repo/images_repo.dart';
-import 'package:pharmacy_app/features/doctors/data/entitiy/doctor_entity.dart';
+import 'package:pharmacy_app/core/services/supabase_storage_services.dart';
 import 'package:pharmacy_app/features/doctors/domain/model/doctor_models.dart';
 import 'package:pharmacy_app/features/doctors/domain/uses_case/create_doctor_usecase.dart';
 import 'package:pharmacy_app/features/doctors/domain/uses_case/delete_doctor_usecase.dart';
@@ -16,16 +15,11 @@ class DoctorsCubit extends Cubit<DoctorState> {
   final DeleteDoctorUsecase deleteDoctorUsecase;
 
   DoctorsCubit({
-    required this.imagesRepo,
     required this.getDoctorUsecase,
     required this.createDoctorUsecase,
     required this.editeDoctorUsecase,
     required this.deleteDoctorUsecase,
-  }) : super(DoctorInitial()) {
-    fetchDoctors();
-  }
-
-  final ImagesRepo imagesRepo;
+  }) : super(DoctorInitial()) {}
 
   Future<void> fetchDoctors() async {
     try {
@@ -41,10 +35,29 @@ class DoctorsCubit extends Cubit<DoctorState> {
     try {
       final currentState = state;
       if (currentState is DoctorLoaded) {
-        var result = await imagesRepo.uploadImage(doctor.image);
+        // 1. Capture the image
+        final helper = ImageUploadHelper();
+        final pickedFile = await helper.pickImage();
 
-        final createdDoctors = await createDoctorUsecase.execute(doctor);
-        emit(DoctorLoaded([...currentState.doctors, createdDoctors]));
+        // 2. If an image is selected, upload it to Supabase Storage
+        if (pickedFile != null) {
+          final url = await helper.uploadImage(pickedFile, "doctor-images");
+
+          if (url != null) {
+            print("Image uploaded successfully: $url");
+            fetchDoctors();
+            // 3. Update doctor.image with the new URL
+            doctor = doctor.copyWith(imageUrl: url);
+          } else {
+            emit(DoctorError("Failed to upload image"));
+            return;
+          }
+        }
+
+        // 4. Execute doctor creation after uploading the image
+        final createdDoctor = await createDoctorUsecase.execute(doctor);
+
+        emit(DoctorLoaded([...currentState.doctors, createdDoctor]));
       }
     } catch (e) {
       emit(DoctorError(e.toString()));

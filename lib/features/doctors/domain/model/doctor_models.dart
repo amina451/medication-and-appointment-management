@@ -5,7 +5,7 @@ import 'package:pharmacy_app/features/doctors/data/entitiy/doctor_entity.dart';
 class DoctorModel {
   final String doctorId;
   final String doctorName;
-  final File image;
+  final String image;
   final String specialty;
   final String address;
   final String phone;
@@ -37,7 +37,7 @@ class DoctorModel {
     return DoctorEntity(
       doctorId: doctorId,
       doctorName: doctorName,
-      image: File(image.path),
+      image: image,
       specialty: specialty,
       address: address,
       phone: phone,
@@ -57,7 +57,7 @@ class DoctorModel {
     return DoctorModel(
       doctorId: doctorId ?? this.doctorId,
       doctorName: doctorName ?? this.doctorName,
-      image: imageUrl != null ? File(imageUrl) : image,
+      image: imageUrl ?? image,
       specialty: specialty ?? this.specialty,
       address: address ?? this.address,
       phone: phone ?? this.phone,

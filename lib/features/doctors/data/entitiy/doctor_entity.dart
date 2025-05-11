@@ -1,9 +1,8 @@
-import 'dart:io';
 
 class DoctorEntity {
   final String doctorId;
   final String doctorName;
-  final File image;
+  final String image;
   final String specialty;
   final String address;
   final String phone;
@@ -23,7 +22,7 @@ class DoctorEntity {
     return DoctorEntity(
       doctorId: json['doctor_id'] as String,
       doctorName: json['name_doctor'] as String,
-      image: File(json['image_url'] as String),
+      image: json['image_url'] as String,
       specialty: json['spicility'] as String,
       address: json['address'] as String,
       phone: json['phone'] as String,

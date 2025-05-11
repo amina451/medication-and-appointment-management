@@ -9,30 +9,28 @@ class CustomShowMore extends StatelessWidget {
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      child: SizedBox(
-        height: 40.h,
-        child: IconButton(
-          onPressed: onPressed,
-          icon: Row(
-            spacing: 5.w,
-            children: [
-              Icon(
-                Icons.remove_red_eye,
-                size: 20.sp,
-                color: AppColor.primaryColor,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5.0),
-                child: Text(
-                  isExpanded ? "Show Less" : "Show More",
-                  style: AppTextStyle.semiBold12.copyWith(
-                    color: AppColor.primaryColor,
-                  ),
+    return SizedBox(
+      height: 40.h,
+      child: IconButton(
+        onPressed: onPressed,
+        icon: Row(
+          spacing: 5.w,
+          children: [
+            Icon(
+              Icons.remove_red_eye,
+              size: 20.sp,
+              color: AppColor.primaryColor,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Text(
+                isExpanded ? "Show Less" : "Show More",
+                style: AppTextStyle.semiBold12.copyWith(
+                  color: AppColor.primaryColor,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

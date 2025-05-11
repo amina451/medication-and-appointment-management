@@ -27,7 +27,7 @@ class MedicationsViewBody extends StatelessWidget {
                     date: '5.30',
                   ),
               separatorBuilder: (context, index) => SizedBox(height: 10.h),
-              itemCount: 10,
+              itemCount: 1,
             ),
           ),
         ],

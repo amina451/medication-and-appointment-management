@@ -32,7 +32,6 @@ class CustomCardItemHome extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             FittedBox(
               child: Column(

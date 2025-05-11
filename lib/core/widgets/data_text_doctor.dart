@@ -10,36 +10,40 @@ class DataTextAndButtonRemove extends StatelessWidget {
     required this.name,
     required this.specialty,
     required this.experience,
-       this.onDelete,
+    this.onDelete,
   });
   final String name, specialty;
   final String? experience;
   final void Function()? onDelete;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      spacing: 5.h,
-      children: [
-        Row(
-          spacing: 90.w,
-          children: [
-            Text(name, style: AppTextStyle.semiBold20),
-            GestureDetector(
-              onTap: onDelete,
-              child: RemoveButton()),
-          ],
-        ),
-        Text(
-          specialty,
-          style: AppTextStyle.semiBold12.copyWith(color: AppColor.primaryColor),
-        ),
-        Text(
-          experience!,
-          style: AppTextStyle.semiBold12.copyWith(color: Color(0xff677294)),
-        ),
-      ],
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 5.h,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(name, style: AppTextStyle.semiBold20),
+              Spacer(),
+              GestureDetector(onTap: onDelete, child: RemoveButton()),
+            ],
+          ),
+          Text(
+            specialty,
+            style: AppTextStyle.semiBold12.copyWith(
+              color: AppColor.primaryColor,
+            ),
+          ),
+          Text(
+            experience!,
+            style: AppTextStyle.semiBold12.copyWith(color: Color(0xff677294)),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -5,8 +5,6 @@ import 'package:pharmacy_app/core/widgets/data_text_doctor.dart';
 import 'package:pharmacy_app/core/widgets/date_text.dart';
 import 'package:pharmacy_app/core/widgets/edit_button.dart';
 
-
-
 class CardItem extends StatelessWidget {
   const CardItem({
     super.key,
@@ -14,7 +12,8 @@ class CardItem extends StatelessWidget {
     required this.specialty,
     this.address,
     required this.image,
-    required this.date, this.onDelete,
+    required this.date,
+    this.onDelete,
   });
 
   final String name, specialty, date, image;
@@ -34,11 +33,31 @@ class CardItem extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            spacing: 10.w,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset(image, height: 87.h, width: 92.w),
+                child: Image.network(
+                  image,
+                  height: 87.h,
+                  width: 92.w,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value:
+                            loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    (loadingProgress.expectedTotalBytes ?? 1)
+                                : null,
+                      ),
+                    );
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return Icon(Icons.error, size: 50.w, color: Colors.red);
+                  },
+                ),
               ),
               DataTextAndButtonRemove(
                 onDelete: onDelete,

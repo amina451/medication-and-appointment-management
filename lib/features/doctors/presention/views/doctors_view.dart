@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_app/core/services/get_it.dart';
 import 'package:pharmacy_app/core/widgets/build_app_bar.dart';
 import 'package:pharmacy_app/core/widgets/custom_floating_button.dart';
-import 'package:pharmacy_app/features/doctors/presention/manger/doctor_cubit.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_build_show_modal.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/widgets/doctor_view_body.dart';
 

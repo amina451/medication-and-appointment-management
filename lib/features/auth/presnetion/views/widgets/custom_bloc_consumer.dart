@@ -19,10 +19,10 @@ class CustomBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignUpState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
-         buildShowToast("Confirm Email",AppColor.primaryColor);
+         buildShowToast( message:  "Confirm Email",color:AppColor.primaryColor);
           Navigator.pushReplacementNamed(context, LoginView.routeName);
         } else if (state is SignUpFailure) {
-          buildShowToast(state.message,AppColor.primaryColor);
+          buildShowToast(message:state.message,color:AppColor.primaryColor);
 
         }
       },

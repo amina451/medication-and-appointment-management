@@ -32,15 +32,17 @@ class CustomCardItemHome extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
                   style: AppTextStyle.semiBold20.copyWith(color: colorTitle),
                 ),
-            
+
                 Text(
                   subTitle,
                   style: AppTextStyle.semiBold12.copyWith(fontSize: 14.sp),

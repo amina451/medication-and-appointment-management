@@ -8,12 +8,11 @@ class DataTextAndButtonRemove extends StatelessWidget {
   const DataTextAndButtonRemove({
     super.key,
     required this.name,
-    required this.specialty,
+    required this.spicility,
     required this.experience,
     this.onDelete,
-    this.onDelete,
   });
-  final String name, specialty;
+  final String name, spicility;
   final String? experience;
   final void Function()? onDelete;
   @override
@@ -28,13 +27,17 @@ class DataTextAndButtonRemove extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(name, style: AppTextStyle.semiBold20),
+              Text(
+                overflow: TextOverflow.visible,
+                name,
+                style: AppTextStyle.semiBold20.copyWith(),
+              ),
               Spacer(),
               GestureDetector(onTap: onDelete, child: RemoveButton()),
             ],
           ),
           Text(
-            specialty,
+            spicility,
             style: AppTextStyle.semiBold12.copyWith(
               color: AppColor.primaryColor,
             ),

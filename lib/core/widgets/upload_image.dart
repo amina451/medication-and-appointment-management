@@ -1,10 +1,13 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ImageUpload extends StatefulWidget {
-  const ImageUpload({super.key});
+  final String? initialImageUrl; // الصورة القديمة
+
+  const ImageUpload({super.key, this.initialImageUrl});
 
   @override
   ImageUploadState createState() => ImageUploadState();
@@ -30,27 +33,35 @@ class ImageUploadState extends State<ImageUpload> {
       onTap: () {
         _pickImage(ImageSource.gallery);
       },
-      child:
-          selectedImage == null
-              ? Container(
+      child: selectedImage != null
+          ? ClipRRect(
+              borderRadius: BorderRadius.circular(16.sp),
+              child: Image.file(
+                selectedImage!,
                 width: 125.w,
                 height: 125.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.grey[300],
-                ),
-
-                child: Icon(Icons.image, size: 50.sp, color: Colors.grey),
-              )
-              : ClipRRect(
-                borderRadius: BorderRadius.circular(16.sp),
-                child: Image.file(
-                  selectedImage!,
+                fit: BoxFit.cover,
+              ),
+            )
+          : widget.initialImageUrl != null
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(16.sp),
+                  child: Image.network(
+                    widget.initialImageUrl!,
+                    width: 125.w,
+                    height: 125.h,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              : Container(
                   width: 125.w,
                   height: 125.h,
-                  fit: BoxFit.cover,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.grey[300],
+                  ),
+                  child: Icon(Icons.image, size: 50.sp, color: Colors.grey),
                 ),
-              ),
     );
   }
 }

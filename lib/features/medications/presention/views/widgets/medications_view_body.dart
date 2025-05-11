@@ -20,10 +20,9 @@ class MedicationsViewBody extends StatelessWidget {
               itemBuilder:
                   (context, index) => CardItem(
                     name: 'Pain Reliever',
-                    specialty: index % 2 == 0 ? 
-                    'Pain Reliever' : 'Antibiotic',
+                    spicility: index % 2 == 0 ? 'Pain Reliever' : 'Antibiotic',
                     address: "number : 1",
-                    image: AppImages.assetsImagesMedication, 
+                    image: AppImages.assetsImagesMedication,
                     date: '5.30',
                   ),
               separatorBuilder: (context, index) => SizedBox(height: 10.h),

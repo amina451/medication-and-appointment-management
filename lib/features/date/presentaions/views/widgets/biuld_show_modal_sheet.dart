@@ -32,8 +32,8 @@ void buildShowModalSheet(BuildContext context) {
                 FormTitle(title: "N.Doctor"),
                 CustomFormAddData(hint: "Name Doctor"),
 
-                FormTitle(title: "Specialty"),
-                CustomFormAddData(hint: "Specialty"),
+                FormTitle(title: "spicility"),
+                CustomFormAddData(hint: "spicility"),
 
                 FormTitle(title: "Day"),
                 CustomFormAddData(hint: "Day"),
@@ -51,8 +51,7 @@ void buildShowModalSheet(BuildContext context) {
                   title: "Save",
                   buttonTitleColor: Colors.white,
                   buttonColor: AppColor.primaryColor,
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                 ),
               ],
             ),

@@ -1,9 +1,8 @@
-
 class DoctorEntity {
   final String doctorId;
   final String doctorName;
-  final String image;
-  final String specialty;
+  final String imageUrl;
+  final String spicility;
   final String address;
   final String phone;
   final String userId;
@@ -11,8 +10,8 @@ class DoctorEntity {
   DoctorEntity({
     required this.doctorId,
     required this.doctorName,
-    required this.image,
-    required this.specialty,
+    required this.imageUrl,
+    required this.spicility,
     required this.address,
     required this.phone,
     required this.userId,
@@ -22,8 +21,8 @@ class DoctorEntity {
     return DoctorEntity(
       doctorId: json['doctor_id'] as String,
       doctorName: json['name_doctor'] as String,
-      image: json['image_url'] as String,
-      specialty: json['spicility'] as String,
+      imageUrl: json['image_url'] as String,
+      spicility: json['spicility'] as String,
       address: json['address'] as String,
       phone: json['phone'] as String,
       userId: json['id_user'] as String,
@@ -34,8 +33,8 @@ class DoctorEntity {
     return {
       'doctor_id': doctorId,
       'name_doctor': doctorName,
-      'image_url': image,
-      'spicility': specialty,
+      'image_url': imageUrl,
+      'spicility': spicility,
       'address': address,
       'phone': phone,
       'id_user': userId,

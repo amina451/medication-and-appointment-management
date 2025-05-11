@@ -34,11 +34,11 @@ void setup() {
   );
 
   getIt.registerSingleton<EditeDoctorUsecase>(
-    EditeDoctorUsecase(doctorRepository: getIt<DoctorRepository>()),
+    EditeDoctorUsecase( getIt<DoctorRepository>()),
   );
 
   getIt.registerSingleton<DeleteDoctorUsecase>(
-    DeleteDoctorUsecase(doctorRepository: getIt<DoctorRepository>()),
+    DeleteDoctorUsecase( getIt<DoctorRepository>()),
   );
 
   // Cubit
@@ -48,7 +48,6 @@ void setup() {
       createDoctorUsecase: getIt<CreateDoctorUsecase>(),
       editeDoctorUsecase: getIt<EditeDoctorUsecase>(),
       deleteDoctorUsecase: getIt<DeleteDoctorUsecase>(), 
-      // ✅ صار شغال
     ),
   );
 }

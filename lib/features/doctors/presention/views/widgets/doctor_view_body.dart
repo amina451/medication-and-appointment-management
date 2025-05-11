@@ -5,6 +5,8 @@ import 'package:pharmacy_app/core/widgets/card_item.dart';
 import 'package:pharmacy_app/core/widgets/search_form.dart';
 import 'package:pharmacy_app/features/doctors/presention/manger/doctor_cubit.dart';
 import 'package:pharmacy_app/features/doctors/presention/manger/doctor_state.dart';
+import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_build_show_modal.dart';
+import 'package:pharmacy_app/features/doctors/presention/views/widgets/show_modal_edite.dart';
 
 class DoctorsViewBody extends StatelessWidget {
   const DoctorsViewBody({super.key});
@@ -22,25 +24,32 @@ class DoctorsViewBody extends StatelessWidget {
               if (state is DoctorLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is DoctorLoaded) {
-                return ListView.separated(
-                  itemBuilder: (context, index) {
-                    final doctor = state.doctors[index];
-                    return CardItem(
-                      name: doctor.doctorName,
-                      specialty: doctor.specialty,
-                      address: doctor.address, 
-                      image: doctor.image,
-                      date: "12",   
-                      onDelete: () {
-                        context.read<DoctorsCubit>().deleteDoctor(
-                          int.parse(doctor.doctorId),
-                        );
-                      },
-                    );
-                  },
-                  separatorBuilder:
-                      (context, index) => SizedBox(height: 10.h),
-                  itemCount: state.doctors.length,
+                return Expanded(
+                  child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      final doctor = state.doctors[index];
+                      return CardItem(
+                        onPresed:
+                            () => customBuildEditDoctorModalSheet(
+                              context,
+                              doctor,
+                            ),
+                        name: doctor.doctorName,
+                        spicility: doctor.spicility,
+                        address: doctor.address,
+                        image: doctor.imageUrl,
+                        date: "12",
+                        onDelete: () {
+                          context.read<DoctorsCubit>().deleteDoctor(
+                            doctor.doctorId,
+                          );
+                        },
+                      );
+                    },
+                    separatorBuilder:
+                        (context, index) => SizedBox(height: 10.h),
+                    itemCount: state.doctors.length,
+                  ),
                 );
               } else if (state is DoctorError) {
                 return Center(child: Text(state.message));

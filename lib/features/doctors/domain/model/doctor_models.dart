@@ -1,12 +1,10 @@
-import 'dart:io';
-
 import 'package:pharmacy_app/features/doctors/data/entitiy/doctor_entity.dart';
 
 class DoctorModel {
   final String doctorId;
   final String doctorName;
-  final String image;
-  final String specialty;
+  final String imageUrl;
+  final String spicility;
   final String address;
   final String phone;
   final String userId;
@@ -14,8 +12,8 @@ class DoctorModel {
   DoctorModel({
     required this.doctorId,
     required this.doctorName,
-    required this.image,
-    required this.specialty,
+    required this.imageUrl,
+    required this.spicility,
     required this.address,
     required this.phone,
     required this.userId,
@@ -25,8 +23,8 @@ class DoctorModel {
     return DoctorModel(
       doctorId: doctor.doctorId,
       doctorName: doctor.doctorName,
-      image: doctor.image,
-      specialty: doctor.specialty,
+      imageUrl: doctor.imageUrl,
+      spicility: doctor.spicility,
       address: doctor.address,
       phone: doctor.phone,
       userId: doctor.userId,
@@ -37,8 +35,8 @@ class DoctorModel {
     return DoctorEntity(
       doctorId: doctorId,
       doctorName: doctorName,
-      image: image,
-      specialty: specialty,
+      imageUrl: imageUrl,
+      spicility: spicility,
       address: address,
       phone: phone,
       userId: userId,
@@ -49,7 +47,7 @@ class DoctorModel {
     String? doctorId,
     String? doctorName,
     String? imageUrl,
-    String? specialty,
+    String? spicility,
     String? address,
     String? phone,
     String? userId,
@@ -57,8 +55,8 @@ class DoctorModel {
     return DoctorModel(
       doctorId: doctorId ?? this.doctorId,
       doctorName: doctorName ?? this.doctorName,
-      image: imageUrl ?? image,
-      specialty: specialty ?? this.specialty,
+      imageUrl: imageUrl ?? this.imageUrl,
+      spicility: spicility ?? this.spicility,
       address: address ?? this.address,
       phone: phone ?? this.phone,
       userId: userId ?? this.userId,

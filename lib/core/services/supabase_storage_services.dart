@@ -5,13 +5,14 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class ImageUploadHelper {
   final picker = ImagePicker();
   final supabase = Supabase.instance.client;
+  
 
   Future<File?> pickImage() async {
     final picked = await picker.pickImage(source: ImageSource.gallery);
     return picked != null ? File(picked.path) : null;
   }
 
-  Future<String?> uploadImage(File file, String bucketName) async {
+  Future<String?> uploadImage(File file, String bucketName,) async {
     final fileExt = file.path.split('.').last;
     final fileName = '${DateTime.now().millisecondsSinceEpoch}.$fileExt';
     final filePath = 'uploads/$fileName';   

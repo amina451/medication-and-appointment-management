@@ -10,16 +10,18 @@ class CardItem extends StatelessWidget {
   const CardItem({
     super.key,
     required this.name,
-    required this.specialty,
+    required this.spicility,
     this.address,
     required this.image,
     required this.date,
     this.onDelete,
+    this.onPresed,
   });
 
-  final String name, specialty, date, image;
+  final String name, spicility, date, image;
   final String? address;
   final void Function()? onDelete;
+  final void Function()? onPresed;
 
   @override
   Widget build(BuildContext context) {
@@ -35,31 +37,33 @@ class CardItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-                ClipRRect(
+              ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: CachedNetworkImage(
                   imageUrl: image,
                   height: 87.h,
                   width: 92.w,
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => Center(
-                  child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => Icon(
-                  Icons.error,
-                  size: 40,
-                  color: Colors.red,
-                  ),
+                  placeholder:
+                      (context, url) => Center(
+                        child: CircularProgressIndicator(
+                          color: AppColor.primaryColor,
+                        ),
+                      ),
+                  errorWidget:
+                      (context, url, error) =>
+                          const Icon(Icons.error, size: 40, color: Colors.red),
                 ),
+              ),
+              SizedBox(width: 10.w),
+              Expanded(
+                child: DataTextAndButtonRemove(
+                  onDelete: onDelete,
+                  name: name,
+                  spicility: spicility,
+                  experience: address ?? 'No address available',
                 ),
-              
-              DataTextAndButtonRemove(
-                onDelete: onDelete,
-                name: name,
-                specialty: specialty,
-                experience: address ?? 'No address available',
               ),
             ],
           ),
@@ -68,7 +72,7 @@ class CardItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               DateVisitDoctor(date: date),
-              EditButton(),
+              EditButton(onPressed: onPresed),
             ],
           ),
         ],
@@ -76,4 +80,3 @@ class CardItem extends StatelessWidget {
     );
   }
 }
-  

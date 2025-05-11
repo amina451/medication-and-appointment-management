@@ -19,10 +19,10 @@ class LoginView extends StatelessWidget {
         body: BlocConsumer<SignInCubit, SignInState>(
           listener: (context, state) {
             if (state is SignInSuccess) {
-              buildShowToast(state.toString(),AppColor.primaryColor);
+              buildShowToast(message:  state.toString(),color:AppColor.primaryColor);
               Navigator.pushReplacementNamed(context, CustomBottomNavBar.routeName);
             } else if (state is SignInFailure) {
-             buildShowToast(state.toString(),Colors.red.shade500);
+             buildShowToast(message:  state.toString(),color:Colors.red.shade500);
             }
           },
 

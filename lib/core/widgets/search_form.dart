@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
+import 'package:pharmacy_app/features/doctors/presention/manger/doctor_cubit.dart';
+import 'package:pharmacy_app/features/doctors/presention/manger/doctor_state.dart';
 
 class SearchForm extends StatelessWidget {
-  SearchForm({super.key});
-
-  final List<String> items = ['Doctor A', 'Doctor B', 'Doctor C'];
+  const SearchForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,32 +23,44 @@ class SearchForm extends StatelessWidget {
             EdgeInsets.symmetric(horizontal: 16.0),
           ),
           leading: const Icon(Icons.search),
-          hintText: 'Search...',
+          hintText: 'Search for a doctor...',
           elevation: const WidgetStatePropertyAll(4.0),
+          onChanged: (query) {
+            context.read<DoctorsCubit>().searchDoctors(query);
+          },
         );
       },
-      suggestionsBuilder: (BuildContext context, SearchController controller) {
-        final query = controller.text;
-        final filteredItems =
-            items
-                .where(
-                  (item) => item.toLowerCase().contains(query.toLowerCase()),
-                )
-                .toList();
+      suggestionsBuilder: (BuildContext context, SearchController controller) async {
+        final state = context.read<DoctorsCubit>().state;
 
-        return filteredItems.isNotEmpty
-            ? filteredItems.map((suggestion) {
-              return ListTile(
-                title: Text(suggestion),
-                onTap: () {
-                  controller.closeView(suggestion);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Selected: $suggestion')),
-                  );
-                },
-              );
-            })
-            : [const Center(child: Text('No results found'))];
+        if (state is DoctorLoaded) {
+          final query = controller.text;
+          final doctors = state.doctors;
+
+          final filtered = query.isEmpty
+              ? doctors
+              : doctors.where((doctor) =>
+                  doctor.doctorName.toLowerCase().contains(query.toLowerCase()) ||
+                  doctor.spicility.toLowerCase().contains(query.toLowerCase())
+                ).toList();
+
+          return filtered.isNotEmpty
+              ? filtered.map((doctor) => ListTile(
+                    title: Text(doctor.doctorName),
+                    subtitle: Text(doctor.spicility),
+                    onTap: () {
+                      controller.closeView(doctor.doctorName);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Selected: ${doctor.doctorName}')),
+                      );
+                    },
+                  ))
+              : [const Center(child: Text('No results found'))];
+        } else if (state is DoctorLoading) {
+          return [const Center(child: CircularProgressIndicator())];
+        } else {
+          return [const Center(child: Text('Error loading data'))];
+        }
       },
     );
   }

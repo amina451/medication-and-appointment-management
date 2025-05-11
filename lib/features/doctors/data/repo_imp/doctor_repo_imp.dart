@@ -28,7 +28,8 @@ class DoctorRepoImpl implements DoctorRepository {
 
 
   @override
-  Future<DoctorModel> updateDoctor(DoctorModel oldDoctor, DoctorModel newDoctor) async {
+  Future<DoctorModel> updateDoctor(DoctorModel oldDoctor, DoctorModel newDoctor)
+   async {
     final DoctorEntity = await supabaseService.updateDoctor(
         oldDoctor.toEntity(), newDoctor.toEntity());
     return DoctorModel.mapDoctorEntity(DoctorEntity);
@@ -38,7 +39,9 @@ class DoctorRepoImpl implements DoctorRepository {
 
 
   @override
-  Future<void> deleteDoctor(int id) async {
+  Future<void> deleteDoctor(String id) async {
     await supabaseService.deleteDoctor(id);
   }
+  
+ 
 }

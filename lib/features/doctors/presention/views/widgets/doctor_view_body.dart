@@ -5,7 +5,6 @@ import 'package:pharmacy_app/core/widgets/card_item.dart';
 import 'package:pharmacy_app/core/widgets/search_form.dart';
 import 'package:pharmacy_app/features/doctors/presention/manger/doctor_cubit.dart';
 import 'package:pharmacy_app/features/doctors/presention/manger/doctor_state.dart';
-import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_build_show_modal.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/widgets/show_modal_edite.dart';
 
 class DoctorsViewBody extends StatelessWidget {
@@ -19,7 +18,14 @@ class DoctorsViewBody extends StatelessWidget {
         children: [
           SearchForm(),
           const SizedBox(height: 20),
-          BlocBuilder<DoctorsCubit, DoctorState>(
+          BlocConsumer<DoctorsCubit, DoctorState>(
+            listener: (context, state) {
+              if (state is DoctorError) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(state.message)));
+              }
+            },
             builder: (context, state) {
               if (state is DoctorLoading) {
                 return const Center(child: CircularProgressIndicator());
@@ -29,7 +35,7 @@ class DoctorsViewBody extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final doctor = state.doctors[index];
                       return CardItem(
-                        onPresed:
+                        onEdite:
                             () => customBuildEditDoctorModalSheet(
                               context,
                               doctor,
@@ -52,8 +58,11 @@ class DoctorsViewBody extends StatelessWidget {
                   ),
                 );
               } else if (state is DoctorError) {
-                return Center(child: Text(state.message));
+                return const Center(
+                  child: Text('An error occurred while loading doctors.'),
+                );
               }
+
               return const Center(child: Text('No doctors available.'));
             },
           ),

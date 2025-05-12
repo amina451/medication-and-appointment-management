@@ -13,15 +13,16 @@ class CardItem extends StatelessWidget {
     required this.spicility,
     this.address,
     required this.image,
-    required this.date,
+   required this.date,
     this.onDelete,
-    this.onPresed,
+    this.onEdite,
   });
 
-  final String name, spicility, date, image;
+  final String name, spicility, image;
+  final String date;
   final String? address;
   final void Function()? onDelete;
-  final void Function()? onPresed;
+  final void Function()? onEdite;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class CardItem extends StatelessWidget {
                   onDelete: onDelete,
                   name: name,
                   spicility: spicility,
-                  experience: address ?? 'No address available',
+                  experience: address ?? 'No available',
                 ),
               ),
             ],
@@ -72,7 +73,7 @@ class CardItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               DateVisitDoctor(date: date),
-              EditButton(onPressed: onPresed),
+              EditButton(onPressed: onEdite),
             ],
           ),
         ],

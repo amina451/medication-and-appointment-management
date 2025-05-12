@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pharmacy_app/core/utils/app_images.dart';
 import 'package:pharmacy_app/core/widgets/card_item.dart';
-import 'package:pharmacy_app/core/widgets/search_form.dart';
+import 'package:pharmacy_app/features/medications/presention/manger/medication_cubit.dart';
+import 'package:pharmacy_app/features/medications/presention/manger/medication_state.dart';
+import 'package:pharmacy_app/features/medications/presention/views/widgets/search_form.dart';
+import 'package:pharmacy_app/features/medications/presention/views/widgets/show_modal_edite_medication.dart';
 
 class MedicationsViewBody extends StatelessWidget {
   const MedicationsViewBody({super.key});
@@ -13,21 +16,57 @@ class MedicationsViewBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
         children: [
-          SearchForm(),
+          SearchFormMedication(),
           const SizedBox(height: 20),
-          Expanded(
-            child: ListView.separated(
-              itemBuilder:
-                  (context, index) => CardItem(
-                    name: 'Pain Reliever',
-                    spicility: index % 2 == 0 ? 'Pain Reliever' : 'Antibiotic',
-                    address: "number : 1",
-                    image: AppImages.assetsImagesMedication,
-                    date: '5.30',
+          BlocConsumer<MedicationsCubit, MedicationState>(
+            listener: (context, state) {
+              if (state is MedicationError) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(state.message)));
+                print(state.message);
+              }
+            },
+            builder: (context, state) {
+              if (state is MedicationLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is MedicationLoaded) {
+                return Expanded(
+                  child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      final medication = state.Medications[index];
+                      return CardItem(
+                        date: "12",
+                        onDelete:
+                             () => context
+                                .read<MedicationsCubit>()
+                                .deleteMedication(medication.medication_id),
+                        name: medication.name_medication,
+                        spicility: medication.potion,
+                        address: "${medication.num_of_day}",
+                        image: medication.imageUrl,
+                            
+                            
+                        onEdite: ()=> customBuildEditMedicationModalSheet(
+                              context,
+                              medication,
+                            ),
+                            
+                      );
+                    },
+                    separatorBuilder:
+                        (context, index) => SizedBox(height: 10.h),
+                    itemCount: state.Medications.length,
                   ),
-              separatorBuilder: (context, index) => SizedBox(height: 10.h),
-              itemCount: 1,
-            ),
+                );
+              } else if (state is MedicationError) {
+                return const Center(
+                  child: Text('An error occurred while loading medications.'),
+                );
+              }
+
+              return const Center(child: Text('No medications available.'));
+            },
           ),
         ],
       ),

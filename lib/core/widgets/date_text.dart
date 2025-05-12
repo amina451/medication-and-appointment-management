@@ -3,8 +3,8 @@ import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
 
 class DateVisitDoctor extends StatelessWidget {
-  const DateVisitDoctor({super.key, required this.date});
-  final String date;
+  const DateVisitDoctor({super.key,  this.date});
+  final String ? date;
   @override
   Widget build(BuildContext context) {
     return Padding(

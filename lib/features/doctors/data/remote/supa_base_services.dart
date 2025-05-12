@@ -1,10 +1,10 @@
 import 'package:pharmacy_app/features/doctors/data/entitiy/doctor_entity.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SupabaseService {
+class SupabaseServiceDoctor {
   final SupabaseClient supabase;
 
-  SupabaseService({required this.supabase});
+  SupabaseServiceDoctor({required this.supabase});
 
   Future<List<DoctorEntity>> fetchDoctors() async {
     final response = await supabase.from("doctors").select();

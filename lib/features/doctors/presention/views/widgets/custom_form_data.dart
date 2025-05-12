@@ -4,13 +4,15 @@ import 'package:pharmacy_app/core/utils/app_color.dart';
 
 class CustomFormAddData extends StatelessWidget {
   const CustomFormAddData({super.key, required this.hint, this.maxLength,
-    this.controller});
+    this.controller, this.keyboardType});
   final String hint;
   final int? maxLength;
   final TextEditingController? controller;
+  final TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType:keyboardType ,
       controller: controller,
       cursorColor: AppColor.primaryColor,
       decoration: InputDecoration(

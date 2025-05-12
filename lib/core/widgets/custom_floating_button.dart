@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
-  const CustomFloatingActionButton({super.key, required this.onPressed,});
- final void Function() onPressed;
+  const CustomFloatingActionButton({super.key, required this.onPressed});
+  final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: 'addMedicationBtn',
       onPressed: onPressed,
       /*() {
         buildShowModalSheet(context);
@@ -16,6 +17,4 @@ class CustomFloatingActionButton extends StatelessWidget {
       child: const Icon(Icons.add, color: Colors.white, size: 30),
     );
   }
-
 }
-

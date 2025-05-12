@@ -6,6 +6,7 @@ import 'package:pharmacy_app/core/services/bloc_observer.dart';
 import 'package:pharmacy_app/core/services/get_it.dart';
 import 'package:pharmacy_app/core/utils/constants.dart';
 import 'package:pharmacy_app/features/doctors/presention/manger/doctor_cubit.dart';
+import 'package:pharmacy_app/features/medications/presention/manger/medication_cubit.dart';
 import 'package:pharmacy_app/features/spalsh/presention/views/splash_view.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [BlocProvider(create: (context) => 
-          getIt<DoctorsCubit>()..fetchDoctors()
-          
+          getIt<DoctorsCubit>()..fetchDoctors(),),
+          BlocProvider(create: (context) => 
+          getIt<MedicationsCubit>()..fetchMedications(),
           )],
           child: MaterialApp(
             theme: ThemeData(

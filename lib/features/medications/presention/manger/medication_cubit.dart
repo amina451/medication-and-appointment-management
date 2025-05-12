@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy_app/core/services/supabase_storage_services.dart';
 import 'package:pharmacy_app/features/medications/domain/model/medication_models.dart';
@@ -34,7 +35,10 @@ class MedicationsCubit extends Cubit<MedicationState> {
 
   final currentUserId = Supabase.instance.client.auth.currentUser!.id;
 
-  Future<void> createMedication(MedicationModel Medication, File imageFile) async {
+  Future<void> createMedication(
+    MedicationModel Medication,
+    File imageFile,
+  ) async {
     try {
       final currentState = state;
       if (currentState is MedicationLoaded) {
@@ -47,9 +51,13 @@ class MedicationsCubit extends Cubit<MedicationState> {
         }
 
         final completeMedication = Medication.copyWith(imageUrlCopy: url);
-        final createdMedication = await createMedicationUsecase.execute(completeMedication);
+        final createdMedication = await createMedicationUsecase.execute(
+          completeMedication,
+        );
 
-        emit(MedicationLoaded([...currentState.Medications, createdMedication]));
+        emit(
+          MedicationLoaded([...currentState.Medications, createdMedication]),
+        );
       }
     } catch (e) {
       emit(MedicationError(e.toString()));
@@ -74,9 +82,9 @@ class MedicationsCubit extends Cubit<MedicationState> {
       if (currentState is MedicationLoaded) {
         await deleteMedicationUsecase.execute(MedicationId);
         final updatedMedications =
-            currentState.Medications
-                .where((doc) => doc.medication_id != MedicationId)
-                .toList();
+            currentState.Medications.where(
+              (doc) => doc.medication_id != MedicationId,
+            ).toList();
 
         emit(MedicationLoaded(updatedMedications));
       }
@@ -89,27 +97,28 @@ class MedicationsCubit extends Cubit<MedicationState> {
     await fetchMedications();
   }
 
-void searchMedications(String query) async {
-  try {
-    final currentState = state;
-    if (currentState is MedicationLoaded) {
-      if (query.isEmpty) {
-        // Fetch the full list of Medications again to reset the state
-        final medications = await getMedicationUsecase.execute();
-        emit(MedicationLoaded(medications));
-      } else {
-        // Filter the Medications based on the query
-        final filteredMedications = currentState.Medications.where((medication) {
-          final nameMatch = medication.name_medication.toLowerCase().contains(query.toLowerCase());
-          return nameMatch ;
-        }).toList();
-        emit(MedicationLoaded(filteredMedications));
+  void searchMedications(String query) async {
+    try {
+      final currentState = state;
+      if (currentState is MedicationLoaded) {
+        if (query.isEmpty) {
+          // Fetch the full list of Medications again to reset the state
+          final medications = await getMedicationUsecase.execute();
+          emit(MedicationLoaded(medications));
+        } else {
+          // Filter the Medications based on the query
+          final filteredMedications =
+              currentState.Medications.where((medication) {
+                final nameMatch = medication.name_medication
+                    .toLowerCase()
+                    .contains(query.toLowerCase());
+                return nameMatch;
+              }).toList();
+          emit(MedicationLoaded(filteredMedications));
+        }
       }
+    } catch (e) {
+      emit(MedicationError(e.toString()));
     }
-  } catch (e) {
-    emit(MedicationError(e.toString()));
   }
-}
-
-
 }

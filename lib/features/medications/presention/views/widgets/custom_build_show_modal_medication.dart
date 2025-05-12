@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -11,12 +12,10 @@ import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/custom_button.dart';
 import 'package:pharmacy_app/core/widgets/upload_image.dart';
 import 'package:pharmacy_app/features/auth/presnetion/views/widgets/form_title.dart';
-import 'package:pharmacy_app/features/doctors/domain/model/doctor_models.dart';
-import 'package:pharmacy_app/features/doctors/presention/manger/doctor_cubit.dart';
-import 'package:pharmacy_app/features/doctors/presention/manger/doctor_state.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_form_data.dart';
 import 'package:pharmacy_app/features/medications/domain/model/medication_models.dart';
 import 'package:pharmacy_app/features/medications/presention/manger/medication_cubit.dart';
+import 'package:pharmacy_app/features/medications/presention/manger/medication_state.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
@@ -26,7 +25,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
 
   final medicationNameController = TextEditingController();
   final potionController = TextEditingController();
-  final num_of_dayController = TextEditingController();
+  final numOfDaycontroller = TextEditingController();
 
   showModalBottomSheet(
     context: context,
@@ -35,15 +34,15 @@ void customBuildShowModalSheetMed(BuildContext context) {
       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
     builder: (BuildContext context) {
-      return BlocConsumer<DoctorsCubit, DoctorState>(
+      return BlocConsumer<MedicationsCubit, MedicationState>(
         listener: (context, state) {
-          if (state is DoctorLoaded) {
+          if (state is MedicationLoaded) {
             buildShowToast(
-              message: 'Doctor added successfully!',
+              message: 'Medication added successfully!',
               color: AppColor.primaryColor,
             );
-            context.read<DoctorsCubit>().fetchDoctors();
-          } else if (state is DoctorError) {
+            context.read<MedicationsCubit>().fetchMedications();
+          } else if (state is MedicationError) {
             buildShowToast(message: state.message, color: Colors.red.shade500);
             log(state.message);
           }
@@ -54,7 +53,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
             progressIndicator: CircularProgressIndicator(
               color: AppColor.primaryColor,
             ),
-            inAsyncCall: state is DoctorLoading ? true : false,
+            inAsyncCall: state is MedicationLoading ? true : false,
             child: Padding(
               padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -89,11 +88,10 @@ void customBuildShowModalSheetMed(BuildContext context) {
                         const FormTitle(title: "num_of_day"),
                         CustomFormAddData(
                           hint: "num_of_day",
-                         keyboardType:TextInputType.number ,
-                          controller: num_of_dayController,
+                          keyboardType: TextInputType.number,
+                          controller: numOfDaycontroller,
                         ),
-                        
-                    
+
                         CustomButton(
                           title: "Save",
                           buttonTitleColor: Colors.white,
@@ -103,19 +101,19 @@ void customBuildShowModalSheetMed(BuildContext context) {
 
                             if (image != null) {
                               final medication = MedicationModel(
-                                 medication_id: const Uuid().v4(),
-                                 name_medication: medicationNameController.text,
-                                 imageUrl: "",
-                                  potion: potionController.text,
-                                  num_of_day: num_of_dayController.text,
-                                  userId: Supabase
-                                      .instance
-                                      .client
-                                      .auth
-                                      .currentUser!
-                                      .id,
-);
-                              
+                                medication_id: const Uuid().v4(),
+                                name_medication: medicationNameController.text,
+                                imageUrl: "",
+                                potion: potionController.text,
+                                num_of_day: numOfDaycontroller.text,
+                                userId:
+                                    Supabase
+                                        .instance
+                                        .client
+                                        .auth
+                                        .currentUser!
+                                        .id,
+                              );
 
                               context.read<MedicationsCubit>().createMedication(
                                 medication,

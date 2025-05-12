@@ -1,62 +1,128 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/custom_button.dart';
 import 'package:pharmacy_app/features/auth/presnetion/views/widgets/form_title.dart';
+import 'package:pharmacy_app/features/date/domain/model/date_models.dart';
+import 'package:pharmacy_app/features/date/manger/date_cubit.dart';
+import 'package:pharmacy_app/features/date/manger/date_state.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_form_data.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 void buildShowModalSheet(BuildContext context) {
+  final dayController = TextEditingController();
+  final doctorController = TextEditingController();
+  final specialtyController = TextEditingController();
+  final timeController = TextEditingController();
+  final addressController = TextEditingController();
+  final followUpController = TextEditingController();
+  final noteController = TextEditingController();
+
   showModalBottomSheet(
     context: context,
-    shape: RoundedRectangleBorder(
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
     builder: (BuildContext context) {
-      return Expanded(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 52.w, vertical: 20.h),
-          height: 800.h,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(32),
-              topRight: Radius.circular(32),
+      return BlocConsumer<DatesCubit, DateState>(
+        listener: (context, state) {
+          if (state is DateLoaded) {
+            Navigator.pop(context);
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text('Data saved successfully!')));
+          } else if (state is DateError) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
+          }
+        },
+        builder: (context, state) {
+          return Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-            color: Colors.white,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              spacing: 10.h,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                FormTitle(title: "N.Doctor"),
-                CustomFormAddData(hint: "Name Doctor"),
-
-                FormTitle(title: "spicility"),
-                CustomFormAddData(hint: "spicility"),
-
-                FormTitle(title: "Day"),
-                CustomFormAddData(hint: "Day"),
-
-                FormTitle(title: "Time"),
-                CustomFormAddData(hint: "Time"),
-
-                FormTitle(title: "Address"),
-                CustomFormAddData(hint: "Address"),
-
-                FormTitle(title: "Diagnosis"),
-                CustomFormAddData(hint: "Diagnosis"),
-
-                CustomButton(
-                  title: "Save",
-                  buttonTitleColor: Colors.white,
-                  buttonColor: AppColor.primaryColor,
-                  onPressed: () {},
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 52.w, vertical: 20.h),
+              height: 800.h,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(32),
+                  topRight: Radius.circular(32),
                 ),
-              ],
+                color: Colors.white,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FormTitle(title: "Day"),
+                    CustomFormAddData(hint: "Day", controller: dayController),
+
+                    FormTitle(title: "N.Doctor"),
+                    CustomFormAddData(
+                      hint: "Name Doctor",
+                      controller: doctorController,
+                    ),
+
+                    FormTitle(title: "Specialty"),
+                    CustomFormAddData(
+                      hint: "Specialty",
+                      controller: specialtyController,
+                    ),
+
+                    FormTitle(title: "Time"),
+                    CustomFormAddData(hint: "Time", controller: timeController),
+
+                    FormTitle(title: "Address"),
+                    CustomFormAddData(
+                      hint: "Address",
+                      controller: addressController,
+                    ),
+                    FormTitle(title: "Follow Up"),
+                    CustomFormAddData(
+                      hint: "Follow Up",
+                      controller: followUpController,
+                    ),
+
+                    FormTitle(title: "Note"),
+                    CustomFormAddData(
+                      hint: "Add Note",
+                      maxLength: 2,
+                      controller: noteController,
+                    ),
+
+                    SizedBox(height: 20.h),
+                    CustomButton(
+                      title: state is DateLoading ? "Saving..." : "Save",
+                      buttonTitleColor: Colors.white,
+                      buttonColor: AppColor.primaryColor,
+                      onPressed: () {
+                        final date = DateModel(
+                          idDate:  Uuid().v4(),
+                          time: timeController.text,
+                          doctorName: doctorController.text,
+                          userId: Supabase.instance.client.auth.currentUser!.id,
+                          note: noteController.text,
+                          followUp: followUpController.text,
+                          date: dayController.text,
+                          specialty: specialtyController.text,
+                        );
+                        
+                        context.read<DatesCubit>().createDate(date);
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       );
     },
   );

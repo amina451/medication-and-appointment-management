@@ -1,5 +1,3 @@
-
-
 import 'package:pharmacy_app/features/medications/domain/model/medication_models.dart';
 import 'package:pharmacy_app/features/medications/domain/repo/medication_repo.dart';
 
@@ -8,7 +6,10 @@ class EditeMedicationUsecase {
 
   EditeMedicationUsecase(this.medicationRepository);
 
-  Future<MedicationModel> execute(MedicationModel oldMed, MedicationModel newMed) async {
+  Future<MedicationModel> execute(
+    MedicationModel oldMed,
+    MedicationModel newMed,
+  ) async {
     return await medicationRepository.updateMedication(oldMed, newMed);
   }
 }

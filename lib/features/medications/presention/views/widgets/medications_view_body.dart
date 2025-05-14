@@ -43,24 +43,20 @@ class MedicationsViewBody extends StatelessWidget {
                       final medication = state.medication[index];
                       return CardItem(
                         date: "12",
-                        onDelete:
-                            () => context
-                                .read<MedicationsCubit>()
-                                .deleteMedication(medication.medication_id),
-                        name: medication.name_medication,
-                        spicility: medication.potion,
-                        address: medication.num_of_day,
-                        image: medication.imageUrl,
-
-                        onEdite:
-                            () => customBuildEditMedicationModalSheet(
-                              context,
-                              medication,
-                            ),
+                        onDelete: () => context
+                            .read<MedicationsCubit>()
+                            .deleteMedication(medication.medication_id ?? ''),
+                        name: medication.name_medication ?? 'غير متوفر',
+                        spicility: medication.potion ?? 'غير متوفر',
+                        address: medication.num_of_day ?? 'غير متوفر',
+                        image: medication.imageUrl ?? '',
+                        onEdite: () => customBuildEditMedicationModalSheet(
+                          context,
+                          medication,
+                        ),
                       );
                     },
-                    separatorBuilder:
-                        (context, index) => SizedBox(height: 10.h),
+                    separatorBuilder: (context, index) => SizedBox(height: 10.h),
                     itemCount: state.medication.length,
                   ),
                 );

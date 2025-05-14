@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -75,7 +74,6 @@ void customBuildShowModalSheetMed(BuildContext context) {
                       children: [
                         ImageUpload(key: imageKey),
                         const FormTitle(title: "Medication Name"),
-
                         CustomFormAddData(
                           hint: "Medication",
                           controller: medicationNameController,
@@ -91,7 +89,6 @@ void customBuildShowModalSheetMed(BuildContext context) {
                           keyboardType: TextInputType.number,
                           controller: numOfDaycontroller,
                         ),
-
                         CustomButton(
                           title: "Save",
                           buttonTitleColor: Colors.white,
@@ -106,13 +103,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
                                 imageUrl: "",
                                 potion: potionController.text,
                                 num_of_day: numOfDaycontroller.text,
-                                userId:
-                                    Supabase
-                                        .instance
-                                        .client
-                                        .auth
-                                        .currentUser!
-                                        .id,
+                                userId: Supabase.instance.client.auth.currentUser!.id,
                               );
 
                               context.read<MedicationsCubit>().createMedication(

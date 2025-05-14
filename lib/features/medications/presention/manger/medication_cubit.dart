@@ -74,17 +74,19 @@ class MedicationsCubit extends Cubit<MedicationState> {
     }
   }
 
-  Future<void> deleteMedication(String MedicationId) async {
+  Future<void> deleteMedication(String? medicationId) async {
     try {
       final currentState = state;
       if (currentState is MedicationLoaded) {
-        await deleteMedicationUsecase.execute(MedicationId);
-        final updatedMedications =
-            currentState.medication
-                .where((doc) => doc.medication_id != MedicationId)
-                .toList();
+        if (medicationId != null) {
+          await deleteMedicationUsecase.execute(medicationId);
+          final updatedMedications =
+              currentState.medication
+                  .where((doc) => doc.medication_id != medicationId)
+                  .toList();
 
-        emit(MedicationLoaded(updatedMedications));
+          emit(MedicationLoaded(updatedMedications));
+        }
       }
     } catch (e) {
       emit(MedicationError(e.toString()));
@@ -100,16 +102,15 @@ class MedicationsCubit extends Cubit<MedicationState> {
       final currentState = state;
       if (currentState is MedicationLoaded) {
         if (query.isEmpty) {
-          // Fetch the full list of Medications again to reset the state
           final medications = await getMedicationUsecase.execute();
           emit(MedicationLoaded(medications));
         } else {
-          // Filter the Medications based on the query
           final filteredMedications =
               currentState.medication.where((medication) {
                 final nameMatch = medication.name_medication
-                    .toLowerCase()
-                    .contains(query.toLowerCase());
+                        ?.toLowerCase()
+                        .contains(query.toLowerCase()) ??
+                    false;
                 return nameMatch;
               }).toList();
           emit(MedicationLoaded(filteredMedications));

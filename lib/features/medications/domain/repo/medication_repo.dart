@@ -7,5 +7,5 @@ abstract class MedicationRepository {
     MedicationModel oldMedication,
     MedicationModel newMedication,
   );
-  Future<void> deleteMedication(String id);
+  Future<void> deleteMedication(String? id);
 }

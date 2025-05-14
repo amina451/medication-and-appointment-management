@@ -1,12 +1,12 @@
 import 'package:pharmacy_app/features/medications/data/entitiy/medication_entity.dart';
 
 class MedicationModel {
-  final String medication_id;
-  final String name_medication;
-  final String imageUrl;
-  final String potion;
-  final String num_of_day;
-  final String userId;
+  final String? medication_id;
+  final String? name_medication;
+  final String? imageUrl;
+  final String? potion;
+  final String? num_of_day;
+  final String? userId;
 
   MedicationModel({
     required this.medication_id,
@@ -65,5 +65,5 @@ class MedicationModel {
           medication_id == other.medication_id;
 
   @override
-  int get hashCode => medication_id.hashCode;
+  int get hashCode => medication_id?.hashCode ?? 0;
 }

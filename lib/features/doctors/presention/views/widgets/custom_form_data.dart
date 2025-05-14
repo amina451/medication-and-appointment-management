@@ -8,16 +8,18 @@ class CustomFormAddData extends StatelessWidget {
     required this.hint,
     this.maxLength,
     this.controller,
-    this.keyboardType, this.maxLines,
+    this.keyboardType, this.maxLines, this.validator,
   });
   final String hint;
   final int? maxLength;
   final int? maxLines;
+  final String? Function(String?)? validator;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
       maxLines: maxLines,
       keyboardType: keyboardType,
       controller: controller,

@@ -8,6 +8,7 @@ class SupabaseServiceMedication {
 
   Future<List<MedicationEntity>> fetchMedications() async {
     final response = await supabase.from("medications").select();
+    print("Response from Supabase: $response"); // اطبع البيانات
     return response.map((e) => MedicationEntity.fromJson(e)).toList();
   }
 
@@ -17,7 +18,6 @@ class SupabaseServiceMedication {
     return MedicationEntity.fromJson(response.first);
   }
 
-  @override
   Future<MedicationEntity> updateMedication(
     MedicationEntity oldMedication,
     MedicationEntity newMedication,
@@ -25,17 +25,20 @@ class SupabaseServiceMedication {
     await supabase
         .from('medications')
         .update({
-          'name_medication': newMedication.name_medication,
-          'potion': newMedication.potion,
-          'num_of_day': newMedication.num_of_day,
-          'imageUrl': newMedication.imageUrl,
+          'name_medication': newMedication.name_medication ?? '',
+          'potion': newMedication.potion ?? '',
+          'num_of_day': newMedication.num_of_day ?? '',
+          'imageUrl': newMedication.imageUrl ?? '',
         })
-        .eq('medication_id', oldMedication.medication_id);
+        .eq('medication_id', oldMedication.medication_id ?? '');
 
     return newMedication;
   }
 
-  Future<void> deleteMedication(String medicationId) async {
+  Future<void> deleteMedication(String? medicationId) async {
+    if (medicationId == null) {
+      throw Exception('Medication ID cannot be null');
+    }
     await supabase
         .from('medications')
         .delete()

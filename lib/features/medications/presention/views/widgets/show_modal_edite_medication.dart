@@ -10,11 +10,10 @@ import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/custom_button.dart';
 import 'package:pharmacy_app/core/widgets/upload_image.dart';
 import 'package:pharmacy_app/features/auth/presnetion/views/widgets/form_title.dart';
-import 'package:pharmacy_app/features/doctors/presention/manger/doctor_cubit.dart';
-import 'package:pharmacy_app/features/doctors/presention/manger/doctor_state.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_form_data.dart';
 import 'package:pharmacy_app/features/medications/domain/model/medication_models.dart';
 import 'package:pharmacy_app/features/medications/presention/manger/medication_cubit.dart';
+import 'package:pharmacy_app/features/medications/presention/manger/medication_state.dart';
 
 void customBuildEditMedicationModalSheet(
   BuildContext context,
@@ -23,11 +22,18 @@ void customBuildEditMedicationModalSheet(
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ImageUploadState> imageKey = GlobalKey();
 
+  // التحقق من null عند تعيين القيم في الـ Controllers
   final medicationNameController = TextEditingController(
-    text: medication.name_medication.split("").first,
+    text: medication.name_medication?.isNotEmpty == true
+        ? medication.name_medication
+        : '',
   );
-  final potionController = TextEditingController();
-  final numOfDayController = TextEditingController();
+  final potionController = TextEditingController(
+    text: medication.potion ?? '',
+  );
+  final numOfDayController = TextEditingController(
+    text: medication.num_of_day ?? '',
+  );
 
   showModalBottomSheet(
     context: context,
@@ -36,15 +42,15 @@ void customBuildEditMedicationModalSheet(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
     builder: (BuildContext context) {
-      return BlocConsumer<DoctorsCubit, DoctorState>(
+      return BlocConsumer<MedicationsCubit, MedicationState>(
         listener: (context, state) {
-          if (state is DoctorLoaded) {
+          if (state is MedicationLoaded) {
             buildShowToast(
-              message: 'Doctor added successfully!',
+              message: 'Medication updated successfully!',
               color: AppColor.primaryColor,
             );
-            context.read<DoctorsCubit>().fetchDoctors();
-          } else if (state is DoctorError) {
+            context.read<MedicationsCubit>().fetchMedications();
+          } else if (state is MedicationError) {
             buildShowToast(message: state.message, color: Colors.red.shade500);
             log(state.message);
           }
@@ -55,7 +61,7 @@ void customBuildEditMedicationModalSheet(
             progressIndicator: CircularProgressIndicator(
               color: AppColor.primaryColor,
             ),
-            inAsyncCall: state is DoctorLoading,
+            inAsyncCall: state is MedicationLoading,
             child: Padding(
               padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -77,23 +83,41 @@ void customBuildEditMedicationModalSheet(
                       children: [
                         ImageUpload(
                           key: imageKey,
-                          initialImageUrl: medication.imageUrl,
+                          initialImageUrl: medication.imageUrl ?? '',
                         ),
                         const FormTitle(title: "Medication Name"),
                         CustomFormAddData(
                           hint: "Medication",
                           controller: medicationNameController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter medication name';
+                            }
+                            return null;
+                          },
                         ),
                         const FormTitle(title: "Potion"),
                         CustomFormAddData(
                           hint: "Potion",
                           controller: potionController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter potion';
+                            }
+                            return null;
+                          },
                         ),
                         const FormTitle(title: "num_of_day"),
                         CustomFormAddData(
                           hint: "num_of_day",
                           keyboardType: TextInputType.number,
                           controller: numOfDayController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter number of days';
+                            }
+                            return null;
+                          },
                         ),
                         CustomButton(
                           title: "Save",
@@ -105,13 +129,13 @@ void customBuildEditMedicationModalSheet(
                             if (!formKey.currentState!.validate()) return;
 
                             final image = imageKey.currentState?.selectedImage;
-                            String finalImageUrl = medication.imageUrl;
+                            String finalImageUrl = medication.imageUrl ?? '';
 
                             if (image != null) {
                               final helper = ImageUploadHelper();
                               final uploadedUrl = await helper.uploadImage(
                                 image,
-                                "doctor-images",
+                                "medication-images", // تغيير "doctor-images" لـ "medication-images"
                               );
 
                               if (uploadedUrl != null) {

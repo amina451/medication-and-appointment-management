@@ -31,42 +31,33 @@ class SearchFormMedication extends StatelessWidget {
           },
         );
       },
-      suggestionsBuilder: (
-        BuildContext context,
-        SearchController controller,
-      ) async {
+      suggestionsBuilder: (BuildContext context, SearchController controller) async {
         final state = context.read<MedicationsCubit>().state;
 
         if (state is MedicationLoaded) {
           final query = controller.text;
           final medication = state.medication;
 
-          final filtered =
-              query.isEmpty
-                  ? medication
-                  : medication
-                      .where(
-                        (doctor) => doctor.name_medication
-                            .toLowerCase()
-                            .contains(query.toLowerCase()),
-                      )
-                      .toList();
+          final filtered = query.isEmpty
+              ? medication
+              : medication.where((doctor) {
+                  // تحقق من null قبل استخدام toLowerCase()
+                  final name = doctor.name_medication?.toLowerCase() ?? '';
+                  return name.contains(query.toLowerCase());
+                }).toList();
 
           return filtered.isNotEmpty
-              ? filtered.map(
-                (doctor) => ListTile(
-                  title: Text(doctor.name_medication),
-
-                  onTap: () {
-                    controller.closeView(doctor.name_medication);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Selected: ${doctor.name_medication}'),
-                      ),
-                    );
-                  },
-                ),
-              )
+              ? filtered.map((doctor) => ListTile(
+                    title: Text(doctor.name_medication ?? 'غير متوفر'),
+                    onTap: () {
+                      controller.closeView(doctor.name_medication ?? '');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Selected: ${doctor.name_medication ?? 'غير متوفر'}'),
+                        ),
+                      );
+                    },
+                  ))
               : [const Center(child: Text('No results found'))];
         } else if (state is MedicationLoading) {
           return [const Center(child: CircularProgressIndicator())];

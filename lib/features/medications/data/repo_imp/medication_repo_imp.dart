@@ -36,7 +36,7 @@ class MedicationRepoImpl implements MedicationRepository {
   }
 
   @override
-  Future<void> deleteMedication(String id) async {
+  Future<void> deleteMedication(String? id) async {
     await supabaseService.deleteMedication(id);
   }
 }

@@ -7,7 +7,7 @@ class SupabaseServiceDate {
   SupabaseServiceDate({required this.supabase});
 
   Future<List<DateEntity>> fetchDates() async {
-    final response = await supabase.from("Dates").select();
+    final response = await supabase.from("date").select();
     return (response as List)
         .map((e) => DateEntity.fromJson(e))
         .toList();
@@ -15,7 +15,7 @@ class SupabaseServiceDate {
 
   Future<DateEntity> createDate(DateEntity Date) async {
     final response =
-        await supabase.from("Dates").insert(Date.toJson()).select();
+        await supabase.from("date").insert(Date.toJson()).select();
     return DateEntity.fromJson(response.first);
   }
 
@@ -24,7 +24,7 @@ class SupabaseServiceDate {
     DateEntity newDate,
   ) async {
     await supabase
-        .from('Dates')
+        .from('date')
         .update(newDate.toJson())
         .eq('id_date', oldDate.idDate);
 
@@ -33,7 +33,7 @@ class SupabaseServiceDate {
 
   Future<void> deleteDate(String idDate) async {
     await supabase
-        .from('Dates')
+        .from('date')
         .delete()
         .eq('id_date', idDate);
   }

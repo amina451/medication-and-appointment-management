@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pharmacy_app/core/helper_functions/build_show_toast.dart';
+import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/card_item.dart';
 import 'package:pharmacy_app/features/medications/presention/manger/medication_cubit.dart';
 import 'package:pharmacy_app/features/medications/presention/manger/medication_state.dart';
@@ -21,10 +23,11 @@ class MedicationsViewBody extends StatelessWidget {
           BlocConsumer<MedicationsCubit, MedicationState>(
             listener: (context, state) {
               if (state is MedicationError) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(SnackBar(content: Text(state.message)));
+                buildShowToast(message: state.message, color: Colors.red);
                 print(state.message);
+              }
+              if (state is MedicationLoaded) {
+                buildShowToast(message: "Done Loaded", color: AppColor.primaryColor);
               }
             },
             builder: (context, state) {
@@ -38,20 +41,19 @@ class MedicationsViewBody extends StatelessWidget {
                       return CardItem(
                         date: "12",
                         onDelete:
-                             () => context
+                            () => context
                                 .read<MedicationsCubit>()
                                 .deleteMedication(medication.medication_id),
                         name: medication.name_medication,
                         spicility: medication.potion,
                         address: "${medication.num_of_day}",
                         image: medication.imageUrl,
-                            
-                            
-                        onEdite: ()=> customBuildEditMedicationModalSheet(
+
+                        onEdite:
+                            () => customBuildEditMedicationModalSheet(
                               context,
                               medication,
                             ),
-                            
                       );
                     },
                     separatorBuilder:

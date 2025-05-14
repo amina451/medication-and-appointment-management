@@ -3,6 +3,7 @@ import 'package:pharmacy_app/features/date/data/remote/supa_base_services_dates.
 import 'package:pharmacy_app/features/date/data/repo_imp/date_repo_imp.dart';
 import 'package:pharmacy_app/features/date/domain/repo/date_repo.dart';
 import 'package:pharmacy_app/features/date/domain/uses_case/create_date_usecase.dart';
+import 'package:pharmacy_app/features/date/domain/uses_case/create_date_usecase.dart';
 import 'package:pharmacy_app/features/date/domain/uses_case/delete_date_usecase.dart';
 import 'package:pharmacy_app/features/date/domain/uses_case/edit_date_usecase.dart';
 import 'package:pharmacy_app/features/date/domain/uses_case/get_date_usecase.dart';
@@ -73,6 +74,7 @@ void setup() {
 
 
 
+
 //services date
   getIt.registerSingleton<SupabaseServiceDate>(
     SupabaseServiceDate(supabase: Supabase.instance.client),
@@ -99,7 +101,24 @@ void setup() {
 
 
 
-  // Cubit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   getIt.registerFactory<DoctorsCubit>(
     () => DoctorsCubit(
       getDoctorUsecase: getIt<GetDoctorUsecase>(),

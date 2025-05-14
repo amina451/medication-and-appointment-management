@@ -3,12 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
 import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/custom_show_more.dart';
-import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/info_doctor.dart';
-import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/medication_item.dart';
 
 class CardPrescriptionsItem extends StatefulWidget {
-  const CardPrescriptionsItem({super.key, required this.index});
-  final int index;
+
+  const CardPrescriptionsItem({super.key, });
 
   @override
   State<CardPrescriptionsItem> createState() => _CardPrescriptionsItemState();
@@ -16,6 +14,7 @@ class CardPrescriptionsItem extends StatefulWidget {
 
 class _CardPrescriptionsItemState extends State<CardPrescriptionsItem> {
   bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,28 +27,40 @@ class _CardPrescriptionsItemState extends State<CardPrescriptionsItem> {
         border: Border.all(width: 0.3, color: AppColor.hintColor),
       ),
       child: Column(
-        spacing: 10.h,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          InfoDoctor(index: widget.index),
-
+          /// اسم الدكتور
           Text(
-            "Medications",
+            'Doctor: ${"widget.prescription.doctorName"}',
             style: AppTextStyle.semiBold20.copyWith(
               color: Colors.grey.shade800,
             ),
           ),
+          SizedBox(height: 10.h),
+
+          /// عنوان الأدوية
+          Text(
+            "Medications",
+            style: AppTextStyle.semiBold20.copyWith(
+              fontSize: 18,
+              color: Colors.black87,
+            ),
+          ),
+
+          /// الأدوية
           Expanded(
             child: ListView.separated(
               itemCount: 8,
-              shrinkWrap: true,
-              itemBuilder: (context, index) => MedicationItem(),
-              separatorBuilder:
-                  (BuildContext context, int index) => SizedBox(height: 5),
+              itemBuilder: (context, index) => Text(
+                "widget.prescription.medications[index]",
+                style: TextStyle(fontSize: 16),
+              ),
+              separatorBuilder: (context, index) => SizedBox(height: 5),
             ),
           ),
+
+          /// زرار Show More & Edit/Delete
           Row(
-            spacing: 5.w,
             children: [
               CustomShowMore(
                 isExpanded: isExpanded,
@@ -59,9 +70,15 @@ class _CardPrescriptionsItemState extends State<CardPrescriptionsItem> {
                   });
                 },
               ),
-              Spacer(),
-              IconButton(onPressed: () {}, icon: Icon(Icons.edit, size: 18)),
-              IconButton(onPressed: () {}, icon: Icon(Icons.delete, size: 18)),
+              const Spacer(),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.edit, size: 18),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.delete, size: 18),
+              ),
             ],
           ),
         ],

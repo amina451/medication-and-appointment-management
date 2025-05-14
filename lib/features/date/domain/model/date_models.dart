@@ -1,4 +1,3 @@
-
 import 'package:pharmacy_app/features/date/data/entitiy/date_entity.dart';
 
 class DateModel {
@@ -10,8 +9,10 @@ class DateModel {
   final String followUp;
   final String date;
   final String specialty;
+  final String address;
 
-  DateModel({
+  DateModel( {
+    required this.address,
     required this.idDate,
     required this.time,
     required this.doctorName,
@@ -24,6 +25,7 @@ class DateModel {
 
   factory DateModel.mapFromEntity(DateEntity entity) {
     return DateModel(
+      address: entity.address,
       idDate: entity.idDate,
       time: entity.time,
       doctorName: entity.doctorName,
@@ -37,6 +39,7 @@ class DateModel {
 
   DateEntity toEntity() {
     return DateEntity(
+      address: address,
       idDate: idDate,
       time: time,
       doctorName: doctorName,
@@ -48,8 +51,8 @@ class DateModel {
     );
   }
 
-
   DateModel copyWith({
+    String ?address,
     String? idDateCopy,
     DateTime? createdAt,
     String? time,
@@ -61,6 +64,7 @@ class DateModel {
     String? specialty,
   }) {
     return DateModel(
+      address: address??this.address,
       idDate: idDateCopy ?? this.idDate,
       time: time ?? this.time,
       doctorName: doctorName ?? this.doctorName,
@@ -71,7 +75,6 @@ class DateModel {
       specialty: specialty ?? this.specialty,
     );
   }
-
 
   @override
   bool operator ==(Object other) =>

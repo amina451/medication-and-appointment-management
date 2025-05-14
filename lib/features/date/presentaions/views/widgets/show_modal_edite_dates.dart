@@ -8,17 +8,35 @@ import 'package:pharmacy_app/features/date/domain/model/date_models.dart';
 import 'package:pharmacy_app/features/date/manger/date_cubit.dart';
 import 'package:pharmacy_app/features/date/manger/date_state.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_form_data.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:uuid/uuid.dart';
 
-void buildShowModalSheet(BuildContext context) {
-  final dayController = TextEditingController();
-  final doctorController = TextEditingController();
-  final specialtyController = TextEditingController();
-  final timeController = TextEditingController();
-  final addressController = TextEditingController();
-  final followUpController = TextEditingController();
-  final noteController = TextEditingController();
+
+void buildShowModalSheetEditDate(BuildContext context, DateModel dateModel) {
+  final dayController = TextEditingController(
+    text: dateModel.date,
+  );
+  final doctorController = TextEditingController(
+
+        text: dateModel.doctorName,
+
+  );
+  final specialtyController = TextEditingController(
+    text: dateModel.specialty,
+  );
+  final timeController = TextEditingController(
+    text: dateModel.time
+  );
+  final addressController = TextEditingController(
+        text: dateModel.address,
+
+  );
+  final followUpController = TextEditingController(
+        text: dateModel.followUp,
+
+  );
+  final noteController = TextEditingController(
+        text: dateModel.note,
+
+  );
 
   showModalBottomSheet(
     context: context,
@@ -102,19 +120,21 @@ void buildShowModalSheet(BuildContext context) {
                       buttonTitleColor: Colors.white,
                       buttonColor: AppColor.primaryColor,
                       onPressed: () {
-                        final date = DateModel(
-                          idDate:  Uuid().v4(),
-                          address: addressController.text,
-                          time: timeController.text,
-                          doctorName: doctorController.text,
-                          userId: Supabase.instance.client.auth.currentUser!.id,
-                          note: noteController.text,
+                        final date = dateModel.copyWith(
+                          address:addressController.text,
                           followUp: followUpController.text,
-                          date: dayController.text,
+                          note: noteController.text,
                           specialty: specialtyController.text,
+                          time: timeController.text,
+                          date: dayController.text,
+                          doctorName: doctorController.text,
+ 
                         );
-                        
-                        context.read<DatesCubit>().createDate(date);
+
+                        context.read<DatesCubit>().editDate(
+                          oldDate: dateModel,
+                          updatedDate: date,
+                        );
                         Navigator.pop(context);
                       },
                     ),

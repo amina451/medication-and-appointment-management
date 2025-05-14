@@ -7,8 +7,10 @@ class DateEntity {
   final String followUp;
   final String date;
   final String specialty;
+  final String address;
 
   DateEntity({
+    required this.address,
     required this.idDate,
     required this.time,
     required this.doctorName,
@@ -21,6 +23,7 @@ class DateEntity {
 
   factory DateEntity.fromJson(Map<String, dynamic> json) {
     return DateEntity(
+      address: json['address'] as String,
       idDate: json['id_date'] as String,
       time: json['time'] as String,
       doctorName: json['doctor_name'] as String,
@@ -28,12 +31,13 @@ class DateEntity {
       note: json['note'] as String,
       followUp: json['follow_up'] as String,
       date: json['date'] as String,
-      specialty: json['specialty'] as String,
+      specialty: json['spicialty'] as String,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      "address":address,
       'id_date': idDate,
       'time': time,
       'doctor_name': doctorName,
@@ -41,7 +45,7 @@ class DateEntity {
       'note': note,
       'follow_up': followUp,
       'date': date,
-      'specialty': specialty,
+      'spicialty': specialty,
     };
   }
 }

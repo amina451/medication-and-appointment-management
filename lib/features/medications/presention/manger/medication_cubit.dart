@@ -55,9 +55,7 @@ class MedicationsCubit extends Cubit<MedicationState> {
           completeMedication,
         );
 
-        emit(
-          MedicationLoaded([...currentState.Medications, createdMedication]),
-        );
+        emit(MedicationLoaded([...currentState.medication, createdMedication]));
       }
     } catch (e) {
       emit(MedicationError(e.toString()));
@@ -82,9 +80,9 @@ class MedicationsCubit extends Cubit<MedicationState> {
       if (currentState is MedicationLoaded) {
         await deleteMedicationUsecase.execute(MedicationId);
         final updatedMedications =
-            currentState.Medications.where(
-              (doc) => doc.medication_id != MedicationId,
-            ).toList();
+            currentState.medication
+                .where((doc) => doc.medication_id != MedicationId)
+                .toList();
 
         emit(MedicationLoaded(updatedMedications));
       }
@@ -108,7 +106,7 @@ class MedicationsCubit extends Cubit<MedicationState> {
         } else {
           // Filter the Medications based on the query
           final filteredMedications =
-              currentState.Medications.where((medication) {
+              currentState.medication.where((medication) {
                 final nameMatch = medication.name_medication
                     .toLowerCase()
                     .contains(query.toLowerCase());

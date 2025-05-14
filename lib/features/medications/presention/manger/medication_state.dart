@@ -13,12 +13,12 @@ class MedicationInitial extends MedicationState {}
 class MedicationLoading extends MedicationState {}
 
 class MedicationLoaded extends MedicationState {
-  final List<MedicationModel> Medications;
+  final List<MedicationModel> medication;
 
-  const MedicationLoaded(this.Medications);
+  const MedicationLoaded(this.medication);
 
   @override
-  List<Object?> get props => [Medications];
+  List<Object?> get props => [medication];
 }
 
 class MedicationError extends MedicationState {

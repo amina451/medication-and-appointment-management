@@ -27,7 +27,10 @@ class MedicationsViewBody extends StatelessWidget {
                 print(state.message);
               }
               if (state is MedicationLoaded) {
-                buildShowToast(message: "Done Loaded", color: AppColor.primaryColor);
+                buildShowToast(
+                  message: "Done Loaded",
+                  color: AppColor.primaryColor,
+                );
               }
             },
             builder: (context, state) {
@@ -37,7 +40,7 @@ class MedicationsViewBody extends StatelessWidget {
                 return Expanded(
                   child: ListView.separated(
                     itemBuilder: (context, index) {
-                      final medication = state.Medications[index];
+                      final medication = state.medication[index];
                       return CardItem(
                         date: "12",
                         onDelete:
@@ -46,7 +49,7 @@ class MedicationsViewBody extends StatelessWidget {
                                 .deleteMedication(medication.medication_id),
                         name: medication.name_medication,
                         spicility: medication.potion,
-                        address: "${medication.num_of_day}",
+                        address: medication.num_of_day,
                         image: medication.imageUrl,
 
                         onEdite:
@@ -58,7 +61,7 @@ class MedicationsViewBody extends StatelessWidget {
                     },
                     separatorBuilder:
                         (context, index) => SizedBox(height: 10.h),
-                    itemCount: state.Medications.length,
+                    itemCount: state.medication.length,
                   ),
                 );
               } else if (state is MedicationError) {

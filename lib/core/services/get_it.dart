@@ -23,71 +23,67 @@ import 'package:pharmacy_app/features/medications/domain/uses_case/delete_medica
 import 'package:pharmacy_app/features/medications/domain/uses_case/edit_medication_usecase.dart';
 import 'package:pharmacy_app/features/medications/domain/uses_case/get_medication_usecase.dart';
 import 'package:pharmacy_app/features/medications/presention/manger/medication_cubit.dart';
+import 'package:pharmacy_app/features/perscipations/data/remote/supa_base_services_prescription.dart';
+import 'package:pharmacy_app/features/perscipations/data/repo_imp/prescription_repo_imp.dart';
+import 'package:pharmacy_app/features/perscipations/domain/repo/prescription_repo.dart';
+import 'package:pharmacy_app/features/perscipations/domain/uses_case/create_prescription_usecase.dart';
+import 'package:pharmacy_app/features/perscipations/domain/uses_case/delete_prescription_usecase.dart';
+import 'package:pharmacy_app/features/perscipations/domain/uses_case/edit_prescription_usecase.dart';
+import 'package:pharmacy_app/features/perscipations/domain/uses_case/get_prescription_usecase.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/manger/prescription_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-
 
 final GetIt getIt = GetIt.instance;
 
 void setup() {
-  // Supabase client service
+  // Supabase client services
   getIt.registerSingleton<SupabaseServiceDoctor>(
     SupabaseServiceDoctor(supabase: Supabase.instance.client),
   );
+  getIt.registerSingleton<SupabaseServiceMedication>(
+    SupabaseServiceMedication(supabase: Supabase.instance.client),
+  );
+  getIt.registerSingleton<SupabaseServiceDate>(
+    SupabaseServiceDate(supabase: Supabase.instance.client),
+  );
+  getIt.registerSingleton<SupabaseServicePrescription>(
+    SupabaseServicePrescription(supabase: Supabase.instance.client),
+  );
 
-  // Doctor repo
+  // Repositories
   getIt.registerSingleton<DoctorRepository>(
     DoctorRepoImpl(supabaseServiceDoctor: getIt<SupabaseServiceDoctor>()),
   );
+  getIt.registerSingleton<MedicationRepository>(
+    MedicationRepoImpl(supabaseService: getIt<SupabaseServiceMedication>()),
+  );
+  getIt.registerSingleton<DateRepository>(
+    DateRepoImpl(supabaseService: getIt<SupabaseServiceDate>()),
+  );
+  getIt.registerSingleton<PrescriptionRepository>(
+    PrescriptionRepoImpl(supabaseService: getIt<SupabaseServicePrescription>()),
+  );
 
-  // Usecases
+  // Doctor Usecases
   getIt.registerSingleton<GetDoctorUsecase>(
     GetDoctorUsecase(doctorRepository: getIt<DoctorRepository>()),
   );
-
   getIt.registerSingleton<CreateDoctorUsecase>(
     CreateDoctorUsecase(doctorRepository: getIt<DoctorRepository>()),
   );
-
   getIt.registerSingleton<EditeDoctorUsecase>(
     EditeDoctorUsecase(getIt<DoctorRepository>()),
   );
-
   getIt.registerSingleton<DeleteDoctorUsecase>(
     DeleteDoctorUsecase(getIt<DoctorRepository>()),
   );
 
-
-
-  // medication services
-  getIt.registerSingleton<SupabaseServiceMedication>(
-    SupabaseServiceMedication(supabase: Supabase.instance.client),
-  );
-
-
-  
-
-  getIt.registerSingleton<MedicationRepository>(
-    MedicationRepoImpl(supabaseService: getIt<SupabaseServiceMedication>()),
-  );
-
-
-
-
-//services date
-  getIt.registerSingleton<SupabaseServiceDate>(
-    SupabaseServiceDate(supabase: Supabase.instance.client),
-  );
-
-
-  // usecases medication
+  // Medication Usecases
   getIt.registerSingleton<GetMedicationUsecase>(
     GetMedicationUsecase(medicationRepository: getIt<MedicationRepository>()),
   );
   getIt.registerSingleton<CreateMedicationUsecase>(
-    CreateMedicationUsecase(
-      medicationRepository: getIt<MedicationRepository>(),
-    ),
+    CreateMedicationUsecase(medicationRepository: getIt<MedicationRepository>()),
   );
   getIt.registerSingleton<EditeMedicationUsecase>(
     EditeMedicationUsecase(getIt<MedicationRepository>()),
@@ -96,71 +92,12 @@ void setup() {
     DeleteMedicationUsecase(getIt<MedicationRepository>()),
   );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  getIt.registerFactory<DoctorsCubit>(
-    () => DoctorsCubit(
-      getDoctorUsecase: getIt<GetDoctorUsecase>(),
-      createDoctorUsecase: getIt<CreateDoctorUsecase>(),
-      editeDoctorUsecase: getIt<EditeDoctorUsecase>(),
-      deleteDoctorUsecase: getIt<DeleteDoctorUsecase>(),
-    ),
-  );
-
-
-  getIt.registerFactory<MedicationsCubit>(
-    () => MedicationsCubit(
-      getMedicationUsecase: getIt<GetMedicationUsecase>(),
-      createMedicationUsecase: getIt<CreateMedicationUsecase>(),
-      editeMedicationUsecase: getIt<EditeMedicationUsecase>(),
-      deleteMedicationUsecase: getIt<DeleteMedicationUsecase>(),
-    ),
-  );
-
-
-
-
-
-
-
-
-
-
-
-
-
-getIt.registerSingleton<DateRepository>(
-    DateRepoImpl(supabaseService: getIt<SupabaseServiceDate>()),
-  );
-
-  // usecases Date
+  // Date Usecases
   getIt.registerSingleton<GetDateUsecase>(
     GetDateUsecase(dateRepository: getIt<DateRepository>()),
   );
   getIt.registerSingleton<CreateDateUsecase>(
-    CreateDateUsecase(
-      dateRepository: getIt<DateRepository>(),
-    ),
+    CreateDateUsecase(dateRepository: getIt<DateRepository>()),
   );
   getIt.registerSingleton<EditeDateUsecase>(
     EditeDateUsecase(getIt<DateRepository>()),
@@ -169,10 +106,37 @@ getIt.registerSingleton<DateRepository>(
     DeleteDateUsecase(getIt<DateRepository>()),
   );
 
+  // Prescription Usecases
+  getIt.registerSingleton<GetPrescriptionUsecase>(
+    GetPrescriptionUsecase(prescriptionRepository: getIt<PrescriptionRepository>()),
+  );
+  getIt.registerSingleton<CreatePrescriptionUsecase>(
+    CreatePrescriptionUsecase(prescriptionRepository: getIt<PrescriptionRepository>()),
+  );
+  getIt.registerSingleton<EditPrescriptionUsecase>(
+    EditPrescriptionUsecase(getIt<PrescriptionRepository>()),
+  );
+  getIt.registerSingleton<DeletePrescriptionUsecase>(
+    DeletePrescriptionUsecase(getIt<PrescriptionRepository>()),
+  );
 
-
-
-  // Cubit
+  // Cubits
+  getIt.registerFactory<DoctorsCubit>(
+    () => DoctorsCubit(
+      getDoctorUsecase: getIt<GetDoctorUsecase>(),
+      createDoctorUsecase: getIt<CreateDoctorUsecase>(),
+      editeDoctorUsecase: getIt<EditeDoctorUsecase>(),
+      deleteDoctorUsecase: getIt<DeleteDoctorUsecase>(),
+    ),
+  );
+  getIt.registerFactory<MedicationsCubit>(
+    () => MedicationsCubit(
+      getMedicationUsecase: getIt<GetMedicationUsecase>(),
+      createMedicationUsecase: getIt<CreateMedicationUsecase>(),
+      editeMedicationUsecase: getIt<EditeMedicationUsecase>(),
+      deleteMedicationUsecase: getIt<DeleteMedicationUsecase>(),
+    ),
+  );
   getIt.registerFactory<DatesCubit>(
     () => DatesCubit(
       getDatesUsecase: getIt<GetDateUsecase>(),
@@ -181,6 +145,12 @@ getIt.registerSingleton<DateRepository>(
       deleteDateUsecase: getIt<DeleteDateUsecase>(),
     ),
   );
-
-
+  getIt.registerFactory<PrescriptionsCubit>(
+    () => PrescriptionsCubit(
+      getPrescriptionsUsecase: getIt<GetPrescriptionUsecase>(),
+      createPrescriptionUsecase: getIt<CreatePrescriptionUsecase>(),
+      editPrescriptionUsecase: getIt<EditPrescriptionUsecase>(),
+      deletePrescriptionUsecase: getIt<DeletePrescriptionUsecase>(),
+    ),
+  );
 }

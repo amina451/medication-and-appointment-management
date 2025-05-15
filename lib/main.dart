@@ -9,6 +9,8 @@ import 'package:pharmacy_app/core/utils/theme_data.dart';
 import 'package:pharmacy_app/features/date/manger/date_cubit.dart';
 import 'package:pharmacy_app/features/doctors/presention/manger/doctor_cubit.dart';
 import 'package:pharmacy_app/features/medications/presention/manger/medication_cubit.dart';
+import 'package:pharmacy_app/features/perscipations/domain/model/prescription_models.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/manger/prescription_cubit.dart';
 import 'package:pharmacy_app/features/spalsh/presention/views/splash_view.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -40,6 +42,10 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(create: (context) => 
             getIt<DatesCubit>()..fetchDates(),
+            ),
+
+             BlocProvider(create: (context) => 
+            getIt<PrescriptionsCubit>()..fetchPrescriptions(),
             ),
           
           ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/cstom_section_title_header_with_add_card.dart';
-import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/build_show_modal_pres_edit.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/build_show_modal_pres.dart';
 import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/custom_search_anochr.dart';
 
 class HeaderPrescription extends StatelessWidget {
@@ -30,7 +30,7 @@ class HeaderPrescription extends StatelessWidget {
               title: "Prescriptions",
               subTitle: '  "Manage Your Prescriptions "',
               onTap: () {
-                buildShowModalSheetPrescriptionsEdit(context);
+                buildShowModalSheetPrescriptions(context);
               },
             ),
             Spacer(),

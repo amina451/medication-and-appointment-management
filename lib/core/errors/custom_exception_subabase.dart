@@ -1,31 +1,31 @@
   import 'package:pharmacy_app/core/errors/exception.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+  import 'package:supabase_flutter/supabase_flutter.dart';
 
-CustomException handleAuthError(AuthException error) {
+  CustomException handleAuthError(AuthException error) {
     switch (error.message.toLowerCase()) {
       case 'email already exists':
         return CustomException(
-          message: 'This email is already registered. Please sign in.',
+          message: 'Cet e-mail est déjà enregistré. Veuillez vous connecter.',
         );
       case 'invalid email address':
         return CustomException(
-          message: 'Invalid email address. Please enter a valid email.',
+          message: 'Adresse e-mail invalide. Veuillez saisir une adresse valide.',
         );
       case 'password should be at least 6 characters':
         return CustomException(
-          message: 'Password must be at least 6 characters long.',
+          message: 'Le mot de passe doit contenir au moins 6 caractères.',
         );
       case 'network error':
         return CustomException(
-          message: 'Please check your internet connection and try again.',
+          message: 'Veuillez vérifier votre connexion Internet et réessayer.',
         );
       case 'too many requests':
         return CustomException(
-          message: 'Too many requests. Please try again later.',
+          message: 'Trop de requêtes. Veuillez réessayer plus tard.',
         );
       default:
         return CustomException(
-          message: 'An unknown error occurred. Please try again later.',
+          message: 'Une erreur inconnue est survenue. Veuillez réessayer plus tard.',
         );
     }
   }

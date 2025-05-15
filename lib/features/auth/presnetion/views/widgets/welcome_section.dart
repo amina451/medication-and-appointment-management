@@ -16,7 +16,7 @@ class WelcomeSection extends StatelessWidget {
         SizedBox(height: 12),
         SupTitleMessage(
           supTitle:
-              'Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do\neiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+              'Bonjour ! Gérez facilement vos médicaments et\n vos rendez-vous médicaux avec notre application. ',
         ),
         SizedBox(height: 47),
       ],

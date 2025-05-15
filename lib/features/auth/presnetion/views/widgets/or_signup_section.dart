@@ -11,7 +11,7 @@ class OrSignUp extends StatelessWidget {
         SizedBox(height: 16),
         Center(
           child: Text(
-            'or sign up with',
+            'ou inscrivez-vous avec',
             style: AppTextStyle.semiBold12.copyWith(
               fontWeight: FontWeight.w300,
             ),

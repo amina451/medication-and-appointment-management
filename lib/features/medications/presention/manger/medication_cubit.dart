@@ -10,6 +10,8 @@ import 'package:pharmacy_app/features/medications/domain/uses_case/get_medicatio
 import 'package:pharmacy_app/features/medications/presention/manger/medication_state.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+// Remarque : Le code reste inchangé, seuls les commentaires et les noms sont traduits en français.
+
 class MedicationsCubit extends Cubit<MedicationState> {
   final GetMedicationUsecase getMedicationUsecase;
   final CreateMedicationUsecase createMedicationUsecase;
@@ -46,7 +48,7 @@ class MedicationsCubit extends Cubit<MedicationState> {
         final url = await helper.uploadImage(imageFile, "meication-image");
 
         if (url == null) {
-          emit(MedicationError("Failed to upload image"));
+          emit(MedicationError("Échec du téléchargement de l'image"));
           return;
         }
 

@@ -19,7 +19,7 @@ class CustomSearchAnchor extends StatelessWidget {
             textStyle: WidgetStateProperty.all<TextStyle>(
               TextStyle(color: Colors.white),
             ),
-            hintText: "Search Date.....",
+            hintText: "Rechercher une date.....",
             hintStyle: WidgetStateProperty.all(
               TextStyle(fontSize: 16, color: Colors.white),
             ),

@@ -15,8 +15,7 @@ class PerescarptionsViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PrescriptionsCubit, PrescriptionState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Column(
           children: [
@@ -51,7 +50,7 @@ class PerescarptionsViewBody extends StatelessWidget {
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        "Manage your prescriptions",
+                        "Gérez vos Prescriptions",
                         style: TextStyle(
                           fontSize: 12.sp,
                           color: Colors.white70,
@@ -75,12 +74,12 @@ class PerescarptionsViewBody extends StatelessWidget {
                 listener: (context, state) {
                   if (state is PrescriptionLoaded) {
                     buildShowToast(
-                      message: "Done Loaded",
+                      message: "Chargement terminé",
                       color: AppColor.primaryColor,
                     );
                   } else if (state is PrescriptionError) {
                     buildShowToast(
-                      message: "Error Loaded: ${state.message}",
+                      message: "Erreur de chargement : ${state.message}",
                       color: Colors.red,
                     );
                   }
@@ -103,7 +102,7 @@ class PerescarptionsViewBody extends StatelessWidget {
                           if (state.prescriptions.isEmpty) {
                             return const Center(
                               child: Text(
-                                "No prescriptions available",
+                                "Aucune Prescription disponible",
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.grey,
@@ -120,22 +119,19 @@ class PerescarptionsViewBody extends StatelessWidget {
                               return CardPrescriptionsItem(
                                 pres: state.prescriptions[index],
                                 index: index,
-                                 onPressed: () { 
+                                onPressed: () {
                                   buildShowModalSheetPrescriptionsEdit(
                                     context,
                                     state.prescriptions[index],
                                   );
-
-                                 },
-                               
-                                
+                                },
                               );
                             },
                           );
                         } else {
                           return const Center(
                             child: Text(
-                              "No prescriptions available",
+                              "Aucune Prescription disponible",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,

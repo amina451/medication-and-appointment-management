@@ -59,11 +59,11 @@ class DoctorsViewBody extends StatelessWidget {
                 );
               } else if (state is DoctorError) {
                 return const Center(
-                  child: Text('An error occurred while loading doctors.'),
+                  child: Text('Une erreur s\'est produite lors du chargement des médecins.'),
                 );
               }
 
-              return const Center(child: Text('No doctors available.'));
+              return const Center(child: Text('Aucun médecin disponible.'));
             },
           ),
         ],

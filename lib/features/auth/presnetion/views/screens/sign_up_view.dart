@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
-  static const String routeName = 'sign_up';
+  static const String routeName = 'Inscription';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

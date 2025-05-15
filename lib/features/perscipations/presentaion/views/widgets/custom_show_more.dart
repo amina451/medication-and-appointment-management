@@ -24,7 +24,7 @@ class CustomShowMore extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 5.0),
               child: Text(
-                isExpanded ? "Show Less" : "Show More",
+                isExpanded ? "Afficher moins" : "Afficher plus",
                 style: AppTextStyle.semiBold12.copyWith(
                   color: AppColor.primaryColor,
                 ),

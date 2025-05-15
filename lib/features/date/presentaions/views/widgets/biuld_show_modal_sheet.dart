@@ -31,9 +31,9 @@ void buildShowModalSheet(BuildContext context) {
         listener: (context, state) {
           if (state is DateLoaded) {
             Navigator.pop(context);
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text('Data saved successfully!')));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Données enregistrées avec succès !')),
+            );
           } else if (state is DateError) {
             ScaffoldMessenger.of(
               context,
@@ -60,50 +60,56 @@ void buildShowModalSheet(BuildContext context) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    FormTitle(title: "Day"),
-                    CustomFormAddData(hint: "Day", controller: dayController),
+                    FormTitle(title: "Jour"),
+                    CustomFormAddData(hint: "Jour", controller: dayController),
 
-                    FormTitle(title: "N.Doctor"),
+                    FormTitle(title: "Nom du médecin"),
                     CustomFormAddData(
-                      hint: "Name Doctor",
+                      hint: "Nom du médecin",
                       controller: doctorController,
                     ),
 
-                    FormTitle(title: "Specialty"),
+                    FormTitle(title: "Spécialité"),
                     CustomFormAddData(
-                      hint: "Specialty",
+                      hint: "Spécialité",
                       controller: specialtyController,
                     ),
 
-                    FormTitle(title: "Time"),
-                    CustomFormAddData(hint: "Time", controller: timeController),
-
-                    FormTitle(title: "Address"),
+                    FormTitle(title: "Heure"),
                     CustomFormAddData(
-                      hint: "Address",
+                      hint: "Heure",
+                      controller: timeController,
+                    ),
+
+                    FormTitle(title: "Adresse"),
+                    CustomFormAddData(
+                      hint: "Adresse",
                       controller: addressController,
                     ),
-                    FormTitle(title: "Follow Up"),
+                    FormTitle(title: "Motif"),
                     CustomFormAddData(
-                      hint: "Follow Up",
+                      hint: "Motif",
                       controller: followUpController,
                     ),
 
                     FormTitle(title: "Note"),
                     CustomFormAddData(
-                      hint: "Add Note",
+                      hint: "Ajouter une note",
                       maxLength: 2,
                       controller: noteController,
                     ),
 
                     SizedBox(height: 20.h),
                     CustomButton(
-                      title: state is DateLoading ? "Saving..." : "Save",
+                      title:
+                          state is DateLoading
+                              ? "Enregistrement..."
+                              : "Enregistrer",
                       buttonTitleColor: Colors.white,
                       buttonColor: AppColor.primaryColor,
                       onPressed: () {
                         final date = DateModel(
-                          idDate:  Uuid().v4(),
+                          idDate: Uuid().v4(),
                           address: addressController.text,
                           time: timeController.text,
                           doctorName: doctorController.text,
@@ -113,7 +119,7 @@ void buildShowModalSheet(BuildContext context) {
                           date: dayController.text,
                           specialty: specialtyController.text,
                         );
-                        
+
                         context.read<DatesCubit>().createDate(date);
                         Navigator.pop(context);
                       },

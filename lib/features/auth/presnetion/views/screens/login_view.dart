@@ -9,7 +9,7 @@ import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dar
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
-  static const String routeName = 'login';
+  static const String routeName = 'Connexion';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -19,10 +19,19 @@ class LoginView extends StatelessWidget {
         body: BlocConsumer<SignInCubit, SignInState>(
           listener: (context, state) {
             if (state is SignInSuccess) {
-              buildShowToast(message:  state.toString(),color:AppColor.primaryColor);
-              Navigator.pushReplacementNamed(context, CustomBottomNavBar.routeName);
+              buildShowToast(
+                message: state.toString(),
+                color: AppColor.primaryColor,
+              );
+              Navigator.pushReplacementNamed(
+                context,
+                CustomBottomNavBar.routeName,
+              );
             } else if (state is SignInFailure) {
-             buildShowToast(message:  state.toString(),color:Colors.red.shade500);
+              buildShowToast(
+                message: state.toString(),
+                color: Colors.red.shade500,
+              );
             }
           },
 
@@ -40,6 +49,4 @@ class LoginView extends StatelessWidget {
       ),
     );
   }
-
- 
 }

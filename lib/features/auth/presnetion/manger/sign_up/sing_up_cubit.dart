@@ -23,10 +23,10 @@ class SignupCubit extends Cubit<SignUpState> {
           'phone': phone.trim(),
           "medicationList":[],
           "doctorList":[],
-          },
+        },
       );
       if (response.user == null) {
-        emit(SignUpFailure(message: 'Sign-up failed, user not found'));
+        emit(SignUpFailure(message: 'Échec de l\'inscription, utilisateur non trouvé'));
       } else {
         await addDataUser(email: email, name: name, phone: phone);
         emit(SignUpSuccess());
@@ -36,23 +36,23 @@ class SignupCubit extends Cubit<SignUpState> {
       switch (e.message) {
         case 'missing email or phone':
           emit(
-            SignUpFailure(message: 'Please provide an email or phone number'),
+            SignUpFailure(message: 'Veuillez fournir un e-mail ou un numéro de téléphone'),
           );
           break;
         case 'Invalid signup credentials':
           emit(
             SignUpFailure(
-              message: 'Invalid sign-up credentials, check your password',
+              message: 'Identifiants d\'inscription invalides, vérifiez votre mot de passe',
             ),
           );
           break;
         case 'Email not confirmed':
-          emit(SignUpFailure(message: 'Please confirm your email'));
+          emit(SignUpFailure(message: 'Veuillez confirmer votre e-mail'));
           break;
         default:
           emit(
             SignUpFailure(
-              message: 'An error occurred during sign-up, please try again',
+              message: 'Une erreur est survenue lors de l\'inscription, veuillez réessayer',
             ),
           );
       }
@@ -61,7 +61,7 @@ class SignupCubit extends Cubit<SignUpState> {
       emit(
         SignUpFailure(
           message:
-              'An unexpected error occurred, check your internet connection',
+              'Une erreur inattendue est survenue, vérifiez votre connexion internet',
         ),
       );
     }
@@ -74,7 +74,7 @@ class SignupCubit extends Cubit<SignUpState> {
   }) async {
     try {
       if (client.auth.currentUser == null) {
-        emit(SignUpFailure(message: 'No user is currently signed in'));
+        emit(SignUpFailure(message: 'Aucun utilisateur n\'est actuellement connecté'));
         return;
       }
       await client.from('users').upsert([
@@ -86,13 +86,13 @@ class SignupCubit extends Cubit<SignUpState> {
         },
       ]).select();
     } on PostgrestException catch (e) {
-      devtools.log('Database error: ${e.toString()}');
+      devtools.log('Erreur base de données: ${e.toString()}');
       emit(
-        SignUpFailure(message: 'Failed to save your data, please try again'),
+        SignUpFailure(message: 'Échec de l\'enregistrement de vos données, veuillez réessayer'),
       );
     } catch (e) {
-      devtools.log('Unexpected error in addDataUser: ${e.toString()}');
-      emit(SignUpFailure(message: 'An error occurred while saving the data'));
+      devtools.log('Erreur inattendue dans addDataUser: ${e.toString()}');
+      emit(SignUpFailure(message: 'Une erreur est survenue lors de l\'enregistrement des données'));
     }
   }
 }

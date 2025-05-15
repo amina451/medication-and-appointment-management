@@ -10,19 +10,19 @@ class TermsUsePrivacy extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("By continuing, you agree to ", style: AppTextStyle.semiBold12),
+        Text("En continuant, vous acceptez ", style: AppTextStyle.semiBold12),
         Text.rich(
           TextSpan(
             children: [
               TextSpan(
-                text: "Terms of Use",
+                text: "les Conditions d'utilisation",
                 style: AppTextStyle.semiBold12.copyWith(
                   color: AppColor.primaryColor,
                 ),
               ),
-              TextSpan(text: " and ", style: AppTextStyle.semiBold12),
+              TextSpan(text: " et la ", style: AppTextStyle.semiBold12),
               TextSpan(
-                text: "Privacy Police",
+                text: "Politique de confidentialité",
                 style: AppTextStyle.semiBold12.copyWith(
                   color: AppColor.primaryColor,
                 ),

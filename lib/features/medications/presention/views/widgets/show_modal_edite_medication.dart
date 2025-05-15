@@ -22,7 +22,7 @@ void customBuildEditMedicationModalSheet(
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ImageUploadState> imageKey = GlobalKey();
 
-  // التحقق من null عند تعيين القيم في الـ Controllers
+  // Vérification de null lors de l'attribution des valeurs aux contrôleurs
   final medicationNameController = TextEditingController(
     text: medication.name_medication?.isNotEmpty == true
         ? medication.name_medication
@@ -46,7 +46,7 @@ void customBuildEditMedicationModalSheet(
         listener: (context, state) {
           if (state is MedicationLoaded) {
             buildShowToast(
-              message: 'Medication updated successfully!',
+              message: 'Médicament mis à jour avec succès !',
               color: AppColor.primaryColor,
             );
             context.read<MedicationsCubit>().fetchMedications();
@@ -85,13 +85,13 @@ void customBuildEditMedicationModalSheet(
                           key: imageKey,
                           initialImageUrl: medication.imageUrl ?? '',
                         ),
-                        const FormTitle(title: "Medication Name"),
+                        const FormTitle(title: "Nom du médicament"),
                         CustomFormAddData(
-                          hint: "Medication",
+                          hint: "Médicament",
                           controller: medicationNameController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter medication name';
+                              return 'Veuillez entrer le nom du médicament';
                             }
                             return null;
                           },
@@ -102,25 +102,25 @@ void customBuildEditMedicationModalSheet(
                           controller: potionController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter potion';
+                              return 'Veuillez entrer la potion';
                             }
                             return null;
                           },
                         ),
-                        const FormTitle(title: "num_of_day"),
+                        const FormTitle(title: "Nombre de jours"),
                         CustomFormAddData(
-                          hint: "num_of_day",
+                          hint: "Nombre de jours",
                           keyboardType: TextInputType.number,
                           controller: numOfDayController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter number of days';
+                              return 'Veuillez entrer le nombre de jours';
                             }
                             return null;
                           },
                         ),
                         CustomButton(
-                          title: "Save",
+                          title: "Enregistrer",
                           buttonTitleColor: Colors.white,
                           buttonColor: AppColor.primaryColor,
                           onPressed: () async {
@@ -135,14 +135,14 @@ void customBuildEditMedicationModalSheet(
                               final helper = ImageUploadHelper();
                               final uploadedUrl = await helper.uploadImage(
                                 image,
-                                "medication-images", // تغيير "doctor-images" لـ "medication-images"
+                                "medication-images", // Changer "doctor-images" à "medication-images"
                               );
 
                               if (uploadedUrl != null) {
                                 finalImageUrl = uploadedUrl;
                               } else {
                                 buildShowToast(
-                                  message: "Failed to upload image",
+                                  message: "Échec du téléchargement de l'image",
                                   color: Colors.red,
                                 );
                                 return;

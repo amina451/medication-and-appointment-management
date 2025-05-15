@@ -17,12 +17,12 @@ class DateViewBody extends StatelessWidget {
     return BlocConsumer<DatesCubit, DateState>(
       listener: (context, state) {
         if (state is DateError) {
-          buildShowToast(message: "Error Loading", color: Colors.red);
+          buildShowToast(message: "Erreur de chargement", color: Colors.red);
           log(state.message);
         }
         if (state is DateLoaded) {
-          buildShowToast(message: "Done Loaded", color: AppColor.primaryColor);
-          log("Done Loaded");
+          buildShowToast(message: "Chargement terminé", color: AppColor.primaryColor);
+          log("Chargement terminé");
         }
       },
       builder: (context, state) {
@@ -43,7 +43,6 @@ class DateViewBody extends StatelessWidget {
                   itemBuilder:
                       (context, index) =>
                           CustomCardInfoDateItem(
-                            
                             dateModel: state.dates[index]),
                 ),
               ],

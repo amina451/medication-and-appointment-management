@@ -16,16 +16,16 @@ class LoginViewBody extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(child: CustomAppBar(title: "Log In")),
+            SliverToBoxAdapter(child: CustomAppBar(title: "Connexion")),
             SliverToBoxAdapter(child: WelcomeSection()),
             SliverToBoxAdapter(child: SectionTextFormField()),
             SliverToBoxAdapter(
               child: HaveOrDontHAveAnAcount(
                 onTap: () {
-                Navigator.pushReplacementNamed(context, SignUpView.routeName);
-              },
-                firstTitle: 'Don\'t have an account?',
-                secondTitle: "Sign Up",
+                  Navigator.pushReplacementNamed(context, SignUpView.routeName);
+                },
+                firstTitle: 'Vous n\'avez pas de compte ?',
+                secondTitle: "S'inscrire",
               ),
             ),
           ],

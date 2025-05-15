@@ -37,7 +37,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
         listener: (context, state) {
           if (state is MedicationLoaded) {
             buildShowToast(
-              message: 'Medication added successfully!',
+              message: 'Médicament ajouté avec succès!',
               color: AppColor.primaryColor,
             );
             context.read<MedicationsCubit>().fetchMedications();
@@ -73,9 +73,9 @@ void customBuildShowModalSheetMed(BuildContext context) {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ImageUpload(key: imageKey),
-                        const FormTitle(title: "Medication Name"),
+                        const FormTitle(title: "Nom du médicament"),
                         CustomFormAddData(
-                          hint: "Medication",
+                          hint: "Médicament",
                           controller: medicationNameController,
                         ),
                         const FormTitle(title: "Potion"),
@@ -83,14 +83,14 @@ void customBuildShowModalSheetMed(BuildContext context) {
                           hint: "Potion",
                           controller: potionController,
                         ),
-                        const FormTitle(title: "num_of_day"),
+                        const FormTitle(title: "Nombre de jours"),
                         CustomFormAddData(
-                          hint: "num_of_day",
+                          hint: "Nombre de jours",
                           keyboardType: TextInputType.number,
                           controller: numOfDaycontroller,
                         ),
                         CustomButton(
-                          title: "Save",
+                          title: "Enregistrer",
                           buttonTitleColor: Colors.white,
                           buttonColor: AppColor.primaryColor,
                           onPressed: () async {

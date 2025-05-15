@@ -13,7 +13,7 @@ class MedicationsView extends StatelessWidget {
       backgroundColor: Colors.white,
       floatingActionButton: CustomFloatingActionButtonMed(),
 
-      appBar: buildAppBar(context, "Medications"),
+      appBar: buildAppBar(context, "Médicaments"),
       body: MedicationsViewBody(),
     );
   }

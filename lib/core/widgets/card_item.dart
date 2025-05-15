@@ -63,7 +63,7 @@ class CardItem extends StatelessWidget {
                   onDelete: onDelete,
                   name: name,
                   spicility: spicility,
-                  experience: address ?? 'No available',
+                  experience: address ?? 'Non disponible',
                 ),
               ),
             ],

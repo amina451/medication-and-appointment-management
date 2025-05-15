@@ -44,22 +44,22 @@ class _SectionTextFormFieldState extends State<SectionTextFormField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FormTitle(title: "Email"),
+          FormTitle(title: "E-mail"),
           SizedBox(height: 12.h),
           CustomTextFormField(
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
-            hint: "example@example.com",
+            hint: "exemple@exemple.com",
           ),
           SizedBox(height: 20.h),
-          FormTitle(title: "Password"),
+          FormTitle(title: "Mot de passe"),
           SizedBox(height: 12),
           CustomFiledPassword(controller: _passwordController),
           SizedBox(height: 25.h),
           Align(
             alignment: Alignment.center,
             child: CustomButton(
-              title: 'Log In',
+              title: 'Se connecter',
               buttonTitleColor: Colors.white,
               buttonColor: AppColor.primaryColor,
               onPressed: _handleSignIn,

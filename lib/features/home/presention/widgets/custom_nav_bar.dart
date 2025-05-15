@@ -77,14 +77,14 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   AppImages.assetsImagesHomeIcon,
                   color: _currentIndex == 0 ? _selectedColors[0] : Colors.grey,
                 ),
-                label: 'Home',
+                label: 'Accueil',
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   AppImages.assetsImagesDoctorhand,
                   color: _currentIndex == 1 ? _selectedColors[1] : Colors.grey,
                 ),
-                label: 'Doctors',
+                label: 'Médecins',
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
@@ -92,23 +92,22 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   AppImages.assetsImagesSyringe,
                   color: _currentIndex == 2 ? _selectedColors[2] : Colors.grey,
                 ),
-                label: 'Medications',
+                label: 'Médicaments',
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   AppImages.assetsImagesCalendar,
                   color: _currentIndex == 3 ? _selectedColors[3] : Colors.grey,
                 ),
-                label: 'M.schedule',
+                label: 'Rendez-vous',
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   height: 35.h,
                   AppImages.assetsImagesMedicalPrescriptionSvgrepoCom,
-                  color: _currentIndex == 4 ? _selectedColors[4] : 
-                  Colors.grey,
+                  color: _currentIndex == 4 ? _selectedColors[4] : Colors.grey,
                 ),
-                label: 'Pref',
+                label: 'Prescreptions',
               ),
             ],
           ),

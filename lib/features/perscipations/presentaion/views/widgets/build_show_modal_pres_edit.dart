@@ -44,12 +44,12 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
   @override
   void initState() {
     super.initState();
-    // Set initial values from prescriptionModel
+    // Définir les valeurs initiales à partir de prescriptionModel
     doctorNameController.text = widget.prescriptionModel.nameDoctor;
     doctorSpecialityController.text = widget.prescriptionModel.specialty;
     dateMedicationController.text = widget.prescriptionModel.allDateMedication;
 
-    // Parse medications
+    // Analyser les médicaments
     final medications = widget.prescriptionModel.nameMedication.split(', ');
     if (medications.isNotEmpty) {
       final firstMed = medications[0].split(' - ');
@@ -114,92 +114,92 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              FormTitle(title: "Edit Prescription"),
+              FormTitle(title: "Modifier l'ordonnance"),
               SizedBox(height: 15.h),
               CustomFormAddData(
-                hint: "Doctor Name",
+                hint: "Nom du médecin",
                 controller: doctorNameController,
               ),
               SizedBox(height: 10.h),
               CustomFormAddData(
-                hint: "Speciality",
+                hint: "Spécialité",
                 controller: doctorSpecialityController,
               ),
               SizedBox(height: 20.h),
               Center(
-                child: FormTitle(title: "Medications"),
+                child: FormTitle(title: "Médicaments"),
               ),
               SizedBox(height: 15.h),
               CustomFormAddData(
-                hint: "First Medication Name",
+                hint: "Nom du premier médicament",
                 controller: firstMedicationNameController,
               ),
               SizedBox(height: 10.h),
               CustomFormAddData(
-                hint: "Dosage (e.g., 500mg)",
+                hint: "Dosage (ex : 500mg)",
                 controller: firstMedicationDosageController,
               ),
               SizedBox(height: 10.h),
               CustomFormAddData(
-                hint: "Instructions (e.g., 1 pill daily)",
+                hint: "Instructions (ex : 1 comprimé par jour)",
                 controller: firstMedicationInstructionsController,
               ),
               SizedBox(height: 15.h),
               CustomFormAddData(
-                hint: "Second Medication Name",
+                hint: "Nom du deuxième médicament",
                 controller: secondMedicationNameController,
               ),
               SizedBox(height: 10.h),
               CustomFormAddData(
-                hint: "Dosage (e.g., 10mg)",
+                hint: "Dosage (ex : 10mg)",
                 controller: secondMedicationDosageController,
               ),
               SizedBox(height: 10.h),
               CustomFormAddData(
-                hint: "Instructions (e.g., once daily)",
+                hint: "Instructions (ex : une fois par jour)",
                 controller: secondMedicationInstructionsController,
               ),
               SizedBox(height: 20.h),
               CustomFormAddData(
-                hint: "Date (YYYY-MM-DD)",
+                hint: "Date (AAAA-MM-JJ)",
                 controller: dateMedicationController,
               ),
               SizedBox(height: 25.h),
               CustomButton(
-                title: "Save Changes",
+                title: "Enregistrer les modifications",
                 buttonTitleColor: Colors.white,
                 buttonColor: AppColor.primaryColor,
                 onPressed: () async {
-                  // Validate inputs
+                  // Valider les entrées
                   if (doctorNameController.text.trim().isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Doctor name is required")),
+                      SnackBar(content: Text("Le nom du médecin est requis")),
                     );
                     return;
                   }
                   if (firstMedicationNameController.text.trim().isEmpty &&
                       secondMedicationNameController.text.trim().isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("At least one medication is required")),
+                      SnackBar(content: Text("Au moins un médicament est requis")),
                     );
                     return;
                   }
                   if (!RegExp(r'^\d{4}-\d{2}-\d{2}$').hasMatch(dateMedicationController.text)) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Enter date in YYYY-MM-DD format")),
+                      SnackBar(content: Text("Entrez la date au format AAAA-MM-JJ")),
                     );
                     return;
                   }
 
-                  // Create medication list
+                  // Créer la liste des médicaments
                   final medications = <String>[];
                   if (firstMedicationNameController.text.trim().isNotEmpty) {
                     final dosage = firstMedicationDosageController.text.trim().isNotEmpty
                         ? firstMedicationDosageController.text.trim()
-                        : "Not specified";
+                        : "Non spécifié";
                     final instructions = firstMedicationInstructionsController.text.trim().isNotEmpty
                         ? firstMedicationInstructionsController.text.trim()
-                        : "No instructions";
+                        : "Aucune instruction";
                     medications.add(
                       '${firstMedicationNameController.text.trim()} - $dosage ($instructions)',
                     );
@@ -207,10 +207,10 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
                   if (secondMedicationNameController.text.trim().isNotEmpty) {
                     final dosage = secondMedicationDosageController.text.trim().isNotEmpty
                         ? secondMedicationDosageController.text.trim()
-                        : "Not specified";
+                        : "Non spécifié";
                     final instructions = secondMedicationInstructionsController.text.trim().isNotEmpty
                         ? secondMedicationInstructionsController.text.trim()
-                        : "No instructions";
+                        : "Aucune instruction";
                     medications.add(
                       '${secondMedicationNameController.text.trim()} - $dosage ($instructions)',
                     );
@@ -218,7 +218,7 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
 
                   final medicationString = medications.join(', ');
 
-                  // Create updated prescription
+                  // Créer l'ordonnance mise à jour
                   final updatedPrescription = widget.prescriptionModel.copyWith(
                     nameDoctor: doctorNameController.text.trim(),
                     specialty: doctorSpecialityController.text.trim(),
@@ -226,17 +226,17 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
                     allDateMedication: dateMedicationController.text.trim(),
                   );
 
-                  // Call the cubit to edit prescription
+                  // Appeler le cubit pour modifier l'ordonnance
                   await context.read<PrescriptionsCubit>().editPrescription(
                     oldPrescription: widget.prescriptionModel,
                     updatedPrescription: updatedPrescription,
                   );
 
-                  // Close the bottom sheet
+                  // Fermer la bottom sheet
                   if (mounted) {
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Prescription updated successfully")),
+                      SnackBar(content: Text("Precreption mise à jour avec succès")),
                     );
                   }
                 },

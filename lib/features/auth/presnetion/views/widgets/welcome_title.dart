@@ -8,7 +8,7 @@ class WelcomeTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "Welcome",
+      "Bienvenue",
       style: AppTextStyle.semiBold24.copyWith(color: AppColor.primaryColor),
     );
   }

@@ -21,8 +21,8 @@ class HeaderDateView extends StatelessWidget {
         ),
       ),
       child: CustomSectionTitleHeaderWithAddCard(
-        title: 'Schedule',
-        subTitle: 'Mange your visit your doctor',
+        title: 'Rendez-vous',
+        subTitle: 'Gérez vos visites chez le médecin',
         onTap: () {
           buildShowModalSheet(context,);
         },

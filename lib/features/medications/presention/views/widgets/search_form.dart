@@ -24,7 +24,7 @@ class SearchFormMedication extends StatelessWidget {
             EdgeInsets.symmetric(horizontal: 16.0),
           ),
           leading: const Icon(Icons.search),
-          hintText: 'Search for a medication...',
+          hintText: 'Rechercher un médicament...',
           elevation: const WidgetStatePropertyAll(4.0),
           onChanged: (query) {
             context.read<MedicationsCubit>().searchMedications(query);
@@ -41,28 +41,28 @@ class SearchFormMedication extends StatelessWidget {
           final filtered = query.isEmpty
               ? medication
               : medication.where((doctor) {
-                  // تحقق من null قبل استخدام toLowerCase()
+                  // Vérifiez null avant d'utiliser toLowerCase()
                   final name = doctor.name_medication?.toLowerCase() ?? '';
                   return name.contains(query.toLowerCase());
                 }).toList();
 
           return filtered.isNotEmpty
               ? filtered.map((doctor) => ListTile(
-                    title: Text(doctor.name_medication ?? 'غير متوفر'),
+                    title: Text(doctor.name_medication ?? 'Non disponible'),
                     onTap: () {
                       controller.closeView(doctor.name_medication ?? '');
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Selected: ${doctor.name_medication ?? 'غير متوفر'}'),
+                          content: Text('Sélectionné : ${doctor.name_medication ?? 'Non disponible'}'),
                         ),
                       );
                     },
                   ))
-              : [const Center(child: Text('No results found'))];
+              : [const Center(child: Text('Aucun résultat trouvé'))];
         } else if (state is MedicationLoading) {
           return [const Center(child: CircularProgressIndicator())];
         } else {
-          return [const Center(child: Text('Error loading data'))];
+          return [const Center(child: Text('Erreur lors du chargement des données'))];
         }
       },
     );

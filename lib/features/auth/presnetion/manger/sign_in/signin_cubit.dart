@@ -20,12 +20,10 @@ class SignInCubit extends Cubit<SignInState> {
       emit(SignInSuccess());
     } on AuthException catch (e) {
       log(e.toString());
-      emit(SignInFailure(message: e.message));
+      emit(SignInFailure(message: e.message)); // Vous pouvez traduire ici
     } catch (e) {
       log(e.toString());
-      emit(SignInFailure(message: 'An unexpected error occurred, please try again'));
+      emit(SignInFailure(message: 'Une erreur inattendue est survenue, veuillez réessayer'));
     }
   }
 }
-
-

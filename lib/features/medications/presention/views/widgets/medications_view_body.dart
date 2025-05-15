@@ -28,7 +28,7 @@ class MedicationsViewBody extends StatelessWidget {
               }
               if (state is MedicationLoaded) {
                 buildShowToast(
-                  message: "Done Loaded",
+                  message: "Chargement terminé",
                   color: AppColor.primaryColor,
                 );
               }
@@ -46,9 +46,9 @@ class MedicationsViewBody extends StatelessWidget {
                         onDelete: () => context
                             .read<MedicationsCubit>()
                             .deleteMedication(medication.medication_id ?? ''),
-                        name: medication.name_medication ?? 'غير متوفر',
-                        spicility: medication.potion ?? 'غير متوفر',
-                        address: medication.num_of_day ?? 'غير متوفر',
+                        name: medication.name_medication ?? 'Non disponible',
+                        spicility: medication.potion ?? 'Non disponible',
+                        address: medication.num_of_day ?? 'Non disponible',
                         image: medication.imageUrl ?? '',
                         onEdite: () => customBuildEditMedicationModalSheet(
                           context,
@@ -62,11 +62,11 @@ class MedicationsViewBody extends StatelessWidget {
                 );
               } else if (state is MedicationError) {
                 return const Center(
-                  child: Text('An error occurred while loading medications.'),
+                  child: Text('Une erreur s\'est produite lors du chargement des médicaments.'),
                 );
               }
 
-              return const Center(child: Text('No medications available.'));
+              return const Center(child: Text('Aucun médicament disponible.'));
             },
           ),
         ],

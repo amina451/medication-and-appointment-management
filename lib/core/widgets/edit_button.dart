@@ -10,14 +10,14 @@ class EditButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed:onPressed,
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColor.primaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       ),
       child: Text(
-        'Edit',
+        'Modifier',
         style: AppTextStyle.semiBold12.copyWith(color: Colors.white),
       ),
     );

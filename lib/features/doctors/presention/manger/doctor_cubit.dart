@@ -44,9 +44,10 @@ class DoctorsCubit extends Cubit<DoctorState> {
         final url = await helper.uploadImage(imageFile, "doctor-images");
 
         if (url == null) {
-          emit(DoctorError("Failed to upload image"));
+            emit(DoctorError("Échec du téléchargement de l'image"));
           return;
         }
+        
 
         final completeDoctor = doctor.copyWith(imageUrl: url);
         final createdDoctor = await createDoctorUsecase.execute(completeDoctor);

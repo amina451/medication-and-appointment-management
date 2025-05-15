@@ -23,14 +23,10 @@ class CustomLogo extends StatelessWidget {
           CustomLogoAnimation(imageLogo: imageLogo),
           SizedBox(height: 19.h),
           Text(
-            "Skin\nFirts",
+            "My\nReminder",
             style: AppTextStyle.then48.copyWith(height: 0.8, color: colorTitle),
           ),
-          SizedBox(height: 19.h),
-          Text(
-            "Dermatology center",
-            style: AppTextStyle.semiBold12.copyWith(color: colorSupTitle),
-          ),
+      
         ],
       ),
     );

@@ -7,7 +7,7 @@ class CustomFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      heroTag: 'addMedicationBtn',
+      heroTag: 'ajouterMedicamentBtn',
       onPressed: onPressed,
       /*() {
         buildShowModalSheet(context);

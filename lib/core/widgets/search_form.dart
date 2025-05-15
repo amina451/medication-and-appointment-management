@@ -23,7 +23,7 @@ class SearchForm extends StatelessWidget {
             EdgeInsets.symmetric(horizontal: 16.0),
           ),
           leading: const Icon(Icons.search),
-          hintText: 'Search for a doctor...',
+          hintText: 'Rechercher un médecin...',
           elevation: const WidgetStatePropertyAll(4.0),
           onChanged: (query) {
             context.read<DoctorsCubit>().searchDoctors(query);
@@ -51,15 +51,15 @@ class SearchForm extends StatelessWidget {
                     onTap: () {
                       controller.closeView(doctor.doctorName);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Selected: ${doctor.doctorName}')),
+                        SnackBar(content: Text('Sélectionné : ${doctor.doctorName}')),
                       );
                     },
                   ))
-              : [const Center(child: Text('No results found'))];
+              : [const Center(child: Text('Aucun résultat trouvé'))];
         } else if (state is DoctorLoading) {
           return [const Center(child: CircularProgressIndicator())];
         } else {
-          return [const Center(child: Text('Error loading data'))];
+          return [const Center(child: Text('Erreur lors du chargement des données'))];
         }
       },
     );

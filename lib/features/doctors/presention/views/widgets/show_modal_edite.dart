@@ -38,7 +38,7 @@ void customBuildEditDoctorModalSheet(BuildContext context, DoctorModel doctor) {
         listener: (context, state) {
           if (state is DoctorLoaded) {
             buildShowToast(
-              message: 'Doctor updated successfully!',
+              message: 'Médecin mis à jour avec succès!',
               color: AppColor.primaryColor,
             );
           } else if (state is DoctorError) {
@@ -75,33 +75,33 @@ void customBuildEditDoctorModalSheet(BuildContext context, DoctorModel doctor) {
                           key: imageKey,
                           initialImageUrl: doctor.imageUrl,
                         ),
-                        const FormTitle(title: "First Name Doctor"),
+                        const FormTitle(title: "Prénom du médecin"),
                         CustomFormAddData(
                           hint: "dr.",
                           controller: firstNameController,
                         ),
-                        const FormTitle(title: "Last Name Doctor"),
+                        const FormTitle(title: "Nom du médecin"),
                         CustomFormAddData(
-                          hint: "Last Name Doctor",
+                          hint: "Nom du médecin",
                           controller: lastNameController,
                         ),
-                        const FormTitle(title: "spicility"),
+                        const FormTitle(title: "Spécialité"),
                         CustomFormAddData(
-                          hint: "spicility",
+                          hint: "Spécialité",
                           controller: spicilityController,
                         ),
-                        const FormTitle(title: "Address"),
+                        const FormTitle(title: "Adresse"),
                         CustomFormAddData(
-                          hint: "Address",
+                          hint: "Adresse",
                           controller: addressController,
                         ),
-                        const FormTitle(title: "Phone"),
+                        const FormTitle(title: "Téléphone"),
                         CustomFormAddData(
-                          hint: "Phone",
+                          hint: "Téléphone",
                           controller: phoneController,
                         ),
                         CustomButton(
-                          title: "Update",
+                          title: "Mettre à jour",
                           buttonTitleColor: Colors.white,
                           buttonColor: AppColor.primaryColor,
                           onPressed: () async {
@@ -122,7 +122,7 @@ void customBuildEditDoctorModalSheet(BuildContext context, DoctorModel doctor) {
                                 finalImageUrl = uploadedUrl;
                               } else {
                                 buildShowToast(
-                                  message: "Failed to upload image",
+                                  message: "Échec du téléchargement de l'image",
                                   color: Colors.red,
                                 );
                                 return;

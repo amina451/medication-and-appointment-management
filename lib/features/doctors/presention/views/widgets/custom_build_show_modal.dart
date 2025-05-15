@@ -39,7 +39,7 @@ void customBuildShowModalSheet(BuildContext context) {
         listener: (context, state) {
           if (state is DoctorLoaded) {
             buildShowToast(
-              message: 'Doctor added successfully!',
+              message: 'Médecin ajouté avec succès !',
               color: AppColor.primaryColor,
             );
             context.read<DoctorsCubit>().fetchDoctors();
@@ -75,33 +75,33 @@ void customBuildShowModalSheet(BuildContext context) {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ImageUpload(key: imageKey),
-                        const FormTitle(title: "First Name Doctor"),
+                        const FormTitle(title: "Prénom du médecin"),
                         CustomFormAddData(
                           hint: "dr.",
                           controller: firstNameController,
                         ),
-                        const FormTitle(title: "Last Name Doctor"),
+                        const FormTitle(title: "Nom du médecin"),
                         CustomFormAddData(
-                          hint: "Last Name Doctor",
+                          hint: "Nom du médecin",
                           controller: lastNameController,
                         ),
-                        const FormTitle(title: "spicility"),
+                        const FormTitle(title: "Spécialité"),
                         CustomFormAddData(
-                          hint: "spicility",
+                          hint: "Spécialité",
                           controller: spicilityController,
                         ),
-                        const FormTitle(title: "Address"),
+                        const FormTitle(title: "Adresse"),
                         CustomFormAddData(
-                          hint: "Address",
+                          hint: "Adresse",
                           controller: addressController,
                         ),
-                        const FormTitle(title: "Phone"),
+                        const FormTitle(title: "Téléphone"),
                         CustomFormAddData(
-                          hint: "Phone",
+                          hint: "Téléphone",
                           controller: phoneController,
                         ),
                         CustomButton(
-                          title: "Save",
+                          title: "Enregistrer",
                           buttonTitleColor: Colors.white,
                           buttonColor: AppColor.primaryColor,
                           onPressed: () async {
@@ -123,7 +123,7 @@ void customBuildShowModalSheet(BuildContext context) {
                                         .auth
                                         .currentUser!
                                         .id,
-                                imageUrl: "", // سيتم استبداله داخل الكيوبت
+                                imageUrl: "", // sera remplacé dans le cubit
                               );
 
                               context.read<DoctorsCubit>().createDoctor(

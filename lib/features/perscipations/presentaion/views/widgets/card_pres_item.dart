@@ -55,13 +55,13 @@ class _CardPrescriptionsItemState extends State<CardPrescriptionsItem> {
                 width: 100.w,
                 height: 40.h,
                 decoration: BoxDecoration(
-                  color: AppColor.secondaryColor, // لون الصندوق زي التصميم
+                  color: AppColor.secondaryColor, // Couleur de la boîte comme dans le design
                   borderRadius: BorderRadius.circular(6.r),
                 ),
                 child: Text(
                   widget.pres.allDateMedication,
                   style: AppTextStyle.semiBold12.copyWith(
-                    color: AppColor.primaryColor, // لون النص زي التصميم
+                    color: AppColor.primaryColor, // Couleur du texte comme dans le design
                     fontSize: 14.sp,
                   ),
                 ),
@@ -78,7 +78,7 @@ class _CardPrescriptionsItemState extends State<CardPrescriptionsItem> {
           ),
           SizedBox(height: 10.h),
           Text(
-            "Medications",
+            "Médicaments",
             style: AppTextStyle.semiBold20.copyWith(
               fontSize: 18.sp,
               color: Colors.black87,

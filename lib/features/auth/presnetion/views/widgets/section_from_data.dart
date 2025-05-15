@@ -36,10 +36,10 @@ class _SectionFormDataState extends State<SectionFormData> {
   void _handleSignUp() {
     if (formKey.currentState!.validate()) {
       context.read<SignupCubit>().signUp(
-        name:_nameController.text,
+        name: _nameController.text,
         phone: _phoneController.text.trim(),
-        email:   _emailController.text.trim(),
-       password:   _passwordController.text.trim(),
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
       );
     }
   }
@@ -53,38 +53,38 @@ class _SectionFormDataState extends State<SectionFormData> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 12),
-          FormTitle(title: "Full Name"),
+          FormTitle(title: "Nom complet"),
           SizedBox(height: 5),
           CustomTextFormField(
             controller: _nameController,
             validator: Valid.validateName,
             keyboardType: TextInputType.name,
-            hint: "Full Name",
+            hint: "Nom complet",
           ),
 
           SizedBox(height: 12),
-          FormTitle(title: "Email"),
+          FormTitle(title: "E-mail"),
           SizedBox(height: 5),
           CustomTextFormField(
             validator: Valid.validateEmail,
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
-            hint: "example@gmail.com",
+            hint: "exemple@gmail.com",
           ),
 
           SizedBox(height: 12),
 
-          FormTitle(title: "Password"),
+          FormTitle(title: "Mot de passe"),
           SizedBox(height: 5),
-                    CustomFiledPassword(controller: _passwordController,),
+          CustomFiledPassword(controller: _passwordController,),
 
           SizedBox(height: 12),
-          FormTitle(title: "Mobile Number"),
+          FormTitle(title: "Numéro de téléphone"),
           SizedBox(height: 5),
           CustomTextFormField(
             validator: Valid.validatePhone,
             controller: _phoneController,
-            keyboardType: TextInputType.name,
+            keyboardType: TextInputType.phone,
             hint: "+213*********",
           ),
 
@@ -96,7 +96,7 @@ class _SectionFormDataState extends State<SectionFormData> {
           Align(
             alignment: Alignment.center,
             child: CustomButton(
-              title: "Sign Up",
+              title: "S'inscrire",
               buttonTitleColor: Colors.white,
               buttonColor: AppColor.primaryColor,
               onPressed: _handleSignUp,

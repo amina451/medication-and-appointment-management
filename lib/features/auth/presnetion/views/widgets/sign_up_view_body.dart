@@ -14,15 +14,15 @@ class SignUpViewBody extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(child: CustomAppBar(title: "New Account")),
+            SliverToBoxAdapter(child: CustomAppBar(title: "Nouveau Compte")),
             SliverToBoxAdapter(child: SectionFormData()),
             SliverToBoxAdapter(
               child: HaveOrDontHAveAnAcount(
                 onTap: () {
-                Navigator.pushReplacementNamed(context, LoginView.routeName);
-              },
-                firstTitle: "already have an account?",
-                secondTitle: "Log In",
+                  Navigator.pushReplacementNamed(context, LoginView.routeName);
+                },
+                firstTitle: "Vous avez déjà un compte ?",
+                secondTitle: "Se connecter",
               ),
             ),
           ],

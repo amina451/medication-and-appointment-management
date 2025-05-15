@@ -8,7 +8,6 @@ import 'package:pharmacy_app/features/auth/presnetion/manger/sign_up/sing_up_cub
 import 'package:pharmacy_app/features/auth/presnetion/views/screens/login_view.dart';
 import 'package:pharmacy_app/features/auth/presnetion/views/widgets/sign_up_view_body.dart';
 
-
 class CustomBlocConsumer extends StatelessWidget {
   const CustomBlocConsumer({
     super.key,
@@ -19,25 +18,22 @@ class CustomBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignUpState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
-         buildShowToast( message:  "Confirm Email",color:AppColor.primaryColor);
+          buildShowToast(message: "Confirmez votre e-mail", color: AppColor.primaryColor);
           Navigator.pushReplacementNamed(context, LoginView.routeName);
         } else if (state is SignUpFailure) {
-          buildShowToast(message:state.message,color:AppColor.primaryColor);
-
+          buildShowToast(message: state.message, color: AppColor.primaryColor);
         }
       },
       builder: (context, state) {
-        return  ModalProgressHUD(
+        return ModalProgressHUD(
           progressIndicator: Center(
-          child: CircularProgressIndicator(color: AppColor.primaryColor,)),
+            child: CircularProgressIndicator(color: AppColor.primaryColor,),
+          ),
           color: AppColor.primaryColor,
-          inAsyncCall: state is SignUpLoading ? true :false,
-          child: SignUpViewBody());
+          inAsyncCall: state is SignUpLoading ? true : false,
+          child: SignUpViewBody(),
+        );
       },
     );
   }
 }
-
-
-
-

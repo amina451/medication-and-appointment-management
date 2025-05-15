@@ -20,7 +20,7 @@ class DoctorsView extends StatelessWidget {
             },
           ),
        
-      appBar: buildAppBar(context, "Doctors"),
+      appBar: buildAppBar(context, "Médecins"),
       body: const DoctorsViewBody(),
     );
   }

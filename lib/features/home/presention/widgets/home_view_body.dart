@@ -24,14 +24,14 @@ class HomeViewBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20.h),
-              Text("What are you looking for?", style: AppTextStyle.semiBold24),
+              Text("Que cherchez-vous ?", style: AppTextStyle.semiBold24),
               CustomCardItemHome(
                 onTap: () {
                   Navigator.pushNamed(context, DoctorsView.routeName);
                 },
                 colorIcon: Colors.pinkAccent.withOpacity(0.65),
-                title: 'Doctors',
-                subTitle: "Here are the doctors you've visited",
+                title: 'Médecins',
+                subTitle: "Voici les médecins que vous \navez consultés",
                 imagePath: AppImages.assetsImagesDoctorhand,
                 colorTitle: Colors.pinkAccent.withOpacity(0.65),
               ),
@@ -39,8 +39,8 @@ class HomeViewBody extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(context, MedicationsView.routeName);
                 },
-                title: 'My Medications',
-                subTitle: "Track and manage your \npersonal medications",
+                title: 'Mes Médicaments',
+                subTitle: "Suivez et gérez vos \nmédicaments personnels",
                 imagePath: AppImages.assetsImagesSyringe,
                 colorTitle: Colors.blueAccent.withOpacity(0.65),
                 colorIcon: Colors.blueAccent.withOpacity(0.65),
@@ -49,8 +49,8 @@ class HomeViewBody extends StatelessWidget {
                 onTap: () {
                   Navigator.pushReplacementNamed(context, DateView.routeName);
                 },
-                title: 'Doctor Schedule',
-                subTitle: "View and manage your \ndoctor schedule",
+                title: 'Rendez-vous du Médecin',
+                subTitle: "Consultez et gérez votre \nplanning médical",
                 imagePath: AppImages.assetsImagesCalendar,
                 colorTitle: Colors.greenAccent.withOpacity(0.65),
                 colorIcon: Colors.greenAccent.withOpacity(0.65),
@@ -63,8 +63,8 @@ class HomeViewBody extends StatelessWidget {
                     PerescarptionsView.routeName,
                   );
                 },
-                title: 'Prescriptions',
-                subTitle: "View and manage your \nPrescriptions",
+                title: 'prescreptions',
+                subTitle: "Consultez et gérez vos \nprescreptions",
                 imagePath: AppImages.assetsImagesMedicalPrescriptionSvgrepoCom,
                 colorTitle: AppColor.primaryColor,
                 colorIcon: AppColor.primaryColor,

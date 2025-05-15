@@ -37,7 +37,7 @@ class _CustomFiledPasswordState extends State<CustomFiledPassword> {
                 ),
       ),
       keyboardType: TextInputType.visiblePassword,
-      hint: 'Password ',
+      hint: 'Mot de passe ',
     );
   }
 }

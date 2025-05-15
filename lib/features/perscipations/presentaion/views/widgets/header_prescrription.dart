@@ -28,7 +28,7 @@ class HeaderPrescription extends StatelessWidget {
             SizedBox(height: 15.h),
             CustomSectionTitleHeaderWithAddCard(
               title: "Prescriptions",
-              subTitle: '  "Manage Your Prescriptions "',
+              subTitle: '  "Gérez vos prescriptions"',
               onTap: () {
                 buildShowModalSheetPrescriptions(context);
               },
@@ -41,12 +41,3 @@ class HeaderPrescription extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-

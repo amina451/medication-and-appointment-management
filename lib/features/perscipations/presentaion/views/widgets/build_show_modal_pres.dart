@@ -29,7 +29,7 @@ class _PrescriptionForm extends StatefulWidget {
 }
 
 class __PrescriptionFormState extends State<_PrescriptionForm> {
-  // Initialize TextEditingControllers
+  // Initialiser les TextEditingControllers
   final TextEditingController doctorNameController = TextEditingController();
   final TextEditingController doctorSpecialityController = TextEditingController();
   final TextEditingController firstMedicationNameController = TextEditingController();
@@ -76,51 +76,51 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              FormTitle(title: "Doctor"),
+              FormTitle(title: "Docteur"),
               CustomFormAddData(
-                hint: "Name Doctor",
+                hint: "Nom du docteur",
                 controller: doctorNameController,
               ),
               CustomFormAddData(
-                hint: "Speciality",
+                hint: "Spécialité",
                 controller: doctorSpecialityController,
               ),
-              Center(child: FormTitle(title: "Medications")),
+              Center(child: FormTitle(title: "Médicaments")),
               CustomFormAddData(
-                hint: "First Medication Name",
+                hint: "Nom du premier médicament",
                 controller: firstMedicationNameController,
               ),
               CustomFormAddData(
-                hint: "First Medication Dosage (e.g., 500mg)",
+                hint: "Dosage du premier médicament (ex : 500mg)",
                 controller: firstMedicationDosageController,
               ),
               CustomFormAddData(
-                hint: "First Medication Instructions (e.g., 1 pill daily)",
+                hint: "Instructions du premier médicament (ex : 1 comprimé par jour)",
                 controller: firstMedicationInstructionsController,
               ),
               CustomFormAddData(
-                hint: "Second Medication Name",
+                hint: "Nom du deuxième médicament",
                 controller: secondMedicationNameController,
               ),
               CustomFormAddData(
-                hint: "Second Medication Dosage (e.g., 10mg)",
+                hint: "Dosage du deuxième médicament (ex : 10mg)",
                 controller: secondMedicationDosageController,
               ),
               CustomFormAddData(
-                hint: "Second Medication Instructions (e.g., once daily)",
+                hint: "Instructions du deuxième médicament (ex : une fois par jour)",
                 controller: secondMedicationInstructionsController,
               ),
               CustomFormAddData(
-                hint: "Date (e.g., YYYY-MM-DD)",
+                hint: "Date (ex : AAAA-MM-JJ)",
                 controller: dateMedicationController,
               ),
               SizedBox(height: 20.h),
               CustomButton(
-                title: "Save",
+                title: "Enregistrer",
                 buttonTitleColor: Colors.white,
                 buttonColor: AppColor.primaryColor,
                 onPressed: () async {
-                  // Create medication list as strings with dosage and instructions
+                  // Créer la liste des médicaments comme chaînes avec dosage et instructions
                   final medications = <String>[];
                   if (firstMedicationNameController.text.isNotEmpty) {
                     medications.add(
@@ -133,10 +133,10 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
                     );
                   }
 
-                  // Join medications into a single string
+                  // Joindre les médicaments en une seule chaîne
                   final medicationString = medications.join('\n ');
 
-                  // Create prescription model
+                  // Créer le modèle d'ordonnance
                   final prescription = PrescriptionModel(
                     idPres: const Uuid().v4(),
                     userId: Supabase.instance.client.auth.currentUser!.id,
@@ -148,10 +148,10 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
                     medicationId: const Uuid().v4(),
                   );
 
-                  // Call the cubit to create prescription
+                  // Appeler le cubit pour créer l'ordonnance
                   await context.read<PrescriptionsCubit>().createPrescription(prescription);
 
-                  // Close the bottom sheet only after the operation completes
+                  // Fermer la bottom sheet seulement après l'opération terminée
                   if (mounted) {
                     Navigator.pop(context);
                   }

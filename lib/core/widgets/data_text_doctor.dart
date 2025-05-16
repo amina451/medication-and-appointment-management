@@ -17,37 +17,35 @@ class DataTextAndButtonRemove extends StatelessWidget {
   final void Function()? onDelete;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 5.h,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                overflow: TextOverflow.visible,
-                name,
-                style: AppTextStyle.semiBold20.copyWith(),
-              ),
-              Spacer(),
-              GestureDetector(onTap: onDelete, child: RemoveButton()),
-            ],
-          ),
-          Text(
-            spicility,
-            style: AppTextStyle.semiBold12.copyWith(
-              color: AppColor.primaryColor,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 5.h,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              overflow: TextOverflow.visible,
+              name,
+              style: AppTextStyle.semiBold20.copyWith(),
             ),
+            Spacer(),
+            GestureDetector(onTap: onDelete, child: RemoveButton()),
+          ],
+        ),
+        Text(
+          spicility,
+          style: AppTextStyle.semiBold12.copyWith(
+            color: AppColor.primaryColor,
           ),
-          Text(
-            experience!,
-            style: AppTextStyle.semiBold12.copyWith(color: Color(0xff677294)),
-          ),
-        ],
-      ),
+        ),
+        Text(
+          experience!,
+          style: AppTextStyle.semiBold12.copyWith(color: Color(0xff677294)),
+        ),
+      ],
     );
   }
 }

@@ -13,12 +13,14 @@ class CustomBottomNavBar extends StatefulWidget {
   const CustomBottomNavBar({super.key});
 
   static const String routeName = 'CustomBottomNavBar';
+
   @override
   _CustomBottomNavBarState createState() => _CustomBottomNavBarState();
 }
 
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   int _currentIndex = 0;
+
   final List<Color> _selectedColors = [
     Colors.blueAccent.withOpacity(0.65),
     Colors.pinkAccent.withOpacity(0.65),
@@ -42,14 +44,14 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       bottomNavigationBar: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.white.withOpacity(0.95),
           borderRadius: BorderRadius.circular(32),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 1,
-              blurRadius: 5,
-              offset: const Offset(0, 3),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
             ),
           ],
         ),
@@ -57,15 +59,13 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           borderRadius: BorderRadius.circular(32),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
             elevation: 0,
             currentIndex: _currentIndex,
             selectedItemColor: _selectedColors[_currentIndex],
             unselectedItemColor: Colors.grey,
             selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-            unselectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.normal,
-            ),
+            unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
             onTap: (index) {
               setState(() {
                 _currentIndex = index;
@@ -75,39 +75,54 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   AppImages.assetsImagesHomeIcon,
-                  color: _currentIndex == 0 ? _selectedColors[0] : Colors.grey,
+                  colorFilter: ColorFilter.mode(
+                    _currentIndex == 0 ? _selectedColors[0] : Colors.grey,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 label: 'Accueil',
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   AppImages.assetsImagesDoctorhand,
-                  color: _currentIndex == 1 ? _selectedColors[1] : Colors.grey,
+                  colorFilter: ColorFilter.mode(
+                    _currentIndex == 1 ? _selectedColors[1] : Colors.grey,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 label: 'Médecins',
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
-                  height: 35.h,
                   AppImages.assetsImagesSyringe,
-                  color: _currentIndex == 2 ? _selectedColors[2] : Colors.grey,
+                  height: 35.h,
+                  colorFilter: ColorFilter.mode(
+                    _currentIndex == 2 ? _selectedColors[2] : Colors.grey,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 label: 'Médicaments',
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   AppImages.assetsImagesCalendar,
-                  color: _currentIndex == 3 ? _selectedColors[3] : Colors.grey,
+                  colorFilter: ColorFilter.mode(
+                    _currentIndex == 3 ? _selectedColors[3] : Colors.grey,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 label: 'Rendez-vous',
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
-                  height: 35.h,
                   AppImages.assetsImagesMedicalPrescriptionSvgrepoCom,
-                  color: _currentIndex == 4 ? _selectedColors[4] : Colors.grey,
+                  height: 35.h,
+                  colorFilter: ColorFilter.mode(
+                    _currentIndex == 4 ? _selectedColors[4] : Colors.grey,
+                    BlendMode.srcIn,
+                  ),
                 ),
-                label: 'Prescreptions',
+                label: 'Ordonnances',
               ),
             ],
           ),

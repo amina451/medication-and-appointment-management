@@ -29,7 +29,7 @@ class LoginView extends StatelessWidget {
               );
             } else if (state is SignInFailure) {
               buildShowToast(
-                message: state.toString(),
+                message: "Problem with email or password",
                 color: Colors.red.shade500,
               );
             }

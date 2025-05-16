@@ -3,8 +3,8 @@ import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
 
 class DateVisitDoctor extends StatelessWidget {
-  const DateVisitDoctor({super.key, this.date});
-  final String? date;
+  const DateVisitDoctor({super.key, this.forme});
+  final String? forme;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,13 +14,13 @@ class DateVisitDoctor extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Numero de telephone",
+            "Forme",
             style: AppTextStyle.semiBold12.copyWith(
               color: AppColor.primaryColor,
             ),
           ),
           Text(
-            "+213 123 456 789",
+            forme!,
             style: AppTextStyle.semiBold12.copyWith(
               color: AppColor.primaryColor,
             ),

@@ -153,7 +153,8 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
 
                   // Fermer la bottom sheet seulement après l'opération terminée
                   if (mounted) {
-                    Navigator.pop(context);
+                    Navigator.
+                  pop(context);
                   }
                 },
               ),

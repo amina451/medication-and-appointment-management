@@ -52,7 +52,7 @@ class MedicationsCubit extends Cubit<MedicationState> {
           return;
         }
 
-        final completeMedication = Medication.copyWith(imageUrlCopy: url);
+        final completeMedication = Medication.copyWith(imageUrl: url);
         final createdMedication = await createMedicationUsecase.execute(
           completeMedication,
         );

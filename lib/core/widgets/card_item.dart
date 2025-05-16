@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
+import 'package:pharmacy_app/core/utils/app_text_style.dart';
 import 'package:pharmacy_app/core/widgets/data_text_doctor.dart';
 import 'package:pharmacy_app/core/widgets/date_text.dart';
 import 'package:pharmacy_app/core/widgets/edit_button.dart';
@@ -13,9 +14,10 @@ class CardItem extends StatelessWidget {
     required this.spicility,
     this.address,
     required this.image,
-   required this.date,
+    required this.date,
     this.onDelete,
     this.onEdite,
+    required this.routAdmin,
   });
 
   final String name, spicility, image;
@@ -23,6 +25,7 @@ class CardItem extends StatelessWidget {
   final String? address;
   final void Function()? onDelete;
   final void Function()? onEdite;
+  final String routAdmin;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +75,27 @@ class CardItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              DateVisitDoctor(date: date),
+              DateVisitDoctor(forme: date),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, top: 10),
+                child: Column(
+                  children: [
+                    Text(
+                      "Rout Admin",
+                      style: AppTextStyle.semiBold12.copyWith(
+                        color: AppColor.primaryColor,
+                      ),
+                    ),
+
+                    Text(
+                      routAdmin,
+                      style: AppTextStyle.semiBold12.copyWith(
+                        color: AppColor.primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               EditButton(onPressed: onEdite),
             ],
           ),

@@ -35,17 +35,19 @@ class MedicationsViewBody extends StatelessWidget {
             },
             builder: (context, state) {
               if (state is MedicationLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator(color: AppColor.primaryColor,));
               } else if (state is MedicationLoaded) {
                 return Expanded(
                   child: ListView.separated(
                     itemBuilder: (context, index) {
                       final medication = state.medication[index];
                       return CardItem(
-                        date: "12",
+                        date: medication.forme ?? 'Non disponible',
                         onDelete: () => context
                             .read<MedicationsCubit>()
-                            .deleteMedication(medication.medication_id ?? ''),
+                            .deleteMedication(
+                            medication.medication_id ?? ''),
+                        routAdmin: medication.rout_admin ?? 'Non disponible',    
                         name: medication.name_medication ?? 'Non disponible',
                         spicility: medication.potion ?? 'Non disponible',
                         address: medication.num_of_day ?? 'Non disponible',

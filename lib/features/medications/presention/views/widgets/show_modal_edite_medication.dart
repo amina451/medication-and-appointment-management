@@ -35,6 +35,13 @@ void customBuildEditMedicationModalSheet(
     text: medication.num_of_day ?? '',
   );
 
+
+final routAdminController = TextEditingController(
+    text: medication.rout_admin ?? '',
+  );
+  final formeController = TextEditingController(
+    text: medication.forme ?? '',
+  );
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -96,25 +103,25 @@ void customBuildEditMedicationModalSheet(
                             return null;
                           },
                         ),
-                        const FormTitle(title: "Potion"),
+                        const FormTitle(title: "Dosage"),
                         CustomFormAddData(
-                          hint: "Potion",
+                          hint: "Dosage",
                           controller: potionController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Veuillez entrer la potion';
+                              return 'Veuillez entrer le Dosage';
                             }
                             return null;
                           },
                         ),
-                        const FormTitle(title: "Nombre de jours"),
+                        const FormTitle(title: "Fréquence"),
                         CustomFormAddData(
-                          hint: "Nombre de jours",
-                          keyboardType: TextInputType.number,
+                          hint: "Fréquence",
+                          keyboardType: TextInputType.text,
                           controller: numOfDayController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Veuillez entrer le nombre de jours';
+                              return 'Veuillez entrer le Fréquence';
                             }
                             return null;
                           },
@@ -150,10 +157,12 @@ void customBuildEditMedicationModalSheet(
                             }
 
                             final updatedMedication = medication.copyWith(
-                              imageUrlCopy: finalImageUrl,
-                              doctorNameCopy: medicationNameController.text,
-                              potionCopy: potionController.text,
-                              num_of_dayCopy: numOfDayController.text,
+                              rout_admin: routAdminController.text,
+                              forme: formeController.text,
+                              imageUrl: finalImageUrl,
+                              name_medication: medicationNameController.text,
+                              potion: potionController.text,
+                              num_of_day: numOfDayController.text,
                             );
 
                             context.read<MedicationsCubit>().editMedication(
@@ -178,3 +187,6 @@ void customBuildEditMedicationModalSheet(
     },
   );
 }
+
+
+

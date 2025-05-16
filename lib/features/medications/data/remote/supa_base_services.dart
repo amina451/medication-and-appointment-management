@@ -29,6 +29,8 @@ class SupabaseServiceMedication {
           'potion': newMedication.potion ?? '',
           'num_of_day': newMedication.num_of_day ?? '',
           'imageUrl': newMedication.imageUrl ?? '',
+          'rout_admin': newMedication.rout_admin ?? '',
+          'forme': newMedication.forme ?? '',
         })
         .eq('medication_id', oldMedication.medication_id ?? '');
 

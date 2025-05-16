@@ -25,7 +25,8 @@ void customBuildShowModalSheetMed(BuildContext context) {
   final medicationNameController = TextEditingController();
   final potionController = TextEditingController();
   final numOfDaycontroller = TextEditingController();
-
+  final routAdminController = TextEditingController();
+  final formeController = TextEditingController();
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -70,6 +71,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
                   child: Form(
                     key: formKey,
                     child: Column(
+                      spacing:5.h,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ImageUpload(key: imageKey),
@@ -78,16 +80,22 @@ void customBuildShowModalSheetMed(BuildContext context) {
                           hint: "Médicament",
                           controller: medicationNameController,
                         ),
-                        const FormTitle(title: "Potion"),
                         CustomFormAddData(
-                          hint: "Potion",
+                          hint: "Dosage",
                           controller: potionController,
                         ),
-                        const FormTitle(title: "Nombre de jours"),
                         CustomFormAddData(
-                          hint: "Nombre de jours",
-                          keyboardType: TextInputType.number,
+                          hint: "Fréquence",
+                          keyboardType: TextInputType.text,
                           controller: numOfDaycontroller,
+                        ),
+                        CustomFormAddData(
+                          hint: "forme",
+                          controller: formeController,
+                        ),
+                        CustomFormAddData(
+                          hint: "rout admin",
+                          controller: routAdminController,
                         ),
                         CustomButton(
                           title: "Enregistrer",
@@ -98,12 +106,20 @@ void customBuildShowModalSheetMed(BuildContext context) {
 
                             if (image != null) {
                               final medication = MedicationModel(
+                                rout_admin: routAdminController.text,
+                                forme: formeController.text,
                                 medication_id: const Uuid().v4(),
                                 name_medication: medicationNameController.text,
                                 imageUrl: "",
                                 potion: potionController.text,
                                 num_of_day: numOfDaycontroller.text,
-                                userId: Supabase.instance.client.auth.currentUser!.id,
+                                userId:
+                                    Supabase
+                                        .instance
+                                        .client
+                                        .auth
+                                        .currentUser!
+                                        .id,
                               );
 
                               context.read<MedicationsCubit>().createMedication(

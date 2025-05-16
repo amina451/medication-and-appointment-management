@@ -5,6 +5,8 @@ class MedicationEntity {
   final String? potion;
   final String? num_of_day;
   final String? userId;
+  final String? forme;
+  final String? rout_admin;
 
   MedicationEntity({
     required this.medication_id,
@@ -13,6 +15,10 @@ class MedicationEntity {
     required this.potion,
     required this.num_of_day,
     required this.userId,
+       required this.rout_admin,
+    required this.forme,
+
+
   });
 
   factory MedicationEntity.fromJson(Map<String, dynamic> json) {
@@ -22,7 +28,9 @@ class MedicationEntity {
       imageUrl: json['imageUrl'] as String? ?? '',
       potion: json['potion'] as String? ?? '',
       num_of_day: json['num_of_day'] as String? ?? '',
-      userId: json['user_id'] as String? ?? '',
+      userId: json['user_id'] as String? ?? '', 
+      rout_admin: json['rout_admin'] as String? ?? '',
+      forme: json['forme'] as String? ?? '',
     );
   }
 
@@ -34,6 +42,8 @@ class MedicationEntity {
       'potion': potion ?? '',
       'num_of_day': num_of_day ?? '',
       'user_id': userId ?? '',
+      'rout_admin': rout_admin ?? '',
+      'forme': forme ?? '',
     };
   }
 }

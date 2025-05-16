@@ -37,6 +37,7 @@ class DoctorsViewBody extends StatelessWidget {
                       return CardItem(
                         onEdite:
                             () => customBuildEditDoctorModalSheet(
+                              
                               context,
                               doctor,
                             ),
@@ -50,6 +51,7 @@ class DoctorsViewBody extends StatelessWidget {
                             doctor.doctorId,
                           );
                         },
+                         routAdmin:"",
                       );
                     },
                     separatorBuilder:

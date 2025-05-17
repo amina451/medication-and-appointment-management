@@ -1,12 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pharmacy_app/core/services/local_notifications_services.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/custom_button.dart';
 import 'package:pharmacy_app/features/auth/presnetion/views/widgets/form_title.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/widgets/custom_form_data.dart';
 import 'package:pharmacy_app/features/perscipations/domain/model/prescription_models.dart';
 import 'package:pharmacy_app/features/perscipations/presentaion/manger/prescription_cubit.dart';
+import 'package:pharmacy_app/features/perscipations/presentaion/views/Perescarptions_view.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
@@ -31,14 +35,26 @@ class _PrescriptionForm extends StatefulWidget {
 class __PrescriptionFormState extends State<_PrescriptionForm> {
   // Initialiser les TextEditingControllers
   final TextEditingController doctorNameController = TextEditingController();
-  final TextEditingController doctorSpecialityController = TextEditingController();
-  final TextEditingController firstMedicationNameController = TextEditingController();
-  final TextEditingController firstMedicationDosageController = TextEditingController();
-  final TextEditingController firstMedicationInstructionsController = TextEditingController();
-  final TextEditingController secondMedicationNameController = TextEditingController();
-  final TextEditingController secondMedicationDosageController = TextEditingController();
-  final TextEditingController secondMedicationInstructionsController = TextEditingController();
-  final TextEditingController dateMedicationController = TextEditingController();
+  final TextEditingController doctorSpecialityController =
+      TextEditingController();
+  final TextEditingController firstMedicationNameController =
+      TextEditingController();
+  final TextEditingController firstMedicationDosageController =
+      TextEditingController();
+  final TextEditingController firstMedicationInstructionsController =
+      TextEditingController();
+  final TextEditingController secondMedicationNameController =
+      TextEditingController();
+  final TextEditingController secondMedicationDosageController =
+      TextEditingController();
+  final TextEditingController secondMedicationInstructionsController =
+      TextEditingController();
+  final TextEditingController dateMedicationController =
+      TextEditingController();
+  final TextEditingController notificationHourController =
+      TextEditingController();
+  final TextEditingController notificationMinuteController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -51,7 +67,29 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
     secondMedicationDosageController.dispose();
     secondMedicationInstructionsController.dispose();
     dateMedicationController.dispose();
+    notificationHourController.dispose();
+    notificationMinuteController.dispose();
     super.dispose();
+  }
+
+ void listenToNotificationStream() {
+    LocalNotificationsServices.streamController.stream.listen(
+      (notificationResponse) {
+        log(notificationResponse.id!.toString());
+        log(notificationResponse.payload!.toString());
+        //logic to get product from database.
+          Navigator.pushNamed(context, PerescarptionsView.routeName);
+   
+      },
+    );
+  }
+
+
+  @override
+  void initState() {
+
+
+    super.initState();
   }
 
   @override
@@ -95,7 +133,8 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
                 controller: firstMedicationDosageController,
               ),
               CustomFormAddData(
-                hint: "Instructions du premier médicament (ex : 1 comprimé par jour)",
+                hint:
+                    "Instructions du premier médicament (ex : 1 comprimé par jour)",
                 controller: firstMedicationInstructionsController,
               ),
               CustomFormAddData(
@@ -107,12 +146,33 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
                 controller: secondMedicationDosageController,
               ),
               CustomFormAddData(
-                hint: "Instructions du deuxième médicament (ex : une fois par jour)",
+                hint:
+                    "Instructions du deuxième médicament (ex : une fois par jour)",
                 controller: secondMedicationInstructionsController,
               ),
               CustomFormAddData(
                 hint: "Date (ex : AAAA-MM-JJ)",
                 controller: dateMedicationController,
+              ),
+              SizedBox(height: 10.h),
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomFormAddData(
+                      hint: "Heure (0-23)",
+                      keyboardType: TextInputType.number,
+                      controller: notificationHourController,
+                    ),
+                  ),
+                  SizedBox(width: 10.w),
+                  Expanded(
+                    child: CustomFormAddData(
+                      hint: "Minute (0-59)",
+                      keyboardType: TextInputType.number,
+                      controller: notificationMinuteController,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 20.h),
               CustomButton(
@@ -149,12 +209,22 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
                   );
 
                   // Appeler le cubit pour créer l'ordonnance
-                  await context.read<PrescriptionsCubit>().createPrescription(prescription);
+                  await context.read<PrescriptionsCubit>().createPrescription(
+                    prescription,
+                  );
+                  final hour =
+                      int.tryParse(notificationHourController.text) ?? 0;
+                  final minute =
+                      int.tryParse(notificationMinuteController.text) ?? 0;
+
+                  await LocalNotificationsServices.showDailyScheduledNotification(
+                    hour,
+                    minute,
+                  );
 
                   // Fermer la bottom sheet seulement après l'opération terminée
                   if (mounted) {
-                    Navigator.
-                  pop(context);
+                    Navigator.pop(context);
                   }
                 },
               ),

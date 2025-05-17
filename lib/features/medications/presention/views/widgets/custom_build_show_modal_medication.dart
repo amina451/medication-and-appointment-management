@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -7,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:pharmacy_app/core/helper_functions/build_show_toast.dart';
+import 'package:pharmacy_app/core/services/local_notifications_services.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/custom_button.dart';
 import 'package:pharmacy_app/core/widgets/upload_image.dart';
@@ -27,6 +26,9 @@ void customBuildShowModalSheetMed(BuildContext context) {
   final numOfDaycontroller = TextEditingController();
   final routAdminController = TextEditingController();
   final formeController = TextEditingController();
+  final notificationHourController = TextEditingController();
+  final notificationMinuteController = TextEditingController();
+
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -53,7 +55,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
             progressIndicator: CircularProgressIndicator(
               color: AppColor.primaryColor,
             ),
-            inAsyncCall: state is MedicationLoading ? true : false,
+            inAsyncCall: state is MedicationLoading,
             child: Padding(
               padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -71,7 +73,6 @@ void customBuildShowModalSheetMed(BuildContext context) {
                   child: Form(
                     key: formKey,
                     child: Column(
-                      spacing:5.h,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ImageUpload(key: imageKey),
@@ -90,13 +91,33 @@ void customBuildShowModalSheetMed(BuildContext context) {
                           controller: numOfDaycontroller,
                         ),
                         CustomFormAddData(
-                          hint: "forme",
+                          hint: "Forme",
                           controller: formeController,
                         ),
                         CustomFormAddData(
-                          hint: "rout admin",
+                          hint: "Voie d'administration",
                           controller: routAdminController,
                         ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomFormAddData(
+                                hint: "Heure (0-23)",
+                                keyboardType: TextInputType.number,
+                                controller: notificationHourController,
+                              ),
+                            ),
+                            SizedBox(width: 10.w),
+                            Expanded(
+                              child: CustomFormAddData(
+                                hint: "Minute (0-59)",
+                                keyboardType: TextInputType.number,
+                                controller: notificationMinuteController,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 16.h),
                         CustomButton(
                           title: "Enregistrer",
                           buttonTitleColor: Colors.white,
@@ -104,7 +125,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
                           onPressed: () async {
                             final image = imageKey.currentState?.selectedImage;
 
-                            if (image != null) {
+                            if (formKey.currentState!.validate() && image != null) {
                               final medication = MedicationModel(
                                 rout_admin: routAdminController.text,
                                 forme: formeController.text,
@@ -113,20 +134,28 @@ void customBuildShowModalSheetMed(BuildContext context) {
                                 imageUrl: "",
                                 potion: potionController.text,
                                 num_of_day: numOfDaycontroller.text,
-                                userId:
-                                    Supabase
-                                        .instance
-                                        .client
-                                        .auth
-                                        .currentUser!
-                                        .id,
+                                userId: Supabase.instance.client.auth.currentUser!.id,
                               );
 
                               context.read<MedicationsCubit>().createMedication(
                                 medication,
                                 image,
                               );
+
+                              final hour = int.tryParse(notificationHourController.text) ?? 0;
+                              final minute = int.tryParse(notificationMinuteController.text) ?? 0;
+
+                          await    LocalNotificationsServices.showDailyScheduledNotification(
+                                hour,
+                                minute,
+                              );
+
                               Navigator.pop(context);
+                            } else {
+                              buildShowToast(
+                                message: 'Veuillez remplir tous les champs!',
+                                color: Colors.red,
+                              );
                             }
                           },
                         ),

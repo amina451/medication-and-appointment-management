@@ -33,7 +33,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(context, 
       
-      client.auth.currentUser !=null ?CustomBottomNavBar.routeName
+      client.auth.currentUser !=null ? CustomBottomNavBar.routeName
       : LoginView.routeName);
     });
   }

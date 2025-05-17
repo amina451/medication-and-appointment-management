@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/helper_functions/build_show_toast.dart';
+import 'package:pharmacy_app/core/services/local_notifications_services.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/card_item.dart';
 import 'package:pharmacy_app/features/medications/presention/manger/medication_cubit.dart';
 import 'package:pharmacy_app/features/medications/presention/manger/medication_state.dart';
+import 'package:pharmacy_app/features/medications/presention/views/medications_views.dart';
 import 'package:pharmacy_app/features/medications/presention/views/widgets/search_form.dart';
 import 'package:pharmacy_app/features/medications/presention/views/widgets/show_modal_edite_medication.dart';
 
@@ -27,6 +31,16 @@ class MedicationsViewBody extends StatelessWidget {
                 print(state.message);
               }
               if (state is MedicationLoaded) {
+             
+                  LocalNotificationsServices.streamController.stream.listen((
+                    notificationResponse,
+                  ) {
+                    log(notificationResponse.id!.toString());
+                    log(notificationResponse.payload!.toString());
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushNamed(context, MedicationsView.routeName);
+                  });
+                
                 buildShowToast(
                   message: "Chargement terminé",
                   color: AppColor.primaryColor,
@@ -35,7 +49,11 @@ class MedicationsViewBody extends StatelessWidget {
             },
             builder: (context, state) {
               if (state is MedicationLoading) {
-                return const Center(child: CircularProgressIndicator(color: AppColor.primaryColor,));
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColor.primaryColor,
+                  ),
+                );
               } else if (state is MedicationLoaded) {
                 return Expanded(
                   child: ListView.separated(
@@ -43,28 +61,34 @@ class MedicationsViewBody extends StatelessWidget {
                       final medication = state.medication[index];
                       return CardItem(
                         date: medication.forme ?? 'Non disponible',
-                        onDelete: () => context
-                            .read<MedicationsCubit>()
-                            .deleteMedication(
-                            medication.medication_id ?? ''),
-                        routAdmin: medication.rout_admin ?? 'Non disponible',    
+                        onDelete:
+                            () => context
+                                .read<MedicationsCubit>()
+                                .deleteMedication(
+                                  medication.medication_id ?? '',
+                                ),
+                        routAdmin: medication.rout_admin ?? 'Non disponible',
                         name: medication.name_medication ?? 'Non disponible',
                         spicility: medication.potion ?? 'Non disponible',
                         address: medication.num_of_day ?? 'Non disponible',
                         image: medication.imageUrl ?? '',
-                        onEdite: () => customBuildEditMedicationModalSheet(
-                          context,
-                          medication,
-                        ),
+                        onEdite:
+                            () => customBuildEditMedicationModalSheet(
+                              context,
+                              medication,
+                            ),
                       );
                     },
-                    separatorBuilder: (context, index) => SizedBox(height: 10.h),
+                    separatorBuilder:
+                        (context, index) => SizedBox(height: 10.h),
                     itemCount: state.medication.length,
                   ),
                 );
               } else if (state is MedicationError) {
                 return const Center(
-                  child: Text('Une erreur s\'est produite lors du chargement des médicaments.'),
+                  child: Text(
+                    'Une erreur s\'est produite lors du chargement des médicaments.',
+                  ),
                 );
               }
 

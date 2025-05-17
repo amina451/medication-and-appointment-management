@@ -30,7 +30,7 @@ class HeaderPrescription extends StatelessWidget {
               title: "Prescriptions",
               subTitle: '  "Gérez vos prescriptions"',
               onTap: () {
-                 buildShowModalSheetPrescriptions(
+                 buildShowModalSheetPrescriptions                                                                                                                 (
                         context,
                       );
               },

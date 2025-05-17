@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pharmacy_app/core/services/local_notifications_services.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/custom_button.dart';
 import 'package:pharmacy_app/features/auth/presnetion/views/widgets/form_title.dart';
@@ -20,6 +21,8 @@ void buildShowModalSheet(BuildContext context) {
   final followUpController = TextEditingController();
   final noteController = TextEditingController();
 
+  final notificationHourController = TextEditingController();
+  final notificationMinuteController = TextEditingController();
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -98,7 +101,25 @@ void buildShowModalSheet(BuildContext context) {
                       maxLength: 2,
                       controller: noteController,
                     ),
-
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomFormAddData(
+                            hint: "Heure (0-23)",
+                            keyboardType: TextInputType.number,
+                            controller: notificationHourController,
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Expanded(
+                          child: CustomFormAddData(
+                            hint: "Minute (0-59)",
+                            keyboardType: TextInputType.number,
+                            controller: notificationMinuteController,
+                          ),
+                        ),
+                      ],
+                    ),
                     SizedBox(height: 20.h),
                     CustomButton(
                       title:
@@ -107,7 +128,7 @@ void buildShowModalSheet(BuildContext context) {
                               : "Enregistrer",
                       buttonTitleColor: Colors.white,
                       buttonColor: AppColor.primaryColor,
-                      onPressed: () {
+                      onPressed: () async {
                         final date = DateModel(
                           idDate: Uuid().v4(),
                           address: addressController.text,
@@ -121,6 +142,16 @@ void buildShowModalSheet(BuildContext context) {
                         );
 
                         context.read<DatesCubit>().createDate(date);
+                        final hour =
+                            int.tryParse(notificationHourController.text) ?? 0;
+                        final minute =
+                            int.tryParse(notificationMinuteController.text) ??
+                            0;
+
+                        await LocalNotificationsServices.showDailyScheduledNotification(
+                          hour,
+                          minute,
+                        );
                         Navigator.pop(context);
                       },
                     ),

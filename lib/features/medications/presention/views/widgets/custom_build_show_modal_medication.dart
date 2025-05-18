@@ -73,6 +73,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
                   child: Form(
                     key: formKey,
                     child: Column(
+                      spacing: 5.h,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ImageUpload(key: imageKey),
@@ -125,7 +126,8 @@ void customBuildShowModalSheetMed(BuildContext context) {
                           onPressed: () async {
                             final image = imageKey.currentState?.selectedImage;
 
-                            if (formKey.currentState!.validate() && image != null) {
+                            if (formKey.currentState!.validate() &&
+                                image != null) {
                               final medication = MedicationModel(
                                 rout_admin: routAdminController.text,
                                 forme: formeController.text,
@@ -134,7 +136,13 @@ void customBuildShowModalSheetMed(BuildContext context) {
                                 imageUrl: "",
                                 potion: potionController.text,
                                 num_of_day: numOfDaycontroller.text,
-                                userId: Supabase.instance.client.auth.currentUser!.id,
+                                userId:
+                                    Supabase
+                                        .instance
+                                        .client
+                                        .auth
+                                        .currentUser!
+                                        .id,
                               );
 
                               context.read<MedicationsCubit>().createMedication(
@@ -142,10 +150,18 @@ void customBuildShowModalSheetMed(BuildContext context) {
                                 image,
                               );
 
-                              final hour = int.tryParse(notificationHourController.text) ?? 0;
-                              final minute = int.tryParse(notificationMinuteController.text) ?? 0;
+                              final hour =
+                                  int.tryParse(
+                                    notificationHourController.text,
+                                  ) ??
+                                  0;
+                              final minute =
+                                  int.tryParse(
+                                    notificationMinuteController.text,
+                                  ) ??
+                                  0;
 
-                          await    LocalNotificationsServices.showDailyScheduledNotification(
+                              await LocalNotificationsServices.showDailyScheduledNotification(
                                 hour,
                                 minute,
                               );

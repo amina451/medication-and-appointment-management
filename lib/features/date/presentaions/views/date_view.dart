@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/features/date/presentaions/views/widgets/date_view_body.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
+import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
 
 class DateView extends StatelessWidget {
   const DateView({super.key});
@@ -15,7 +16,7 @@ class DateView extends StatelessWidget {
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context,HomeView.routeName);
+            Navigator.popAndPushNamed(context,CustomBottomNavBar.routeName);
           },
           icon: Icon(Icons.arrow_back, color: Colors.white),
         ),

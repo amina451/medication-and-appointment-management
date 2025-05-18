@@ -17,7 +17,7 @@ class CardPrescriptionsItem extends StatefulWidget {
 
   final PrescriptionModel pres;
   final int index;
- final  void Function()? onPressed;
+  final void Function()? onPressed;
 
   @override
   State<CardPrescriptionsItem> createState() => _CardPrescriptionsItemState();
@@ -31,7 +31,7 @@ class _CardPrescriptionsItemState extends State<CardPrescriptionsItem> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 10.sp),
       margin: EdgeInsets.symmetric(horizontal: 20.sp),
-      height: isExpanded ? 400.h : 250.h,
+      height: isExpanded ? 330.h : 200.h,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
@@ -55,13 +55,17 @@ class _CardPrescriptionsItemState extends State<CardPrescriptionsItem> {
                 width: 100.w,
                 height: 40.h,
                 decoration: BoxDecoration(
-                  color: AppColor.secondaryColor, // Couleur de la boîte comme dans le design
+                  color:
+                      AppColor
+                          .secondaryColor, // Couleur de la boîte comme dans le design
                   borderRadius: BorderRadius.circular(6.r),
                 ),
                 child: Text(
                   widget.pres.allDateMedication,
                   style: AppTextStyle.semiBold12.copyWith(
-                    color: AppColor.primaryColor, // Couleur du texte comme dans le design
+                    color:
+                        AppColor
+                            .primaryColor, // Couleur du texte comme dans le design
                     fontSize: 14.sp,
                   ),
                 ),
@@ -108,7 +112,7 @@ class _CardPrescriptionsItemState extends State<CardPrescriptionsItem> {
               ),
               const Spacer(),
               IconButton(
-                onPressed:widget.onPressed,
+                onPressed: widget.onPressed,
                 icon: const Icon(Icons.edit, size: 18),
               ),
               IconButton(

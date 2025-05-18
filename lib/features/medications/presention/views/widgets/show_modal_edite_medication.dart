@@ -24,24 +24,20 @@ void customBuildEditMedicationModalSheet(
 
   // Vérification de null lors de l'attribution des valeurs aux contrôleurs
   final medicationNameController = TextEditingController(
-    text: medication.name_medication?.isNotEmpty == true
-        ? medication.name_medication
-        : '',
+    text:
+        medication.name_medication?.isNotEmpty == true
+            ? medication.name_medication
+            : '',
   );
-  final potionController = TextEditingController(
-    text: medication.potion ?? '',
-  );
+  final potionController = TextEditingController(text: medication.potion ?? '');
   final numOfDayController = TextEditingController(
     text: medication.num_of_day ?? '',
   );
 
-
-final routAdminController = TextEditingController(
+  final routAdminController = TextEditingController(
     text: medication.rout_admin ?? '',
   );
-  final formeController = TextEditingController(
-    text: medication.forme ?? '',
-  );
+  final formeController = TextEditingController(text: medication.forme ?? '');
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -86,6 +82,7 @@ final routAdminController = TextEditingController(
                   child: Form(
                     key: formKey,
                     child: Column(
+                      spacing: 5.w,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ImageUpload(
@@ -142,7 +139,7 @@ final routAdminController = TextEditingController(
                               final helper = ImageUploadHelper();
                               final uploadedUrl = await helper.uploadImage(
                                 image,
-                                "medication-images", // Changer "doctor-images" à "medication-images"
+                                "meication-image", // Changer "doctor-images" à "medication-images"
                               );
 
                               if (uploadedUrl != null) {
@@ -187,6 +184,3 @@ final routAdminController = TextEditingController(
     },
   );
 }
-
-
-

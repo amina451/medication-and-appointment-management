@@ -72,23 +72,20 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
     super.dispose();
   }
 
- void listenToNotificationStream() {
-    LocalNotificationsServices.streamController.stream.listen(
-      (notificationResponse) {
-        log(notificationResponse.id!.toString());
-        log(notificationResponse.payload!.toString());
-        //logic to get product from database.
-          Navigator.pushNamed(context, PerescarptionsView.routeName);
-   
-      },
-    );
+  void listenToNotificationStream() {
+    LocalNotificationsServices.streamController.stream.listen((
+      notificationResponse,
+    ) {
+      log(notificationResponse.id!.toString());
+      log(notificationResponse.payload!.toString());
+      //logic to get product from database.
+      Navigator.pushNamed(context, PerescarptionsView.routeName);
+    });
   }
-
 
   @override
   void initState() {
-
-
+    listenToNotificationStream();
     super.initState();
   }
 
@@ -114,6 +111,7 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(height: 10.h),
               FormTitle(title: "Docteur"),
               CustomFormAddData(
                 hint: "Nom du docteur",
@@ -154,26 +152,7 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
                 hint: "Date (ex : AAAA-MM-JJ)",
                 controller: dateMedicationController,
               ),
-              SizedBox(height: 10.h),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomFormAddData(
-                      hint: "Heure (0-23)",
-                      keyboardType: TextInputType.number,
-                      controller: notificationHourController,
-                    ),
-                  ),
-                  SizedBox(width: 10.w),
-                  Expanded(
-                    child: CustomFormAddData(
-                      hint: "Minute (0-59)",
-                      keyboardType: TextInputType.number,
-                      controller: notificationMinuteController,
-                    ),
-                  ),
-                ],
-              ),
+
               SizedBox(height: 20.h),
               CustomButton(
                 title: "Enregistrer",

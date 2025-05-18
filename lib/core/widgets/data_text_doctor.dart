@@ -26,10 +26,12 @@ class DataTextAndButtonRemove extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              overflow: TextOverflow.visible,
-              name,
-              style: AppTextStyle.semiBold20.copyWith(),
+            Expanded(
+              child: Text(
+                name,
+                style: AppTextStyle.semiBold20.copyWith(),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             Spacer(),
             GestureDetector(onTap: onDelete, child: RemoveButton()),
@@ -37,9 +39,7 @@ class DataTextAndButtonRemove extends StatelessWidget {
         ),
         Text(
           spicility,
-          style: AppTextStyle.semiBold12.copyWith(
-            color: AppColor.primaryColor,
-          ),
+          style: AppTextStyle.semiBold12.copyWith(color: AppColor.primaryColor),
         ),
         Text(
           experience!,

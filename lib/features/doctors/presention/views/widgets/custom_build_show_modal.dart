@@ -27,7 +27,8 @@ void customBuildShowModalSheet(BuildContext context) {
   final spicilityController = TextEditingController();
   final addressController = TextEditingController();
   final phoneController = TextEditingController();
-
+ final routAdminController = TextEditingController();
+ final formeController = TextEditingController();
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -100,6 +101,11 @@ void customBuildShowModalSheet(BuildContext context) {
                           hint: "Téléphone",
                           controller: phoneController,
                         ),
+                        const FormTitle(title: "Voie rout admin"),
+                        CustomFormAddData(
+                          hint: "Voie rout admin",
+                          controller: routAdminController,
+                        ),
                         CustomButton(
                           title: "Enregistrer",
                           buttonTitleColor: Colors.white,
@@ -116,6 +122,7 @@ void customBuildShowModalSheet(BuildContext context) {
                                 phone: phoneController.text,
                                 spicility: spicilityController.text,
                                 address: addressController.text,
+                                forme: formeController.text,
                                 userId:
                                     Supabase
                                         .instance
@@ -123,7 +130,8 @@ void customBuildShowModalSheet(BuildContext context) {
                                         .auth
                                         .currentUser!
                                         .id,
-                                imageUrl: "", // sera remplacé dans le cubit
+                                imageUrl: "", 
+                                routAdmin: routAdminController.text, // sera remplacé dans le cubit
                               );
 
                               context.read<DoctorsCubit>().createDoctor(

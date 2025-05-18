@@ -16,28 +16,58 @@ class PerescarptionsViewBody extends StatelessWidget {
     return BlocConsumer<PrescriptionsCubit, PrescriptionState>(
       listener: (context, state) {},
       builder: (context, state) {
-        return Column(
-          children: [
-            HeaderPrescription(),
-            SizedBox(
-              height: 10.h,
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.w,
-                  vertical: 10.h,
-                ),
-                child: Builder(
-                  builder: (context) {
-                    if (state is PrescriptionLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: AppColor.primaryColor,
-                        ),
-                      );
-                    } else if (state is PrescriptionLoaded) {
-                      if (state.prescriptions.isEmpty) {
+        return SafeArea(
+          child: Column(
+            children: [
+              HeaderPrescription(),
+              SizedBox(
+                height: 10.h,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 10.h,
+                  ),
+                  child: Builder(
+                    builder: (context) {
+                      if (state is PrescriptionLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColor.primaryColor,
+                          ),
+                        );
+                      } else if (state is PrescriptionLoaded) {
+                        if (state.prescriptions.isEmpty) {
+                          return const Center(
+                            child: Text(
+                              "Aucune Prescription disponible",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        }
+                        return ListView.separated(
+                          padding: EdgeInsets.zero,
+                          itemCount: state.prescriptions.length,
+                          separatorBuilder:
+                              (context, index) => SizedBox(height: 15.h),
+                          itemBuilder: (context, index) {
+                            return CardPrescriptionsItem(
+                              pres: state.prescriptions[index],
+                              index: index,
+                              onPressed: () {
+                                buildShowModalSheetPrescriptionsEdit(
+                                  context,
+                                  state.prescriptions[index],
+                                );
+                              },
+                            );
+                          },
+                        );
+                      } else {
                         return const Center(
                           child: Text(
                             "Aucune Prescription disponible",
@@ -48,40 +78,12 @@ class PerescarptionsViewBody extends StatelessWidget {
                           ),
                         );
                       }
-                      return ListView.separated(
-                        padding: EdgeInsets.zero,
-                        itemCount: state.prescriptions.length,
-                        separatorBuilder:
-                            (context, index) => SizedBox(height: 15.h),
-                        itemBuilder: (context, index) {
-                          return CardPrescriptionsItem(
-                            pres: state.prescriptions[index],
-                            index: index,
-                            onPressed: () {
-                              buildShowModalSheetPrescriptionsEdit(
-                                context,
-                                state.prescriptions[index],
-                              );
-                            },
-                          );
-                        },
-                      );
-                    } else {
-                      return const Center(
-                        child: Text(
-                          "Aucune Prescription disponible",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      );
-                    }
-                  },
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

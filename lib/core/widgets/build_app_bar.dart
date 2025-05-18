@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/utils/app_text_style.dart';
+import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
 
 AppBar buildAppBar(BuildContext context,String title) {
   return AppBar(
@@ -17,7 +18,7 @@ AppBar buildAppBar(BuildContext context,String title) {
             color: Color(0xff677294),
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.popAndPushNamed(context,CustomBottomNavBar.routeName);
           },
         ),
       ),

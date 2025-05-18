@@ -32,14 +32,7 @@ class MedicationsViewBody extends StatelessWidget {
               }
               if (state is MedicationLoaded) {
              
-                  LocalNotificationsServices.streamController.stream.listen((
-                    notificationResponse,
-                  ) {
-                    log(notificationResponse.id!.toString());
-                    log(notificationResponse.payload!.toString());
-                    // ignore: use_build_context_synchronously
-                    Navigator.pushNamed(context, MedicationsView.routeName);
-                  });
+                 
                 
                 buildShowToast(
                   message: "Chargement terminé",

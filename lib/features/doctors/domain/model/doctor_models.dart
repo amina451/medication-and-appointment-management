@@ -8,6 +8,8 @@ class DoctorModel {
   final String address;
   final String phone;
   final String userId;
+  final String routAdmin;
+  final String forme;
 
   DoctorModel({
     required this.doctorId,
@@ -17,6 +19,8 @@ class DoctorModel {
     required this.address,
     required this.phone,
     required this.userId,
+    required this.routAdmin,
+    required this.forme,
   });
 
   factory DoctorModel.mapDoctorEntity(DoctorEntity doctor) {
@@ -28,6 +32,8 @@ class DoctorModel {
       address: doctor.address,
       phone: doctor.phone,
       userId: doctor.userId,
+      routAdmin: doctor.routAdmin,
+      forme: doctor.forme,
     );
   }
 
@@ -40,6 +46,8 @@ class DoctorModel {
       address: address,
       phone: phone,
       userId: userId,
+      routAdmin: routAdmin,
+      forme: forme,
     );
   }
 
@@ -51,6 +59,8 @@ class DoctorModel {
     String? address,
     String? phone,
     String? userId,
+    String? routAdmin,
+    String? forme,
   }) {
     return DoctorModel(
       doctorId: doctorId ?? this.doctorId,
@@ -60,6 +70,9 @@ class DoctorModel {
       address: address ?? this.address,
       phone: phone ?? this.phone,
       userId: userId ?? this.userId,
+      routAdmin: routAdmin ?? this.routAdmin,
+      
+      forme: forme ?? this.forme,
     );
   }
 

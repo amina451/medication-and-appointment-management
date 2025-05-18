@@ -45,14 +45,13 @@ class DoctorsViewBody extends StatelessWidget {
                         spicility: doctor.spicility,
                         address: doctor.address,
                         image: doctor.imageUrl,
-                        date: "12",
+                        date: doctor.phone,
                       
                         onDelete: () {
                           context.read<DoctorsCubit>().deleteDoctor(
                             doctor.doctorId,
                           );
                         },
-                         routAdmin: doctor.routAdmin,
                       );
                     },
                     separatorBuilder:

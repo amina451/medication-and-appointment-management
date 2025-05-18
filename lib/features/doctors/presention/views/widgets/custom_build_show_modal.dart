@@ -101,11 +101,7 @@ void customBuildShowModalSheet(BuildContext context) {
                           hint: "Téléphone",
                           controller: phoneController,
                         ),
-                        const FormTitle(title: "Voie rout admin"),
-                        CustomFormAddData(
-                          hint: "Voie rout admin",
-                          controller: routAdminController,
-                        ),
+                      
                         CustomButton(
                           title: "Enregistrer",
                           buttonTitleColor: Colors.white,
@@ -122,7 +118,6 @@ void customBuildShowModalSheet(BuildContext context) {
                                 phone: phoneController.text,
                                 spicility: spicilityController.text,
                                 address: addressController.text,
-                                forme: formeController.text,
                                 userId:
                                     Supabase
                                         .instance
@@ -131,7 +126,6 @@ void customBuildShowModalSheet(BuildContext context) {
                                         .currentUser!
                                         .id,
                                 imageUrl: "", 
-                                routAdmin: routAdminController.text, // sera remplacé dans le cubit
                               );
 
                               context.read<DoctorsCubit>().createDoctor(

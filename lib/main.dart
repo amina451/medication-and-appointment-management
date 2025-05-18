@@ -14,16 +14,19 @@ import 'package:pharmacy_app/features/perscipations/presentaion/manger/prescript
 import 'package:pharmacy_app/features/spalsh/presention/views/splash_view.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   CustomBlocObserver();
   await Supabase.initialize(url: urlSubaBase, anonKey: apiKey);
-
   await LocalNotificationsServices.init();
-
   setup();
   runApp(const MyApp());
 }
+
+
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -65,3 +68,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+
+

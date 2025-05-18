@@ -14,7 +14,7 @@ class DateVisitDoctor extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Forme",
+            "Némuro de téléphone",
             style: AppTextStyle.semiBold12.copyWith(
               color: AppColor.primaryColor,
             ),

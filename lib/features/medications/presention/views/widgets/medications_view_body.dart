@@ -1,17 +1,15 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/helper_functions/build_show_toast.dart';
-import 'package:pharmacy_app/core/services/local_notifications_services.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
-import 'package:pharmacy_app/core/widgets/card_item.dart';
 import 'package:pharmacy_app/features/medications/presention/manger/medication_cubit.dart';
 import 'package:pharmacy_app/features/medications/presention/manger/medication_state.dart';
-import 'package:pharmacy_app/features/medications/presention/views/medications_views.dart';
+import 'package:pharmacy_app/features/medications/presention/views/widgets/medication_card_item.dart';
 import 'package:pharmacy_app/features/medications/presention/views/widgets/search_form.dart';
 import 'package:pharmacy_app/features/medications/presention/views/widgets/show_modal_edite_medication.dart';
+
+
 
 class MedicationsViewBody extends StatelessWidget {
   const MedicationsViewBody({super.key});
@@ -52,7 +50,7 @@ class MedicationsViewBody extends StatelessWidget {
                   child: ListView.separated(
                     itemBuilder: (context, index) {
                       final medication = state.medication[index];
-                      return CardItem(
+                      return CardItemMedication(
                         date: medication.forme ?? 'Non disponible',
                         onDelete:
                             () => context

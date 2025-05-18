@@ -20,9 +20,9 @@ void buildShowModalSheet(BuildContext context) {
   final addressController = TextEditingController();
   final followUpController = TextEditingController();
   final noteController = TextEditingController();
-
   final notificationHourController = TextEditingController();
   final notificationMinuteController = TextEditingController();
+
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -38,9 +38,9 @@ void buildShowModalSheet(BuildContext context) {
               SnackBar(content: Text('Données enregistrées avec succès !')),
             );
           } else if (state is DateError) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.message)),
+            );
           }
         },
         builder: (context, state) {
@@ -64,7 +64,25 @@ void buildShowModalSheet(BuildContext context) {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     FormTitle(title: "Jour"),
-                    CustomFormAddData(hint: "Jour", controller: dayController),
+                    GestureDetector(
+                      onTap: () async {
+                        final selectedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100),
+                        );
+                        if (selectedDate != null) {
+                          dayController.text = selectedDate.toIso8601String().split('T').first;
+                        }
+                      },
+                      child: AbsorbPointer(
+                        child: CustomFormAddData(
+                          hint: "Jour (ex: 2025-05-18)",
+                          controller: dayController,
+                        ),
+                      ),
+                    ),
 
                     FormTitle(title: "Nom du médecin"),
                     CustomFormAddData(
@@ -89,6 +107,7 @@ void buildShowModalSheet(BuildContext context) {
                       hint: "Adresse",
                       controller: addressController,
                     ),
+
                     FormTitle(title: "Motif"),
                     CustomFormAddData(
                       hint: "Motif",
@@ -101,6 +120,7 @@ void buildShowModalSheet(BuildContext context) {
                       maxLength: 2,
                       controller: noteController,
                     ),
+
                     Row(
                       children: [
                         Expanded(
@@ -122,10 +142,7 @@ void buildShowModalSheet(BuildContext context) {
                     ),
                     SizedBox(height: 20.h),
                     CustomButton(
-                      title:
-                          state is DateLoading
-                              ? "Enregistrement..."
-                              : "Enregistrer",
+                      title: state is DateLoading ? "Enregistrement..." : "Enregistrer",
                       buttonTitleColor: Colors.white,
                       buttonColor: AppColor.primaryColor,
                       onPressed: () async {
@@ -142,16 +159,15 @@ void buildShowModalSheet(BuildContext context) {
                         );
 
                         context.read<DatesCubit>().createDate(date);
-                        final hour =
-                            int.tryParse(notificationHourController.text) ?? 0;
-                        final minute =
-                            int.tryParse(notificationMinuteController.text) ??
-                            0;
+
+                        final hour = int.tryParse(notificationHourController.text) ?? 0;
+                        final minute = int.tryParse(notificationMinuteController.text) ?? 0;
 
                         await LocalNotificationsServices.showDailyScheduledNotification(
                           hour,
                           minute,
                         );
+
                         Navigator.pop(context);
                       },
                     ),

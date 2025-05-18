@@ -37,4 +37,7 @@ class SupabaseServiceDate {
         .delete()
         .eq('id_date', idDate);
   }
+
+ 
+
 }

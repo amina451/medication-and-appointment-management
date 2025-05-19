@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
               create: (context) => getIt<DatesCubit>()..fetchDates(),
             ),
 
-            BlocProvider(
+            BlocProvider( 
               create:
                   (context) =>
                       getIt<PrescriptionsCubit>()..fetchPrescriptions(),
@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 
 

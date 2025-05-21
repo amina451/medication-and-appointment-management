@@ -15,7 +15,7 @@ class TermsUsePrivacy extends StatelessWidget {
           TextSpan(
             children: [
               TextSpan(
-                text: "les Conditions d'utilisation",
+                text: "les Conditions d'utilisation\t",
                 style: AppTextStyle.semiBold12.copyWith(
                   color: AppColor.primaryColor,
                 ),

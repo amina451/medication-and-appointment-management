@@ -41,10 +41,8 @@ void customBuildShowModalSheetMed(BuildContext context) {
       return BlocConsumer<MedicationsCubit, MedicationState>(
         listener: (context, state) {
           if (state is MedicationLoaded) {
-            buildShowToast(
-              message: 'Médicament ajouté avec succès!',
-              color: AppColor.primaryColor,
-            );
+                            print("Chargement terminé");
+
             context.read<MedicationsCubit>().fetchMedications();
             Navigator.pop(context); // إغلاق النافذة عند النجاح
           } else if (state is MedicationError) {
@@ -76,6 +74,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
                   child: Form(
                     key: formKey,
                     child: Column(
+                      spacing: 5.h,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.min,
                       children: [

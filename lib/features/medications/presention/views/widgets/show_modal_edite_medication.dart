@@ -33,13 +33,16 @@ void customBuildEditMedicationModalSheet(
 
 class _EditMedicationModalContent extends StatefulWidget {
   final MedicationModel medication;
-  const _EditMedicationModalContent({Key? key, required this.medication}) : super(key: key);
+  const _EditMedicationModalContent({Key? key, required this.medication})
+    : super(key: key);
 
   @override
-  State<_EditMedicationModalContent> createState() => _EditMedicationModalContentState();
+  State<_EditMedicationModalContent> createState() =>
+      _EditMedicationModalContentState();
 }
 
-class _EditMedicationModalContentState extends State<_EditMedicationModalContent> {
+class _EditMedicationModalContentState
+    extends State<_EditMedicationModalContent> {
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ImageUploadState> imageKey = GlobalKey();
 
@@ -53,14 +56,23 @@ class _EditMedicationModalContentState extends State<_EditMedicationModalContent
   void initState() {
     super.initState();
     medicationNameController = TextEditingController(
-      text: widget.medication.name_medication?.isNotEmpty == true
-          ? widget.medication.name_medication
-          : '',
+      text:
+          widget.medication.name_medication?.isNotEmpty == true
+              ? widget.medication.name_medication
+              : '',
     );
-    potionController = TextEditingController(text: widget.medication.potion ?? '');
-    numOfDayController = TextEditingController(text: widget.medication.num_of_day ?? '');
-    routAdminController = TextEditingController(text: widget.medication.rout_admin ?? '');
-    formeController = TextEditingController(text: widget.medication.forme ?? '');
+    potionController = TextEditingController(
+      text: widget.medication.potion ?? '',
+    );
+    numOfDayController = TextEditingController(
+      text: widget.medication.num_of_day ?? '',
+    );
+    routAdminController = TextEditingController(
+      text: widget.medication.rout_admin ?? '',
+    );
+    formeController = TextEditingController(
+      text: widget.medication.forme ?? '',
+    );
   }
 
   @override
@@ -78,10 +90,8 @@ class _EditMedicationModalContentState extends State<_EditMedicationModalContent
     return BlocConsumer<MedicationsCubit, MedicationState>(
       listener: (context, state) {
         if (state is MedicationLoaded) {
-          buildShowToast(
-            message: 'Médicament mis à jour avec succès !',
-            color: AppColor.primaryColor,
-          );
+          print("Chargement terminé");
+
           context.read<MedicationsCubit>().fetchMedications();
         } else if (state is MedicationError) {
           buildShowToast(message: state.message, color: Colors.red.shade500);
@@ -151,7 +161,8 @@ class _EditMedicationModalContentState extends State<_EditMedicationModalContent
                           if (!formKey.currentState!.validate()) return;
 
                           final image = imageKey.currentState?.selectedImage;
-                          String finalImageUrl = widget.medication.imageUrl ?? '';
+                          String finalImageUrl =
+                              widget.medication.imageUrl ?? '';
 
                           if (image != null) {
                             final helper = ImageUploadHelper();

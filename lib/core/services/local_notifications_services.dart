@@ -5,6 +5,8 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest.dart' as tzn;
 import 'package:timezone/timezone.dart' as tz;
 
+
+
 @pragma('vm:entry-point')
 void onTapBackground(NotificationResponse notificationResponse) {
   LocalNotificationsServices.streamController.add(notificationResponse);
@@ -84,7 +86,7 @@ class LocalNotificationsServices {
   }
 
 
-  static Future<void> showDateNotification(int hour, int minute) async {
+  static Future<void> showDateNotification(int hour, int minute,String nameDoctor) async {
     const AndroidNotificationDetails android = AndroidNotificationDetails(
       'doctor_channel',
       'Doctor Appointment Reminder',
@@ -114,8 +116,9 @@ class LocalNotificationsServices {
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       notificationId,
-      'Rappel de rendez-vous chez le docteur',
-      'Vous avez un rendez-vous chez le docteur aujourd\'hui à ${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}, merci de ne pas être en retard.',
+      'Rappel de rendez-vous chez le $nameDoctor',
+      'Vous avez un rendez-vous chez le docteur aujourd\'hui à ${
+        hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}, merci de ne pas être en retard.',
       scheduledTime,
       details,
       payload: 'doctorAppointment',
@@ -155,8 +158,8 @@ class LocalNotificationsServices {
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       notificationId,
-      'Daily $nameMedication Reminder',
-      'This is your daily reminder for $nameMedication',
+      'Rappel quotidien de $nameMedication',
+      'Ceci est votre rappel quotidien pour $nameMedication',
       scheduledTime,
       details,
       payload: 'dailyReminder',

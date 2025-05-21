@@ -27,7 +27,7 @@ class HeaderPrescription extends StatelessWidget {
           children: [
             CustomSectionTitleHeaderWithAddCard(
               title: "Prescriptions",
-              subTitle: '  "Gérez vos prescriptions"',
+              subTitle: "Gérez vos prescriptions",
               onTap: () {
                 buildShowModalSheetPrescriptions(context);
               },

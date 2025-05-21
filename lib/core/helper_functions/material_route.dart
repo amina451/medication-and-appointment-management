@@ -5,7 +5,7 @@ import 'package:pharmacy_app/features/date/presentaions/views/date_view.dart';
 import 'package:pharmacy_app/features/perscipations/presentaion/views/Perescarptions_view.dart';
 import 'package:pharmacy_app/features/doctors/presention/views/doctors_view.dart';
 import 'package:pharmacy_app/features/home/presention/view/home_view.dart';
-import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
+import 'package:pharmacy_app/features/home/presention/view/widgets/custom_nav_bar.dart';
 import 'package:pharmacy_app/features/medications/presention/views/medications_views.dart';
 import 'package:pharmacy_app/features/spalsh/presention/views/splash_view.dart';
 

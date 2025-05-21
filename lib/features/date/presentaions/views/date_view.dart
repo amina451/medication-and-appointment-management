@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/features/date/presentaions/views/widgets/date_view_body.dart';
-import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
+import 'package:pharmacy_app/features/home/presention/view/widgets/custom_nav_bar.dart';
 
 class DateView extends StatelessWidget {
   const DateView({super.key});

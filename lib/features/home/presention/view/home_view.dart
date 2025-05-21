@@ -2,7 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 
-import 'package:pharmacy_app/features/home/presention/widgets/home_view_body.dart';
+import 'package:pharmacy_app/features/home/presention/view/widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

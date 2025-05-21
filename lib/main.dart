@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/date_symbol_data_local.dart'; // استيراد الدالةimport 'package:pharmacy_app/core/helper_functions/material_route.dart';
 import 'package:pharmacy_app/core/helper_functions/material_route.dart';
 import 'package:pharmacy_app/core/services/bloc_observer.dart';
 import 'package:pharmacy_app/core/services/get_it.dart';
@@ -19,15 +20,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   CustomBlocObserver();
   await Supabase.initialize(url: urlSubaBase, anonKey: apiKey);
+await initializeDateFormatting('fr_FR', null);
   await LocalNotificationsServices.init();
    setup();
   runApp(const MyApp());
 }
-
-
-
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -21,14 +21,14 @@ import 'package:uuid/uuid.dart';
 void customBuildShowModalSheet(BuildContext context) {
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ImageUploadState> imageKey = GlobalKey();
-
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final spicilityController = TextEditingController();
   final addressController = TextEditingController();
   final phoneController = TextEditingController();
- final routAdminController = TextEditingController();
- final formeController = TextEditingController();
+  
+ 
+
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -39,10 +39,8 @@ void customBuildShowModalSheet(BuildContext context) {
       return BlocConsumer<DoctorsCubit, DoctorState>(
         listener: (context, state) {
           if (state is DoctorLoaded) {
-            buildShowToast(
-              message: 'Médecin ajouté avec succès !',
-              color: AppColor.primaryColor,
-            );
+            print("Chargement terminé");
+
             context.read<DoctorsCubit>().fetchDoctors();
           } else if (state is DoctorError) {
             buildShowToast(message: state.message, color: Colors.red.shade500);
@@ -101,7 +99,7 @@ void customBuildShowModalSheet(BuildContext context) {
                           hint: "Téléphone",
                           controller: phoneController,
                         ),
-                      
+
                         CustomButton(
                           title: "Enregistrer",
                           buttonTitleColor: Colors.white,
@@ -125,7 +123,7 @@ void customBuildShowModalSheet(BuildContext context) {
                                         .auth
                                         .currentUser!
                                         .id,
-                                imageUrl: "", 
+                                imageUrl: "",
                               );
 
                               context.read<DoctorsCubit>().createDoctor(

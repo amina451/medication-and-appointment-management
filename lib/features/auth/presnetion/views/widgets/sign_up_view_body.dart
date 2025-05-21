@@ -14,6 +14,8 @@ class SignUpViewBody extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: CustomScrollView(
           slivers: [
+            SliverToBoxAdapter(child: SizedBox(height: 40)),
+
             SliverToBoxAdapter(child: CustomAppBar(title: "Nouveau Compte")),
             SliverToBoxAdapter(child: SectionFormData()),
             SliverToBoxAdapter(

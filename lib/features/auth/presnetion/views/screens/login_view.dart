@@ -5,7 +5,7 @@ import 'package:pharmacy_app/core/helper_functions/build_show_toast.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/features/auth/presnetion/manger/sign_in/signin_cubit.dart';
 import 'package:pharmacy_app/features/auth/presnetion/views/widgets/login_view_body.dart';
-import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
+import 'package:pharmacy_app/features/home/presention/view/widgets/custom_nav_bar.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -20,7 +20,7 @@ class LoginView extends StatelessWidget {
           listener: (context, state) {
             if (state is SignInSuccess) {
               buildShowToast(
-                message: state.toString(),
+                message: "Connexion réussie",
                 color: AppColor.primaryColor,
               );
               Navigator.pushReplacementNamed(
@@ -29,7 +29,7 @@ class LoginView extends StatelessWidget {
               );
             } else if (state is SignInFailure) {
               buildShowToast(
-                message: "Problem with email or password",
+                message: "Problème avec l'e-mail ou le mot de passe",
                 color: Colors.red.shade500,
               );
             }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
-import 'package:pharmacy_app/features/home/presention/widgets/custom_nav_bar.dart';
+import 'package:pharmacy_app/features/home/presention/view/widgets/custom_nav_bar.dart';
 import 'package:pharmacy_app/features/perscipations/presentaion/views/widgets/pres_body.dart';
 
 class PerescarptionsView extends StatelessWidget {

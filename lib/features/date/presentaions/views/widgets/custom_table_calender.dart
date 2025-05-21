@@ -12,10 +12,16 @@ class CustomTableCalender extends StatefulWidget {
 
 class _CustomTableCalenderState extends State<CustomTableCalender> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
-
   DateTime _focusedDay = DateTime.now();
-
   DateTime? _selectedDay;
+
+  // دالة لتحديث اليوم المختار
+  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    setState(() {
+      _selectedDay = selectedDay;
+      _focusedDay = focusedDay;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +29,7 @@ class _CustomTableCalenderState extends State<CustomTableCalender> {
       padding: EdgeInsets.all(16.sp),
       color: AppColor.lightSecondryColor,
       child: TableCalendar(
+        locale: 'fr_FR', // تغيير اللغة إلى الفرنسية
         firstDay: DateTime.utc(2020, 1, 1),
         lastDay: DateTime.utc(2030, 12, 31),
         focusedDay: _focusedDay,
@@ -30,12 +37,7 @@ class _CustomTableCalenderState extends State<CustomTableCalender> {
         selectedDayPredicate: (day) {
           return isSameDay(_selectedDay, day);
         },
-        onDaySelected: (selectedDay, focusedDay) {
-          setState(() {
-            _selectedDay = selectedDay;
-            _focusedDay = focusedDay;
-          });
-        },
+        onDaySelected: _onDaySelected,
         onFormatChanged: (format) {
           if (_calendarFormat != format) {
             setState(() {
@@ -55,15 +57,29 @@ class _CustomTableCalenderState extends State<CustomTableCalender> {
             color: AppColor.hintColor,
             shape: BoxShape.circle,
           ),
+          outsideDaysVisible: false, // إخفاء الأيام خارج الشهر الحالي
         ),
         headerStyle: HeaderStyle(
           formatButtonVisible: true,
           formatButtonShowsNext: false,
+
+          // تنسيق التاريخ
           formatButtonDecoration: BoxDecoration(
             color: AppColor.primaryColor,
             borderRadius: BorderRadius.circular(12),
           ),
           formatButtonTextStyle: TextStyle(color: Colors.white),
+          titleTextStyle: TextStyle(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+          ), // تحسين أسلوب العنوان
+        ),
+        daysOfWeekStyle: DaysOfWeekStyle(
+          weekdayStyle: TextStyle(fontSize: 14.sp, color: Colors.black),
+          weekendStyle: TextStyle(
+            fontSize: 14.sp,
+            color: Colors.red,
+          ), // تمييز عطل نهاية الأسبوع
         ),
       ),
     );

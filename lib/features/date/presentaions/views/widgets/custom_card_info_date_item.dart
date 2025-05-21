@@ -28,18 +28,18 @@ class CustomCardInfoDateItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FormTitle(title: dateModel.date),
+            FormTitle(title:  dateModel.date),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 5),
 
-            height: 200.h,
+            height: 150.h,
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(width: 0.5, color: AppColor.hintColor),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
-              spacing: 10.h,
+              spacing: 5.h,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
@@ -98,3 +98,6 @@ class CustomCardInfoDateItem extends StatelessWidget {
     );
   }
 }
+
+
+

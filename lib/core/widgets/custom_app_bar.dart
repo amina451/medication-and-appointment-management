@@ -8,15 +8,11 @@ class CustomAppBar extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(Icons.arrow_back_ios, color: AppColor.primaryColor),
-        SizedBox(width: MediaQuery.sizeOf(context).width * 0.28),
-        Text(
-          title,
-          style: AppTextStyle.semiBold24.copyWith(color: AppColor.primaryColor),
-        ),
-      ],
+    return Center(
+      child: Text(
+        title,
+        style: AppTextStyle.semiBold24.copyWith(color: AppColor.primaryColor),
+      ),
     );
   }
 }

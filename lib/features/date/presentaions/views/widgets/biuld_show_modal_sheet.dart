@@ -173,6 +173,7 @@ void buildShowModalSheet(BuildContext context) {
                         await LocalNotificationsServices.showDateNotification(
                           hour,
                           minute,
+                          doctorController.text,
                         );
 
                         Navigator.pop(context);
@@ -187,4 +188,9 @@ void buildShowModalSheet(BuildContext context) {
       );
     },
   );
+
 }
+
+
+
+

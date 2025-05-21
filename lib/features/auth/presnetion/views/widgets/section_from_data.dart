@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy_app/core/helper_functions/validation.dart';
 import 'package:pharmacy_app/core/utils/app_color.dart';
 import 'package:pharmacy_app/core/widgets/custom_button.dart';
@@ -76,7 +77,7 @@ class _SectionFormDataState extends State<SectionFormData> {
 
           FormTitle(title: "Mot de passe"),
           SizedBox(height: 5),
-          CustomFiledPassword(controller: _passwordController,),
+          CustomFiledPassword(controller: _passwordController),
 
           SizedBox(height: 12),
           FormTitle(title: "Numéro de téléphone"),
@@ -91,7 +92,7 @@ class _SectionFormDataState extends State<SectionFormData> {
           SizedBox(height: 16),
           Align(alignment: Alignment.center, child: TermsUsePrivacy()),
 
-          SizedBox(height: 16),
+          SizedBox(height: 50.h),
 
           Align(
             alignment: Alignment.center,

@@ -16,6 +16,7 @@ class LoginViewBody extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
         child: CustomScrollView(
           slivers: [
+             SliverToBoxAdapter(child: SizedBox(height: 40)),
             SliverToBoxAdapter(child: CustomAppBar(title: "Connexion")),
             SliverToBoxAdapter(child: WelcomeSection()),
             SliverToBoxAdapter(child: SectionTextFormField()),

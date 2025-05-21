@@ -30,12 +30,9 @@ class MedicationsViewBody extends StatelessWidget {
               }
               if (state is MedicationLoaded) {
              
-                 
+              
                 
-                buildShowToast(
-                  message: "Chargement terminé",
-                  color: AppColor.primaryColor,
-                );
+                print("Chargement terminé");
               }
             },
             builder: (context, state) {

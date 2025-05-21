@@ -28,6 +28,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
   final formeController = TextEditingController();
   final notificationHourController = TextEditingController();
   final notificationMinuteController = TextEditingController();
+  final nameMedicationController = TextEditingController();
 
   showModalBottomSheet(
     context: context,
@@ -99,6 +100,11 @@ void customBuildShowModalSheetMed(BuildContext context) {
                           hint: "Voie d'administration",
                           controller: routAdminController,
                         ),
+                        const FormTitle(title: "Notification"),
+                        CustomFormAddData(
+                          hint: "Nom du médicament",
+                          controller: nameMedicationController,
+                        ),
                         Row(
                           children: [
                             Expanded(
@@ -150,22 +156,13 @@ void customBuildShowModalSheetMed(BuildContext context) {
                                 image,
                               );
 
-                              final hour =
-                                  int.tryParse(
-                                    notificationHourController.text,
-                                  ) ??
-                                  0;
-                              final minute =
-                                  int.tryParse(
-                                    notificationMinuteController.text,
-                                  ) ??
-                                  0;
 
-                              await LocalNotificationsServices.showDailyScheduledNotification(
-                                hour,
-                                minute,
-                              );
 
+                              await LocalNotificationsServices.shwoMedicationNotification(
+                                int.parse(notificationHourController.text),
+                                int.parse(notificationMinuteController.text),
+                                medicationNameController.text,
+                              );  
                               Navigator.pop(context);
                             } else {
                               buildShowToast(

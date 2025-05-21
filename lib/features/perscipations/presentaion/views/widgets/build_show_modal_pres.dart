@@ -196,10 +196,7 @@ class __PrescriptionFormState extends State<_PrescriptionForm> {
                   final minute =
                       int.tryParse(notificationMinuteController.text) ?? 0;
 
-                  await LocalNotificationsServices.showDailyScheduledNotification(
-                    hour,
-                    minute,
-                  );
+              
 
                   // Fermer la bottom sheet seulement après l'opération terminée
                   if (mounted) {

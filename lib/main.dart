@@ -20,9 +20,10 @@ void main() async {
   CustomBlocObserver();
   await Supabase.initialize(url: urlSubaBase, anonKey: apiKey);
   await LocalNotificationsServices.init();
-  setup();
+   setup();
   runApp(const MyApp());
 }
+
 
 
 
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
               create: (context) => getIt<DatesCubit>()..fetchDates(),
             ),
 
-            BlocProvider(
+            BlocProvider( 
               create:
                   (context) =>
                       getIt<PrescriptionsCubit>()..fetchPrescriptions(),
@@ -68,6 +69,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
 
 
 

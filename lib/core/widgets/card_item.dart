@@ -72,7 +72,7 @@ class CardItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              DateVisitDoctor(forme: date),
+              DateVisitDoctor(forme: date,title:"forme"),
              
               EditButton(onPressed: onEdite),
             ],

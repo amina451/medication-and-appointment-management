@@ -8,6 +8,15 @@ import 'package:pharmacy_app/features/date/domain/model/date_models.dart';
 import 'package:pharmacy_app/features/date/manger/date_cubit.dart';
 import 'package:pharmacy_app/features/date/presentaions/views/widgets/show_modal_edite_dates.dart';
 
+
+
+
+
+
+
+
+
+
 class CustomCardInfoDateItem extends StatelessWidget {
   const CustomCardInfoDateItem({super.key, required this.dateModel});
 

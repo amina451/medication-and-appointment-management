@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +15,8 @@ import 'package:pharmacy_app/features/medications/presention/manger/medication_c
 import 'package:pharmacy_app/features/medications/presention/manger/medication_state.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
+
+
 
 void customBuildShowModalSheetMed(BuildContext context) {
   final formKey = GlobalKey<FormState>();
@@ -45,6 +46,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
               color: AppColor.primaryColor,
             );
             context.read<MedicationsCubit>().fetchMedications();
+            Navigator.pop(context); // إغلاق النافذة عند النجاح
           } else if (state is MedicationError) {
             buildShowToast(message: state.message, color: Colors.red.shade500);
             log(state.message);
@@ -74,7 +76,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
                   child: Form(
                     key: formKey,
                     child: Column(
-                      spacing: 5.h,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ImageUpload(key: imageKey),
@@ -132,8 +134,12 @@ void customBuildShowModalSheetMed(BuildContext context) {
                           onPressed: () async {
                             final image = imageKey.currentState?.selectedImage;
 
-                            if (formKey.currentState!.validate() &&
-                                image != null) {
+                            // التحقق من القيم
+                            final hour = int.tryParse(notificationHourController.text) ?? -1;
+                            final minute = int.tryParse(notificationMinuteController.text) ?? -1;
+                            final nameMedication = nameMedicationController.text.trim();
+
+                            if (formKey.currentState!.validate() && image != null && hour >= 0 && hour < 24 && minute >= 0 && minute < 60 && nameMedication.isNotEmpty) {
                               final medication = MedicationModel(
                                 rout_admin: routAdminController.text,
                                 forme: formeController.text,
@@ -142,13 +148,7 @@ void customBuildShowModalSheetMed(BuildContext context) {
                                 imageUrl: "",
                                 potion: potionController.text,
                                 num_of_day: numOfDaycontroller.text,
-                                userId:
-                                    Supabase
-                                        .instance
-                                        .client
-                                        .auth
-                                        .currentUser!
-                                        .id,
+                                userId: Supabase.instance.client.auth.currentUser!.id,
                               );
 
                               context.read<MedicationsCubit>().createMedication(
@@ -156,17 +156,18 @@ void customBuildShowModalSheetMed(BuildContext context) {
                                 image,
                               );
 
+                              // جدولة الإشعار
+                              await LocalNotificationsServices.showMedicationNotification(
+                                hour,
+                                minute,
+                                nameMedication,
+                              );
 
-
-                              await LocalNotificationsServices.shwoMedicationNotification(
-                                int.parse(notificationHourController.text),
-                                int.parse(notificationMinuteController.text),
-                                medicationNameController.text,
-                              );  
+                              // إغلاق النافذة بعد النجاح
                               Navigator.pop(context);
                             } else {
                               buildShowToast(
-                                message: 'Veuillez remplir tous les champs!',
+                                message: 'Veuillez remplir tous les champs correctement! (Heure: 0-23, Minute: 0-59)',
                                 color: Colors.red,
                               );
                             }

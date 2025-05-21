@@ -41,38 +41,10 @@ class LocalNotificationsServices {
   }
 
   /// إشعار مجدول بعد 10 ثوانٍ مع صوت مخصص
-  static Future<void> showScheduledNotification() async {
+  static Future<void> showDateNotification(int hour, int minute) async {
     const AndroidNotificationDetails android = AndroidNotificationDetails(
-      'scheduled_channel',
-      'Scheduled Notifications',
-      importance: Importance.max,
-      priority: Priority.high,
-      sound: RawResourceAndroidNotificationSound('android_sound_effect_meme'), // ✅ بدون .mp3
-    );
-
-    const NotificationDetails details = NotificationDetails(android: android);
-
-    final scheduledTime =
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 10));
-
-    int notificationId = DateTime.now().millisecondsSinceEpoch.remainder(100000);
-
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      notificationId,
-      'Scheduled Notification',
-      'This notification was scheduled 10 seconds ago',
-      scheduledTime,
-      details,
-      payload: 'zonedSchedule',
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-    );
-  }
-
-  /// إشعار يومي في ساعة ودقيقة محددة مع صوت مخصص
-  static Future<void> showDailyScheduledNotification(int hour, int minute) async {
-    const AndroidNotificationDetails android = AndroidNotificationDetails(
-      'daily_channel',
-      'Daily Medicine Reminder',
+      'doctor_channel',
+      'Doctor Appointment Reminder',
       importance: Importance.max,
       priority: Priority.high,
       sound: RawResourceAndroidNotificationSound('sound_notification'),
@@ -94,8 +66,57 @@ class LocalNotificationsServices {
       scheduledTime = scheduledTime.add(const Duration(days: 1));
     }
 
+    int notificationId = DateTime.now().millisecondsSinceEpoch.remainder(
+      100000,
+    );
+
     await flutterLocalNotificationsPlugin.zonedSchedule(
-      3,
+      notificationId, // معرف ديناميكي
+      'Rappel de rendez-vous chez le docteur',
+      'Vous avez un rendez-vous chez le docteur aujourd\'hui à ${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}, merci de ne pas être en retard.',
+      scheduledTime,
+      details,
+      payload: 'doctorAppointment',
+      matchDateTimeComponents: DateTimeComponents.time,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+    );
+  }
+
+  static Future<void> shwoMedicationNotification(
+    int hour,
+    int minute,
+    String nameMedication,
+  ) async {
+    final AndroidNotificationDetails android = AndroidNotificationDetails(
+      'médicaments_quotidiens',
+      'Alarme quotidienne de médicaments $nameMedication',
+      importance: Importance.max,
+      priority: Priority.high,
+      sound: RawResourceAndroidNotificationSound('sound_notification'),
+    );
+
+    final NotificationDetails details = NotificationDetails(android: android);
+
+    final now = tz.TZDateTime.now(tz.local);
+    tz.TZDateTime scheduledTime = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minute,
+    );
+
+    if (scheduledTime.isBefore(now)) {
+      scheduledTime = scheduledTime.add(const Duration(days: 1));
+    }
+
+    int notificationId = DateTime.now().millisecondsSinceEpoch.remainder(
+      100000,
+    );
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      notificationId, // معرف ديناميكي
       'Daily Medicine Reminder',
       'This is your daily reminder',
       scheduledTime,
@@ -104,9 +125,5 @@ class LocalNotificationsServices {
       matchDateTimeComponents: DateTimeComponents.time,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
     );
-  }
-
-  static Future<void> cancelNotification(int id) async {
-    await flutterLocalNotificationsPlugin.cancel(id);
   }
 }

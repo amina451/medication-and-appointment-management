@@ -20,9 +20,10 @@ void main() async {
   CustomBlocObserver();
   await Supabase.initialize(url: urlSubaBase, anonKey: apiKey);
   await LocalNotificationsServices.init();
-  setup();
+   setup();
   runApp(const MyApp());
 }
+
 
 
 
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 
 

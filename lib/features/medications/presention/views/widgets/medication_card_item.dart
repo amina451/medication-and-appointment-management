@@ -75,7 +75,7 @@ class CardItemMedication extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              DateVisitDoctor(forme: date),
+              DateVisitDoctor(forme: date,title:"forme"),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, top: 10),
                 child: Column(

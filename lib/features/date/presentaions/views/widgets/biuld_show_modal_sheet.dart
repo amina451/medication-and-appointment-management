@@ -38,9 +38,9 @@ void buildShowModalSheet(BuildContext context) {
               SnackBar(content: Text('Données enregistrées avec succès !')),
             );
           } else if (state is DateError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, state) {
@@ -73,7 +73,8 @@ void buildShowModalSheet(BuildContext context) {
                           lastDate: DateTime(2100),
                         );
                         if (selectedDate != null) {
-                          dayController.text = selectedDate.toIso8601String().split('T').first;
+                          dayController.text =
+                              selectedDate.toIso8601String().split('T').first;
                         }
                       },
                       child: AbsorbPointer(
@@ -142,7 +143,10 @@ void buildShowModalSheet(BuildContext context) {
                     ),
                     SizedBox(height: 20.h),
                     CustomButton(
-                      title: state is DateLoading ? "Enregistrement..." : "Enregistrer",
+                      title:
+                          state is DateLoading
+                              ? "Enregistrement..."
+                              : "Enregistrer",
                       buttonTitleColor: Colors.white,
                       buttonColor: AppColor.primaryColor,
                       onPressed: () async {
@@ -160,10 +164,13 @@ void buildShowModalSheet(BuildContext context) {
 
                         context.read<DatesCubit>().createDate(date);
 
-                        final hour = int.tryParse(notificationHourController.text) ?? 0;
-                        final minute = int.tryParse(notificationMinuteController.text) ?? 0;
+                        final hour =
+                            int.tryParse(notificationHourController.text) ?? 0;
+                        final minute =
+                            int.tryParse(notificationMinuteController.text) ??
+                            0;
 
-                        await LocalNotificationsServices.showDailyScheduledNotification(
+                        await LocalNotificationsServices.showDateNotification(
                           hour,
                           minute,
                         );
